@@ -681,14 +681,14 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
             </div>
 
             <div>
-              <label className="block font-semibold text-[#1e3a5f] text-xs mb-1">نوع الحركة المالية</label>
+              <label className="block font-semibold text-[#1e3a5f] text-xs mb-1">نوع الحركة (قبض \ دفع)</label>
               <select
                 value={formData.type === 'صرف' ? 'دفع' : formData.type}
                 onChange={(e) => handleTypeChange(e.target.value)}
                 className="w-full h-8 px-2.5 bg-white border border-[#bcd2e8] rounded-md focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] focus:outline-none text-[#0f2d52] text-xs sm:text-sm font-bold cursor-pointer"
               >
-                <option value="قبض">قبض (سند قبض)</option>
-                <option value="دفع">دفع (سند دفع)</option>
+                <option value="قبض">قبض</option>
+                <option value="دفع">دفع</option>
               </select>
             </div>
           </div>
