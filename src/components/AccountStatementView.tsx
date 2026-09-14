@@ -9,12 +9,13 @@ import {
   CheckCircle2,
   ArrowRight,
   X,
+  ExternalLink,
 } from 'lucide-react';
 import { Transaction, Account } from '../types';
 import { formatCurrency, formatNumber, formatDateDMY } from '../utils/formatters';
 import { REPORT_META } from '../data/initialData';
 import { AccountSearchInput } from './AccountSearchInput';
-import { executePrintStatementReport } from '../utils/printHelper';
+import { executePrintStatementReport, openStatementInNewWindow } from '../utils/printHelper';
 
 interface AccountStatementViewProps {
   transactions: Transaction[];
@@ -167,12 +168,58 @@ export const AccountStatementView: React.FC<AccountStatementViewProps> = ({
   const handlePrintStatement = () => {
     if (!selectedAccountName) {
       alert('يرجى كتابة أو اختيار حساب من دليل الحسابات أولاً لطباعة كشف الحساب.');
+      const el = document.getElementById('view-account-search-input') as HTMLInputElement;
+      if (el) el.focus();
       return;
     }
 
     setPrintStatus('printing');
 
-    executePrintStatementReport({
+    const printPayload = {
+      accountName: selectedAccountName,
+      accountCode: selectedAccountMeta?.code,
+      accountType: selectedAccountMeta?.type,
+      fromDate,
+      toDate,
+      movementFilter,
+      statementRows,
+      totalDebit,
+      totalCredit,
+      accountBalance,
+    };
+
+    const cleanup = () => {
+      document.body.classList.remove('printing-statement');
+      document.body.classList.remove('printing-statement-view');
+      window.removeEventListener('afterprint', cleanup);
+    };
+
+    window.addEventListener('afterprint', cleanup);
+    document.body.classList.add('printing-statement');
+    document.body.classList.add('printing-statement-view');
+
+    try {
+      window.print();
+      setPrintStatus('success');
+      setTimeout(() => setPrintStatus('idle'), 2500);
+      setTimeout(cleanup, 2500);
+    } catch (err) {
+      console.warn('Direct print failed, using helper fallback:', err);
+      cleanup();
+      executePrintStatementReport(printPayload);
+      setPrintStatus('success');
+      setTimeout(() => setPrintStatus('idle'), 2500);
+    }
+  };
+
+  const handleOpenStandalone = () => {
+    if (!selectedAccountName) {
+      alert('يرجى كتابة أو اختيار حساب من دليل الحسابات أولاً لعرض كشف الحساب في نافذة مستقلة.');
+      const el = document.getElementById('view-account-search-input') as HTMLInputElement;
+      if (el) el.focus();
+      return;
+    }
+    openStatementInNewWindow({
       accountName: selectedAccountName,
       accountCode: selectedAccountMeta?.code,
       accountType: selectedAccountMeta?.type,
@@ -184,11 +231,6 @@ export const AccountStatementView: React.FC<AccountStatementViewProps> = ({
       totalCredit,
       accountBalance,
     });
-
-    setTimeout(() => {
-      setPrintStatus('success');
-      setTimeout(() => setPrintStatus('idle'), 2500);
-    }, 600);
   };
 
   // Export to CSV
@@ -281,11 +323,22 @@ export const AccountStatementView: React.FC<AccountStatementViewProps> = ({
             id="btn-view-statement-print"
             onClick={handlePrintStatement}
             className="px-3.5 py-1.5 text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg flex items-center gap-1.5 transition-all cursor-pointer shadow-xs active:scale-95 border border-emerald-500/50"
-            title="طباعة التقرير"
+            title="طباعة التقرير المالي"
           >
             <Printer className="w-3.5 h-3.5" />
             <span>طباعة التقرير</span>
             {printStatus === 'success' && <CheckCircle2 className="w-3.5 h-3.5 text-white" />}
+          </button>
+
+          <button
+            type="button"
+            id="btn-view-statement-standalone"
+            onClick={handleOpenStandalone}
+            className="px-3 py-1.5 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-100 rounded-lg flex items-center gap-1.5 transition-all cursor-pointer shadow-xs active:scale-95 border border-slate-700"
+            title="فتح كشف الحساب في نافذة مستقلة للطباعة والحفظ كـ PDF"
+          >
+            <ExternalLink className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">نافذة مستقلة</span>
           </button>
         </div>
       </div>
@@ -321,6 +374,7 @@ export const AccountStatementView: React.FC<AccountStatementViewProps> = ({
                   onSelectAccount={(acc) => setSelectedAccountName(acc.name)}
                   onClear={() => setSelectedAccountName('')}
                   placeholder="اكتب اسم الحساب أو الكود للبحث الفوري من دليل الحسابات..."
+                  autoFocus={true}
                 />
               </div>
 

@@ -55,13 +55,37 @@
     page-break-inside: avoid;
   }
 
-  /* When printing account statement, hide non-printable containers only */
+  /* When printing account statement from Modal or View, isolate the printable document */
+  body.printing-statement #root > header,
+  body.printing-statement #root > nav,
+  body.printing-statement #quick-action-bar,
+  body.printing-statement #desktop-status-bar,
   body.printing-statement #statement-sheet-interactive-container,
-  body.printing-statement .no-print {
+  body.printing-statement #account-statement-header,
+  body.printing-statement #statement-criteria-area,
+  body.printing-statement #statement-interactive-table,
+  body.printing-statement .no-print,
+  body.printing-statement .print-only:not(#statement-printable-document):not(#view-statement-printable-document),
+  body.printing-statement-modal #root > header,
+  body.printing-statement-modal #root > nav,
+  body.printing-statement-modal #quick-action-bar,
+  body.printing-statement-modal #root > main,
+  body.printing-statement-modal #desktop-status-bar,
+  body.printing-statement-modal #statement-sheet-interactive-container,
+  body.printing-statement-modal .no-print,
+  body.printing-statement-modal .print-only:not(#statement-printable-document),
+  body.printing-statement-view #root > header,
+  body.printing-statement-view #root > nav,
+  body.printing-statement-view #quick-action-bar,
+  body.printing-statement-view #desktop-status-bar,
+  body.printing-statement-view #statement-criteria-container,
+  body.printing-statement-view .no-print,
+  body.printing-statement-view .print-only:not(#view-statement-printable-document) {
     display: none !important;
   }
 
-  body.printing-statement #statement-sheet-modal-wrapper {
+  body.printing-statement #statement-sheet-modal-wrapper,
+  body.printing-statement-modal #statement-sheet-modal-wrapper {
     position: static !important;
     background: transparent !important;
     padding: 0 !important;
@@ -70,7 +94,9 @@
   }
 
   body.printing-statement #statement-printable-document,
-  body.printing-statement #view-statement-printable-document {
+  body.printing-statement-modal #statement-printable-document,
+  body.printing-statement #view-statement-printable-document,
+  body.printing-statement-view #view-statement-printable-document {
     display: block !important;
     position: static !important;
     width: 100% !important;
@@ -79,6 +105,14 @@
     padding: 12px !important;
     background: #ffffff !important;
     color: #000000 !important;
+  }
+
+  /* When NOT printing statement, ensure statement printable documents are hidden */
+  body:not(.printing-statement):not(.printing-statement-modal) #statement-printable-document {
+    display: none !important;
+  }
+  body:not(.printing-statement):not(.printing-statement-view) #view-statement-printable-document {
+    display: none !important;
   }
 
   .no-print {

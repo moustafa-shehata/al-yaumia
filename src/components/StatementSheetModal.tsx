@@ -16,7 +16,7 @@ import { Transaction, Account } from '../types';
 import { formatCurrency, formatNumber, formatDateDMY } from '../utils/formatters';
 import { REPORT_META } from '../data/initialData';
 import { AccountSearchInput } from './AccountSearchInput';
-import { executePrintStatementReport } from '../utils/printHelper';
+import { executePrintStatementReport, openStatementInNewWindow } from '../utils/printHelper';
 
 interface StatementSheetModalProps {
   isOpen: boolean;
@@ -44,10 +44,14 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const [printStatus, setPrintStatus] = useState<'idle' | 'printing' | 'success'>('idle');
 
-  // Update selected account when initialAccount changes or modal opens
+  // Update selected account when initialAccount changes or modal opens (empty by default and ready for typing)
   useEffect(() => {
     if (isOpen) {
-      setSelectedAccount(initialAccount && initialAccount !== 'ALL' ? initialAccount : '');
+      if (initialAccount && initialAccount !== 'ALL') {
+        setSelectedAccount(initialAccount);
+      } else {
+        setSelectedAccount('');
+      }
     }
   }, [isOpen, initialAccount]);
 
@@ -189,12 +193,61 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
   const handlePrintReport = () => {
     if (!selectedAccount) {
       alert('يرجى كتابة أو اختيار حساب من دليل الحسابات أولاً لطباعة كشف الحساب.');
+      const el = document.getElementById('statement-account-search-input') as HTMLInputElement;
+      if (el) el.focus();
       return;
     }
 
     setPrintStatus('printing');
 
-    executePrintStatementReport({
+    const printPayload = {
+      accountName: selectedAccount,
+      accountCode: currentAccountMeta?.code,
+      accountType: currentAccountMeta?.type,
+      fromDate,
+      toDate,
+      movementFilter,
+      statementRows,
+      totalDebit,
+      totalCredit,
+      accountBalance,
+    };
+
+    // 1. Isolate print document using print classes
+    const cleanup = () => {
+      document.body.classList.remove('printing-statement');
+      document.body.classList.remove('printing-statement-modal');
+      window.removeEventListener('afterprint', cleanup);
+    };
+
+    window.addEventListener('afterprint', cleanup);
+    document.body.classList.add('printing-statement');
+    document.body.classList.add('printing-statement-modal');
+
+    // 2. Trigger native print or fallback to isolated iframe
+    try {
+      window.print();
+      setPrintStatus('success');
+      setTimeout(() => setPrintStatus('idle'), 2500);
+      setTimeout(cleanup, 2500);
+    } catch (err) {
+      console.warn('Direct print failed, using helper fallback:', err);
+      cleanup();
+      executePrintStatementReport(printPayload);
+      setPrintStatus('success');
+      setTimeout(() => setPrintStatus('idle'), 2500);
+    }
+  };
+
+  // Open dedicated standalone printable window/tab
+  const handleOpenStandalone = () => {
+    if (!selectedAccount) {
+      alert('يرجى كتابة أو اختيار حساب من دليل الحسابات أولاً لعرض كشف الحساب في نافذة مستقلة.');
+      const el = document.getElementById('statement-account-search-input') as HTMLInputElement;
+      if (el) el.focus();
+      return;
+    }
+    openStatementInNewWindow({
       accountName: selectedAccount,
       accountCode: currentAccountMeta?.code,
       accountType: currentAccountMeta?.type,
@@ -206,11 +259,6 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
       totalCredit,
       accountBalance,
     });
-
-    setTimeout(() => {
-      setPrintStatus('success');
-      setTimeout(() => setPrintStatus('idle'), 2500);
-    }, 600);
   };
 
   if (!isOpen) return null;
@@ -230,7 +278,7 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
         >
           {/* =========================================
               1. شريط الأوامر العلوي الثابت
-              [عرض التقرير]  [طباعة التقرير]  [إغلاق]
+              [عرض التقرير]  [طباعة التقرير]  [نافذة مستقلة]  [إغلاق]
              ========================================= */}
           <div
             id="statement-top-command-bar"
@@ -261,7 +309,7 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
               </div>
             </div>
 
-            {/* أزرار الأوامر: عرض التقرير | طباعة التقرير | إغلاق */}
+            {/* أزرار الأوامر: عرض التقرير | طباعة التقرير | نافذة مستقلة | إغلاق */}
             <div className="flex items-center gap-2 shrink-0">
               {/* 1. زر عرض التقرير */}
               <button
@@ -290,7 +338,19 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                 )}
               </button>
 
-              {/* 3. زر إغلاق */}
+              {/* 3. زر فتح في نافذة مستقلة للطباعة والحفظ */}
+              <button
+                type="button"
+                id="btn-statement-standalone-window"
+                onClick={handleOpenStandalone}
+                className="h-8 sm:h-8.5 px-2.5 sm:px-3 text-xs sm:text-sm font-semibold bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 hover:text-white rounded-lg flex items-center gap-1.5 transition-all cursor-pointer border border-slate-700"
+                title="فتح في نافذة مستقلة للطباعة المباشرة أو الحفظ كـ PDF"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                <span className="hidden md:inline">نافذة مستقلة</span>
+              </button>
+
+              {/* 4. زر إغلاق */}
               <button
                 type="button"
                 id="btn-statement-close"
@@ -342,6 +402,7 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                       onSelectAccount={(acc) => setSelectedAccount(acc.name)}
                       onClear={() => setSelectedAccount('')}
                       placeholder="اكتب اسم الحساب أو الكود للبحث الفوري..."
+                      autoFocus={true}
                     />
                   </div>
 

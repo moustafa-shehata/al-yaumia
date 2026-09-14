@@ -210,12 +210,14 @@ export function executePrintDocument(transactions: Transaction[], auditLogs: Aud
     const iframe = document.createElement('iframe');
     iframe.id = 'acuora-print-iframe';
     iframe.style.position = 'fixed';
-    iframe.style.right = '0';
-    iframe.style.bottom = '0';
-    iframe.style.width = '0';
-    iframe.style.height = '0';
+    iframe.style.top = '0';
+    iframe.style.left = '0';
+    iframe.style.width = '100vw';
+    iframe.style.height = '100vh';
     iframe.style.border = '0';
-    iframe.style.visibility = 'hidden';
+    iframe.style.opacity = '0.001';
+    iframe.style.pointerEvents = 'none';
+    iframe.style.zIndex = '-99999';
     document.body.appendChild(iframe);
 
     const doc = iframe.contentWindow?.document;
@@ -464,12 +466,14 @@ export function executePrintVoucher(transaction: Transaction): void {
     const iframe = document.createElement('iframe');
     iframe.id = 'acuora-voucher-print-iframe';
     iframe.style.position = 'fixed';
-    iframe.style.right = '0';
-    iframe.style.bottom = '0';
-    iframe.style.width = '0';
-    iframe.style.height = '0';
+    iframe.style.top = '0';
+    iframe.style.left = '0';
+    iframe.style.width = '100vw';
+    iframe.style.height = '100vh';
     iframe.style.border = '0';
-    iframe.style.visibility = 'hidden';
+    iframe.style.opacity = '0.001';
+    iframe.style.pointerEvents = 'none';
+    iframe.style.zIndex = '-99999';
     document.body.appendChild(iframe);
 
     const doc = iframe.contentWindow?.document;
@@ -693,6 +697,19 @@ export function generatePrintableStatementHtml(data: StatementPrintData): string
       <div style="color: #065f46; font-weight: bold;">✓ معتمد ومطابق دفترياً</div>
     </div>
   </div>
+
+  <script>
+    window.addEventListener('load', function() {
+      window.focus();
+      setTimeout(function() {
+        try {
+          window.print();
+        } catch (e) {
+          console.warn('Auto print failed:', e);
+        }
+      }, 300);
+    });
+  </script>
 </body>
 </html>
   `.trim();
@@ -700,21 +717,51 @@ export function generatePrintableStatementHtml(data: StatementPrintData): string
 
 /**
  * Triggers printing of Account Statement using an isolated hidden iframe
- * with automatic fallback to popup window and window.print.
+ * with automatic fallback to popup window and in-app print.
  */
 export function executePrintStatementReport(data: StatementPrintData): void {
   const html = generatePrintableStatementHtml(data);
 
+  // Method 1: If in-page document exists, trigger in-page print with body class
+  const hasStatementModal = document.getElementById('statement-printable-document') !== null;
+  const hasStatementView = document.getElementById('view-statement-printable-document') !== null;
+
+  if (hasStatementModal || hasStatementView) {
+    const bodyClass = hasStatementModal ? 'printing-statement-modal' : 'printing-statement-view';
+    const cleanup = () => {
+      document.body.classList.remove('printing-statement');
+      document.body.classList.remove('printing-statement-modal');
+      document.body.classList.remove('printing-statement-view');
+      window.removeEventListener('afterprint', cleanup);
+    };
+
+    window.addEventListener('afterprint', cleanup);
+    document.body.classList.add('printing-statement');
+    document.body.classList.add(bodyClass);
+
+    try {
+      window.print();
+      setTimeout(cleanup, 2500);
+      return;
+    } catch (directPrintErr) {
+      console.warn('Direct window.print failed, attempting iframe/popup fallback:', directPrintErr);
+      cleanup();
+    }
+  }
+
+  // Method 2: Isolated layout-visible iframe
   try {
     const iframe = document.createElement('iframe');
     iframe.id = 'statement-print-iframe';
     iframe.style.position = 'fixed';
-    iframe.style.right = '0';
-    iframe.style.bottom = '0';
-    iframe.style.width = '0';
-    iframe.style.height = '0';
+    iframe.style.top = '0';
+    iframe.style.left = '0';
+    iframe.style.width = '100vw';
+    iframe.style.height = '100vh';
     iframe.style.border = '0';
-    iframe.style.visibility = 'hidden';
+    iframe.style.opacity = '0.001';
+    iframe.style.pointerEvents = 'none';
+    iframe.style.zIndex = '-99999';
     document.body.appendChild(iframe);
 
     const doc = iframe.contentWindow?.document;
@@ -735,9 +782,9 @@ export function executePrintStatementReport(data: StatementPrintData): void {
             if (document.body.contains(iframe)) {
               document.body.removeChild(iframe);
             }
-          }, 4000);
+          }, 6000);
         }
-      }, 500);
+      }, 400);
       return;
     }
   } catch (err) {
@@ -748,9 +795,37 @@ export function executePrintStatementReport(data: StatementPrintData): void {
   fallbackPrintWindow(html);
 }
 
+/**
+ * Open statement in a dedicated new window/tab for printing or PDF export
+ */
+export function openStatementInNewWindow(data: StatementPrintData): void {
+  const html = generatePrintableStatementHtml(data);
+  try {
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+      printWindow.document.open();
+      printWindow.document.write(html);
+      printWindow.document.close();
+      printWindow.focus();
+      return;
+    }
+  } catch (e) {
+    console.warn('Direct popup blocked:', e);
+  }
+
+  try {
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    window.open(url, '_blank');
+  } catch (err) {
+    console.warn('Blob window open failed:', err);
+    executePrintStatementReport(data);
+  }
+}
+
 function fallbackPrintWindow(html: string): void {
   try {
-    const printWindow = window.open('', '_blank', 'width=900,height=700');
+    const printWindow = window.open('', '_blank', 'width=950,height=750');
     if (printWindow) {
       printWindow.document.open();
       printWindow.document.write(html);
@@ -771,8 +846,13 @@ function fallbackPrintWindow(html: string): void {
 
   // Ultimate fallback
   try {
+    document.body.classList.add('printing-statement');
     window.print();
   } catch (err) {
     console.warn('Direct print failed:', err);
+  } finally {
+    setTimeout(() => {
+      document.body.classList.remove('printing-statement');
+    }, 2000);
   }
 }

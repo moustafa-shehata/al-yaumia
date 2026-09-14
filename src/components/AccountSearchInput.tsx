@@ -32,6 +32,16 @@ export const AccountSearchInput: React.FC<AccountSearchInputProps> = ({
     setQuery(selectedAccountName || '');
   }, [selectedAccountName]);
 
+  // Auto-focus when autoFocus prop is enabled
+  useEffect(() => {
+    if (autoFocus) {
+      const timer = setTimeout(() => {
+        inputRef.current?.focus();
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [autoFocus]);
+
   // Handle outside click to close dropdown
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {

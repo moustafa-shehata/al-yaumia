@@ -245,9 +245,9 @@ export const TECHNICAL_NOTES: TechnicalNote[] = [
 ];
 
 export const REPORT_META = {
-  title: 'نظام اليومية العامة',
+  title: 'منظومة اكيورا المالية',
   reportDate: '2026-09-02',
-  systemName: 'نظام اليومية العامة',
+  systemName: 'منظومة اكيورا المالية',
   defaultCreator: 'moustafa.acuora.soft.egypt',
 };
 
