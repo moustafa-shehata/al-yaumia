@@ -373,6 +373,7 @@ export const UserActivityLogModal: React.FC<UserActivityLogModalProps> = ({
                 <option value="إضافة حركة">إضافة حركة</option>
                 <option value="إضافة حساب">إضافة حساب</option>
                 <option value="إدارة المستخدمين">إدارة المستخدمين</option>
+                <option value="تسجيل الدخول">تسجيل الدخول</option>
               </select>
             </div>
 

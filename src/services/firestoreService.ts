@@ -9,11 +9,12 @@ import {
   Unsubscribe,
 } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../firebase';
-import { Transaction, Account, UserActivityLog } from '../types';
+import { Transaction, Account, UserActivityLog, AppUser } from '../types';
 
 const TRANSACTIONS_COLLECTION = 'transactions';
 const ACCOUNTS_COLLECTION = 'accounts';
 const ACTIVITY_LOGS_COLLECTION = 'activity_logs';
+const USERS_COLLECTION = 'users';
 
 /**
  * Subscribe to real-time transactions from Firestore
@@ -190,12 +191,64 @@ export async function saveActivityLogToFirestore(log: UserActivityLog): Promise<
 }
 
 /**
+ * Subscribe to real-time users from Firestore
+ */
+export function subscribeToUsers(
+  onData: (users: AppUser[]) => void,
+  onError?: (err: unknown) => void
+): Unsubscribe {
+  const colRef = collection(db, USERS_COLLECTION);
+  return onSnapshot(
+    colRef,
+    (snapshot) => {
+      const items: AppUser[] = [];
+      snapshot.forEach((docSnap) => {
+        items.push(docSnap.data() as AppUser);
+      });
+      onData(items);
+    },
+    (error) => {
+      console.error('Users onSnapshot error:', error);
+      if (onError) onError(error);
+      handleFirestoreError(error, OperationType.GET, USERS_COLLECTION);
+    }
+  );
+}
+
+/**
+ * Save or update a user profile in Firestore
+ */
+export async function saveUserToFirestore(user: AppUser): Promise<void> {
+  const path = `${USERS_COLLECTION}/${user.id}`;
+  try {
+    const docRef = doc(db, USERS_COLLECTION, user.id);
+    await setDoc(docRef, user);
+  } catch (error) {
+    handleFirestoreError(error, OperationType.WRITE, path);
+  }
+}
+
+/**
+ * Delete a user from Firestore
+ */
+export async function deleteUserFromFirestore(userId: string): Promise<void> {
+  const path = `${USERS_COLLECTION}/${userId}`;
+  try {
+    const docRef = doc(db, USERS_COLLECTION, userId);
+    await deleteDoc(docRef);
+  } catch (error) {
+    handleFirestoreError(error, OperationType.DELETE, path);
+  }
+}
+
+/**
  * Initialize Firestore data with existing local data if Firestore is empty
  */
 export async function seedInitialFirestoreData(
   initialTransactions: Transaction[],
   initialAccounts: Account[],
-  initialLogs: UserActivityLog[]
+  initialLogs: UserActivityLog[],
+  initialUsers?: AppUser[]
 ): Promise<boolean> {
   try {
     const txSnapshot = await getDocs(collection(db, TRANSACTIONS_COLLECTION));
@@ -210,9 +263,27 @@ export async function seedInitialFirestoreData(
       for (const lg of initialLogs) {
         batch.set(doc(db, ACTIVITY_LOGS_COLLECTION, lg.id), lg);
       }
+      if (initialUsers && initialUsers.length > 0) {
+        for (const usr of initialUsers) {
+          batch.set(doc(db, USERS_COLLECTION, usr.id), usr);
+        }
+      }
       await batch.commit();
       return true;
     }
+
+    // Check users collection specifically
+    if (initialUsers && initialUsers.length > 0) {
+      const userSnapshot = await getDocs(collection(db, USERS_COLLECTION));
+      if (userSnapshot.empty) {
+        const batch = writeBatch(db);
+        for (const usr of initialUsers) {
+          batch.set(doc(db, USERS_COLLECTION, usr.id), usr);
+        }
+        await batch.commit();
+      }
+    }
+
     return false;
   } catch (error) {
     console.warn('Could not auto-seed Firestore data:', error);

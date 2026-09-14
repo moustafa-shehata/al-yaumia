@@ -2,12 +2,19 @@ import React from 'react';
 import { FileSpreadsheet, Cloud, CloudCheck, LogIn, LogOut, Loader2 } from 'lucide-react';
 import { REPORT_META } from '../data/initialData';
 import { useFirebase } from '../context/FirebaseContext';
+import { AppUser } from '../types';
 
 interface HeaderProps {
   onOpenUserManagement?: () => void;
+  currentUser?: AppUser;
+  onLogout?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = () => {
+export const Header: React.FC<HeaderProps> = ({
+  onOpenUserManagement,
+  currentUser,
+  onLogout,
+}) => {
   const { firebaseUser, isAuthReady, isFirestoreConnected, loginWithGoogle, logout } = useFirebase();
 
   return (
@@ -96,6 +103,39 @@ export const Header: React.FC<HeaderProps> = () => {
               <LogIn className="w-3.5 h-3.5" />
               <span>مزامنة Firebase</span>
             </button>
+          )}
+          {/* Acuora App User Profile & Quick Logout */}
+          {currentUser && (
+            <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg p-1 pr-2">
+              <button
+                type="button"
+                onClick={onOpenUserManagement}
+                className="flex items-center gap-2 hover:opacity-85 transition-opacity text-right cursor-pointer"
+                title="المستخدم النشط - انقر لفتح إدارة المستخدمين والصلاحيات"
+              >
+                <div className="w-7 h-7 rounded-full bg-slate-800 text-white text-xs flex items-center justify-center font-bold shrink-0">
+                  {currentUser.fullName.slice(0, 1)}
+                </div>
+                <div className="hidden lg:flex flex-col text-right">
+                  <span className="text-xs font-bold text-slate-900 leading-tight">
+                    {currentUser.fullName}
+                  </span>
+                  <span className="text-[10px] text-blue-700 font-semibold leading-none">
+                    {currentUser.role}
+                  </span>
+                </div>
+              </button>
+              {onLogout && (
+                <button
+                  type="button"
+                  onClick={onLogout}
+                  title="تسجيل الخروج من المنظومة"
+                  className="p-1 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded transition-colors cursor-pointer"
+                >
+                  <LogOut className="w-3.5 h-3.5 text-rose-600" />
+                </button>
+              )}
+            </div>
           )}
         </div>
 

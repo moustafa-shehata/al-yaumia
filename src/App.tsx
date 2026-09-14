@@ -16,6 +16,8 @@ import { MonthlyCashFlowChart } from './components/MonthlyCashFlowChart';
 import { ChartOfAccountsModal } from './components/ChartOfAccountsModal';
 import { ImportAccountsModal } from './components/ImportAccountsModal';
 import { AccountCardModal } from './components/AccountCardModal';
+import { LoginScreen } from './components/LoginScreen';
+import { PermissionModalAlert, PermissionNotice } from './components/PermissionModalAlert';
 import { 
   INITIAL_TRANSACTIONS, 
   INITIAL_AUDIT_LOGS, 
@@ -46,6 +48,9 @@ import {
   subscribeToTransactions,
   subscribeToAccounts,
   subscribeToActivityLogs,
+  subscribeToUsers,
+  saveUserToFirestore,
+  deleteUserFromFirestore,
   seedInitialFirestoreData,
 } from './services/firestoreService';
 
@@ -146,7 +151,17 @@ export default function App() {
     return (users && users[0]) || INITIAL_USERS[0];
   });
 
-  // Initialize User Activity Logs state
+  // Active session status (Login Screen vs Main Desktop Dashboard)
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
+    try {
+      const savedLogin = localStorage.getItem('ACUORA_IS_LOGGED_IN');
+      return savedLogin === 'true';
+    } catch {
+      return false;
+    }
+  });
+
+  // Central User Activity Logs state
   const [activityLogs, setActivityLogs] = useState<UserActivityLog[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.ACTIVITY_LOGS);
@@ -202,6 +217,7 @@ export default function App() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [highlightedTxId, setHighlightedTxId] = useState<number | null>(null);
   const [txToDelete, setTxToDelete] = useState<Transaction | null>(null);
+  const [permissionNotice, setPermissionNotice] = useState<PermissionNotice | null>(null);
 
   // Sync to local storage
   useEffect(() => {
@@ -292,17 +308,54 @@ export default function App() {
       (err) => console.warn('[Firestore] Activity logs onSnapshot status:', err)
     );
 
+    // 4. Live subscription to Firestore 'users' collection
+    const unsubUsers = subscribeToUsers(
+      (cloudUsers) => {
+        if (!isSubscribed) return;
+        if (cloudUsers && cloudUsers.length > 0) {
+          setUsers(cloudUsers);
+          // Keep current active user in sync with updated permissions/credentials from Firestore
+          setCurrentActiveUser((prev) => {
+            const matched = cloudUsers.find((u) => u.id === prev.id);
+            return matched || prev;
+          });
+        } else {
+          // If Firestore users collection is empty, seed initial users
+          seedInitialFirestoreData(transactions, accounts, activityLogs, users);
+        }
+      },
+      (err) => console.warn('[Firestore] Users onSnapshot status:', err)
+    );
+
     return () => {
       isSubscribed = false;
       unsubTx();
       unsubAcc();
       unsubLogs();
+      unsubUsers();
     };
   }, []);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(null), 3500);
+  };
+
+  // Trigger prominent centered modal alert for permission denial
+  const triggerPermissionNotice = (
+    actionName: string,
+    targetResource: string,
+    requiredRoleOrPerm?: string,
+    details?: string
+  ) => {
+    setPermissionNotice({
+      actionName,
+      targetResource,
+      requiredRoleOrPerm: requiredRoleOrPerm || 'صلاحية وصول معتمدة',
+      userFullName: currentActiveUser.fullName,
+      userRole: currentActiveUser.role,
+      details: details || `تم رفض الإجراء تلقائياً لعدم توفر الصلاحية الكافية لحساب المستخدم "${currentActiveUser.fullName}" في مصفوفة الصلاحيات المعتمدة للمنظومة.`
+    });
   };
 
   // Central User Activity Logger
@@ -543,6 +596,15 @@ export default function App() {
 
   // Request Delete Transaction (Opens safe confirmation dialog)
   const handleRequestDeleteTransaction = (id: number) => {
+    if (!checkPermission('transaction', 'delete')) {
+      triggerPermissionNotice(
+        'حذف القيد المالي',
+        'دفتر اليومية',
+        'صلاحية الحذف',
+        'عفواً، حسابك الحالي لا يمتلك صلاحية حذف القيود المالية.'
+      );
+      return;
+    }
     const tx = transactions.find((t) => t.id === id);
     if (tx) {
       setTxToDelete(tx);
@@ -596,9 +658,71 @@ export default function App() {
     );
   };
 
+  // User Authentication & Session Handlers
+  const handleLogin = (user: AppUser) => {
+    const updatedUser: AppUser = {
+      ...user,
+      lastLogin: new Date().toLocaleString('ar-EG'),
+    };
+    setCurrentActiveUser(updatedUser);
+    setUsers((prev) => prev.map((u) => (u.id === user.id ? updatedUser : u)));
+    setIsLoggedIn(true);
+    try {
+      localStorage.setItem('ACUORA_IS_LOGGED_IN', 'true');
+      localStorage.setItem(STORAGE_KEYS.ACTIVE_USER_ID, user.id);
+    } catch {
+      // ignore
+    }
+
+    logUserActivity(
+      'دخول',
+      'تسجيل الدخول',
+      user.id,
+      'تسجيل دخول',
+      `تسجيل دخول ناجح إلى النظام (${user.role})`,
+      user.username
+    );
+
+    showToast(`مرحباً بك: ${user.fullName} (${user.role})`);
+  };
+
+  const handleLogout = () => {
+    logUserActivity(
+      'خروج',
+      'تسجيل الدخول',
+      currentActiveUser.id,
+      'جلسة نشطة',
+      'تسجيل خروج من النظام',
+      currentActiveUser.username
+    );
+    setIsLoggedIn(false);
+    try {
+      localStorage.removeItem('ACUORA_IS_LOGGED_IN');
+    } catch {
+      // ignore
+    }
+    showToast('تم تسجيل الخروج بنجاح.');
+  };
+
+  // Permission validator according to active user's roles and permissions
+  const checkPermission = (
+    module: 'transaction' | 'account' | 'userManagement' | 'activityLog',
+    action: 'view' | 'add' | 'edit' | 'delete' | 'print' | 'export'
+  ): boolean => {
+    if (currentActiveUser.role === 'مدير نظام') return true;
+    const perms = currentActiveUser.permissions as any;
+    if (perms?.[module]?.[action] === false) {
+      return false;
+    }
+    return true;
+  };
+
   // User Management Actions
   const handleAddUser = (newUser: AppUser) => {
     setUsers((prev) => [newUser, ...prev]);
+    saveUserToFirestore(newUser).catch((err) =>
+      console.warn('[Firestore] Failed saving user to Firestore:', err)
+    );
     logUserActivity(
       'إضافة',
       'إدارة المستخدمين',
@@ -611,6 +735,9 @@ export default function App() {
 
   const handleUpdateUser = (updatedUser: AppUser, oldUser: AppUser) => {
     setUsers((prev) => prev.map((u) => (u.id === updatedUser.id ? updatedUser : u)));
+    saveUserToFirestore(updatedUser).catch((err) =>
+      console.warn('[Firestore] Failed updating user in Firestore:', err)
+    );
     if (updatedUser.id === currentActiveUser.id) {
       setCurrentActiveUser(updatedUser);
     }
@@ -628,6 +755,9 @@ export default function App() {
     const targetUser = users.find((u) => u.id === userId);
     if (!targetUser) return;
     setUsers((prev) => prev.filter((u) => u.id !== userId));
+    deleteUserFromFirestore(userId).catch((err) =>
+      console.warn('[Firestore] Failed deleting user from Firestore:', err)
+    );
     logUserActivity(
       'حذف',
       'إدارة المستخدمين',
@@ -643,14 +773,74 @@ export default function App() {
     logUserActivity('خروج', 'إدارة المستخدمين', currentActiveUser.id, 'جلسة نشطة', 'تسجيل خروج من النظام', oldUsername);
     logUserActivity('دخول', 'إدارة المستخدمين', newUser.id, 'غير متصل', `تسجيل دخول ناجح للمنظومة (${newUser.role})`, newUser.username);
     setCurrentActiveUser(newUser);
+    setIsLoggedIn(true);
+    try {
+      localStorage.setItem('ACUORA_IS_LOGGED_IN', 'true');
+      localStorage.setItem(STORAGE_KEYS.ACTIVE_USER_ID, newUser.id);
+    } catch {
+      // ignore
+    }
     showToast(`تم التبديل بنجاح إلى المستخدم: ${newUser.fullName} (${newUser.role})`);
   };
 
   // Edit Click Handler
   const handleEditClick = (transaction: Transaction) => {
+    if (!checkPermission('transaction', 'edit')) {
+      triggerPermissionNotice(
+        'تعديل القيد المالي',
+        'دفتر اليومية',
+        'صلاحية التعديل',
+        `عفواً، حسابك لا يملك صلاحية تعديل القيد رقم (${transaction.id}).`
+      );
+      return;
+    }
     setTransactionToEdit(transaction);
     setDefaultTxAccountName(transaction.accountName);
     setIsModalOpen(true);
+  };
+
+  // Add Transaction Handler with Permission check
+  const handleOpenAddTransaction = (defaultAccount?: string) => {
+    if (!checkPermission('transaction', 'add')) {
+      triggerPermissionNotice(
+        'إضافة قيد مالي',
+        'دفتر اليومية',
+        'صلاحية الإضافة',
+        'عفواً، حسابك الحالي لا يمتلك صلاحية إضافة قيود مالية جديدة.'
+      );
+      return;
+    }
+    setTransactionToEdit(null);
+    setDefaultTxAccountName(defaultAccount);
+    setIsModalOpen(true);
+  };
+
+  // Add Account Handler with Permission check
+  const handleOpenAddAccount = () => {
+    if (!checkPermission('account', 'add')) {
+      triggerPermissionNotice(
+        'إضافة حساب جديد',
+        'دليل الحسابات',
+        'صلاحية الحسابات',
+        'عفواً، حسابك لا يمتلك صلاحية إنشاء حسابات مالية جديدة.'
+      );
+      return;
+    }
+    setIsAddAccountModalOpen(true);
+  };
+
+  // Open User Management with Permission check
+  const handleOpenUserManagement = () => {
+    if (!checkPermission('userManagement', 'view')) {
+      triggerPermissionNotice(
+        'إدارة المستخدمين',
+        'إدارة النظام',
+        'مدير نظام',
+        'عفواً، إدارة المستخدمين وصلاحيات الدخول مقتصرة على مدير النظام فقط.'
+      );
+      return;
+    }
+    setIsUserManagementModalOpen(true);
   };
 
   // View User Activity Log for transaction handler
@@ -821,6 +1011,25 @@ export default function App() {
     );
   }, [transactions]);
 
+  // If not logged in, render the Login Screen
+  if (!isLoggedIn) {
+    return (
+      <>
+        {toastMessage && (
+          <div className="fixed bottom-10 left-5 z-50 flex items-center gap-2 bg-slate-900 text-white text-xs sm:text-sm px-4 py-2.5 rounded-lg shadow-xl border border-slate-700 animate-in fade-in slide-in-from-bottom-2 no-print">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+            <span>{toastMessage}</span>
+          </div>
+        )}
+        <LoginScreen
+          users={users}
+          onLogin={handleLogin}
+          lastUserId={currentActiveUser?.id}
+        />
+      </>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900 flex flex-col selection:bg-blue-600 selection:text-white overflow-x-hidden">
       {/* Toast Notification */}
@@ -832,25 +1041,37 @@ export default function App() {
       )}
 
       {/* Screen Header with Navigation & Title */}
-      <Header />
+      <Header
+        currentUser={currentActiveUser}
+        onLogout={handleLogout}
+        onOpenUserManagement={handleOpenUserManagement}
+      />
 
       {/* Desktop Application Menu Bar (شريط القوائم المكتبي) */}
       <DesktopMenuBar
-        onAddTransaction={() => {
-          setTransactionToEdit(null);
-          setDefaultTxAccountName(undefined);
-          setIsModalOpen(true);
-        }}
-        onAddAccount={() => setIsAddAccountModalOpen(true)}
+        onAddTransaction={() => handleOpenAddTransaction()}
+        onAddAccount={handleOpenAddAccount}
         onOpenChartOfAccounts={() => setIsChartOfAccountsModalOpen(true)}
         onOpenAccountCard={() => handleOpenAccountCard()}
-        onOpenImportAccounts={() => setIsImportAccountsModalOpen(true)}
+        onOpenImportAccounts={() => {
+          if (currentActiveUser.role !== 'مدير نظام') {
+            triggerPermissionNotice(
+              'استيراد الحسابات',
+              'دليل الحسابات',
+              'مدير نظام',
+              'عفواً، استيراد دليل الحسابات من ملف خارجي مقتصر على مدير النظام فقط.'
+            );
+            return;
+          }
+          setIsImportAccountsModalOpen(true);
+        }}
         onOpenStatementSheet={() => handleOpenStatementSheet()}
         onOpenUserActivityLogs={() => setIsActivityLogModalOpen(true)}
-        onOpenUserManagement={() => setIsUserManagementModalOpen(true)}
+        onOpenUserManagement={handleOpenUserManagement}
         onExportCSV={handleExportCSV}
         onPrint={handlePrint}
         onResetData={handleResetData}
+        onLogout={handleLogout}
         currentUser={currentActiveUser}
       />
 
@@ -858,20 +1079,27 @@ export default function App() {
       <main className="flex-1 max-w-[1720px] w-full mx-auto px-3 sm:px-5 lg:px-6 py-3 sm:py-4 space-y-4">
         {/* Quick Actions Command Bar (أزرار العمليات المصغرة في صف واحد + حقل البحث عن العمليات) */}
         <QuickActionBar
-          onAddTransaction={() => {
-            setTransactionToEdit(null);
-            setDefaultTxAccountName(undefined);
-            setIsModalOpen(true);
-          }}
-          onAddAccount={() => setIsAddAccountModalOpen(true)}
+          onAddTransaction={() => handleOpenAddTransaction()}
+          onAddAccount={handleOpenAddAccount}
           onOpenChartOfAccounts={() => setIsChartOfAccountsModalOpen(true)}
           onOpenStatementSheet={() => handleOpenStatementSheet()}
           onOpenUserActivityLogs={() => setIsActivityLogModalOpen(true)}
-          onOpenUserManagement={() => setIsUserManagementModalOpen(true)}
+          onOpenUserManagement={handleOpenUserManagement}
           activityCount={activityLogs.length}
           onPrint={handlePrint}
           onExportCSV={handleExportCSV}
-          onOpenImportAccounts={() => setIsImportAccountsModalOpen(true)}
+          onOpenImportAccounts={() => {
+            if (currentActiveUser.role !== 'مدير نظام') {
+              triggerPermissionNotice(
+                'استيراد الحسابات',
+                'دليل الحسابات',
+                'مدير نظام',
+                'عفواً، استيراد دليل الحسابات من ملف خارجي مقتصر على مدير النظام فقط.'
+              );
+              return;
+            }
+            setIsImportAccountsModalOpen(true);
+          }}
           onNavigateToDailyMovements={() => setActiveTab('daily_movement')}
           onNavigateToFinancialAnalysis={() => {
             setActiveTab('daily_movement');
@@ -949,7 +1177,7 @@ export default function App() {
           setDefaultTxAccountName(undefined);
         }}
         onSave={handleSaveTransaction}
-        onDelete={handleConfirmDeleteTransaction}
+        onDelete={checkPermission('transaction', 'delete') ? handleConfirmDeleteTransaction : undefined}
         transactions={transactions}
         transactionToEdit={transactionToEdit}
         nextId={nextId}
@@ -958,7 +1186,7 @@ export default function App() {
         onPrintVoucher={handlePrintVoucher}
         onAddNewAccount={() => {
           setIsModalOpen(false);
-          setIsAddAccountModalOpen(true);
+          handleOpenAddAccount();
         }}
       />
 
@@ -1142,6 +1370,12 @@ export default function App() {
           </div>
         </div>
       )}
+
+      {/* Prominent Centered Permission Alert Modal */}
+      <PermissionModalAlert
+        notice={permissionNotice}
+        onClose={() => setPermissionNotice(null)}
+      />
     </div>
   );
 }

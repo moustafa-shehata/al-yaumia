@@ -101,7 +101,10 @@ export const DesktopStatusBar: React.FC<DesktopStatusBarProps> = ({
             title="المستخدم الحالي للنظام - انقر لإدارة الصلاحيات"
           >
             <UserCheck className="w-3.5 h-3.5 text-purple-600" />
-            <span>المستخدم: <strong className="text-slate-900">{currentUser.fullName}</strong></span>
+            <span>
+              المستخدم: <strong className="text-slate-900">{currentUser.fullName}</strong>{' '}
+              <span className="text-blue-700 font-semibold">({currentUser.role})</span>
+            </span>
           </button>
         )}
 

@@ -15,6 +15,7 @@ import {
   ChevronDown,
   Sparkles,
   UserCheck,
+  LogOut,
 } from 'lucide-react';
 import { AppUser } from '../types';
 
@@ -30,6 +31,7 @@ interface DesktopMenuBarProps {
   onExportCSV: () => void;
   onPrint: () => void;
   onResetData: () => void;
+  onLogout?: () => void;
   currentUser?: AppUser;
 }
 
@@ -47,6 +49,7 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
   onExportCSV,
   onPrint,
   onResetData,
+  onLogout,
   currentUser,
 }) => {
   const [activeMenu, setActiveMenu] = useState<MenuKey>(null);
@@ -168,6 +171,22 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
                   <span>استعادة البيانات الافتراضية الأصلية</span>
                 </span>
               </button>
+
+              {onLogout && (
+                <>
+                  <div className="my-1 border-t border-slate-200" />
+                  <button
+                    type="button"
+                    onClick={() => closeMenuAndRun(onLogout)}
+                    className="w-full px-3 py-1.5 text-right text-xs text-rose-700 hover:bg-rose-50 flex items-center justify-between group cursor-pointer"
+                  >
+                    <span className="flex items-center gap-2">
+                      <LogOut className="w-3.5 h-3.5 text-rose-600" />
+                      <span>تسجيل الخروج من الجلسة (Logout)</span>
+                    </span>
+                  </button>
+                </>
+              )}
             </div>
           )}
         </div>
@@ -339,10 +358,31 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
               </button>
 
               {currentUser && (
-                <div className="px-3 py-1.5 text-[11px] bg-slate-50 border-t border-slate-200 text-slate-600 flex items-center gap-1.5">
-                  <UserCheck className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>المستخدم النشط: <strong>{currentUser.fullName}</strong></span>
+                <div className="px-3 py-1.5 text-[11px] bg-slate-50 border-t border-slate-200 text-slate-600 flex items-center justify-between gap-1.5">
+                  <span className="flex items-center gap-1.5">
+                    <UserCheck className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>المستخدم: <strong>{currentUser.fullName}</strong></span>
+                  </span>
+                  <span className="text-[10px] px-1 py-0.2 rounded bg-blue-100 text-blue-800 font-semibold">
+                    {currentUser.role}
+                  </span>
                 </div>
+              )}
+
+              {onLogout && (
+                <>
+                  <div className="my-1 border-t border-slate-200" />
+                  <button
+                    type="button"
+                    onClick={() => closeMenuAndRun(onLogout)}
+                    className="w-full px-3 py-1.5 text-right text-xs text-rose-700 hover:bg-rose-50 flex items-center justify-between group cursor-pointer"
+                  >
+                    <span className="flex items-center gap-2">
+                      <LogOut className="w-3.5 h-3.5 text-rose-600" />
+                      <span>تسجيل الخروج من الجلسة (Logout)</span>
+                    </span>
+                  </button>
+                </>
               )}
             </div>
           )}
@@ -379,6 +419,36 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
             </div>
           )}
         </div>
+
+        {/* Current User Session Badge & Quick Logout Button on Menu Bar */}
+        {currentUser && (
+          <div className="mr-auto flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={onOpenUserManagement}
+              className="hidden sm:flex items-center gap-1.5 px-2 py-0.5 rounded bg-white/70 hover:bg-white border border-slate-300 text-slate-700 transition-colors cursor-pointer"
+              title="انقر لفتح إدارة المستخدمين والصلاحيات"
+            >
+              <UserCheck className="w-3 h-3 text-emerald-600" />
+              <span className="text-slate-800 font-bold">{currentUser.fullName}</span>
+              <span className="text-[10px] px-1 py-0.2 rounded bg-blue-100 text-blue-800 font-semibold">
+                {currentUser.role}
+              </span>
+            </button>
+
+            {onLogout && (
+              <button
+                type="button"
+                onClick={onLogout}
+                className="flex items-center gap-1 px-2 py-0.5 rounded bg-rose-100/80 hover:bg-rose-200 active:bg-rose-300 text-rose-800 border border-rose-300 text-xs font-bold transition-colors cursor-pointer"
+                title="تسجيل الخروج من المنظومة"
+              >
+                <LogOut className="w-3 h-3 text-rose-700" />
+                <span>خروج</span>
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

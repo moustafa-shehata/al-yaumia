@@ -27,6 +27,7 @@ import {
   Minus,
   Square,
   Lock,
+  LogIn,
   Sparkles,
   FileText,
   HelpCircle,
@@ -106,7 +107,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
         ...targetUser,
         permissions: ensureFullUserPermissions(targetUser.permissions, targetUser.role),
       });
-      setPasswordInput('••••••••');
+      setPasswordInput(targetUser.password || '');
     }
   }, [selectedUserId, users, isCreatingNew, currentActiveUser]);
 
@@ -145,11 +146,11 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
     };
 
     setDraftUser(newUserTemplate);
-    setPasswordInput('123456');
+    setPasswordInput('');
     setIsCreatingNew(true);
     setSelectedUserId(generatedId);
     setActiveTab('profile');
-    setSaveSuccessMessage('تم تجهيز قالب مستخدم جديد، يرجى ملء البيانات وحفظ الصلاحيات.');
+    setSaveSuccessMessage('تم تجهيز قالب مستخدم جديد، يرجى ملء بيانات الحساب وكلمة المرور وحفظ الصلاحيات.');
     setTimeout(() => setSaveSuccessMessage(null), 3000);
   };
 
@@ -161,6 +162,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
       ...user,
       permissions: ensureFullUserPermissions(user.permissions, user.role),
     });
+    setPasswordInput(user.password || '');
   };
 
   // Handler: Save User & Permissions
@@ -173,6 +175,10 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
       setErrorMessage('يرجى إدخال اسم الدخول للمستخدم');
       return;
     }
+    if (!passwordInput.trim() && !draftUser.password) {
+      setErrorMessage('يرجى إدخال كلمة مرور صالحة للمستخدم');
+      return;
+    }
 
     setErrorMessage(null);
 
@@ -183,8 +189,10 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
     const userAdmin = modules['menu_system']?.['userManagement'] || createFiveAction(false, false, false, false, false);
     const actAudit = modules['menu_system']?.['userActivityLogs'] || createFiveAction(true, false, false, false, true);
 
+    const finalPassword = passwordInput.trim() || draftUser.password || '';
     const consolidatedUser: AppUser = {
       ...draftUser,
+      password: finalPassword,
       permissions: {
         ...draftUser.permissions,
         transaction: {
@@ -499,6 +507,19 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
               <Trash2 className="w-3.5 h-3.5" />
               <span>حذف</span>
             </button>
+
+            {/* Button: دخول بحساب هذا المستخدم فورياً */}
+            {!isCreatingNew && draftUser.id !== currentActiveUser.id && (
+              <button
+                type="button"
+                onClick={handleSwitchToCurrent}
+                className="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white rounded border border-indigo-700 shadow-2xs text-xs font-bold transition-colors cursor-pointer"
+                title={`التبديل فوراً وتفعيل جلسة العمل بحساب "${draftUser.fullName}"`}
+              >
+                <LogIn className="w-3.5 h-3.5" />
+                <span>دخول بحسابه</span>
+              </button>
+            )}
 
             {/* Button: إغلاق - مباشرة بجوار الأزرار في نفس شريط الأوامر */}
             <button

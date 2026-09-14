@@ -57,6 +57,24 @@
       },
       "required": ["id", "sequence", "date", "time", "username", "action", "window", "recordId"]
     },
+    "AppUser": {
+      "title": "AppUser",
+      "description": "System user account and security permissions profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 100, "description": "Unique user code/ID" },
+        "username": { "type": "string", "maxLength": 100, "description": "Login username" },
+        "fullName": { "type": "string", "maxLength": 150, "description": "Full display name" },
+        "role": { "type": "string", "enum": ["مدير نظام", "محاسب عام", "مدخل بيانات", "مراجع حسابات"], "description": "Primary user role" },
+        "status": { "type": "string", "enum": ["نشط", "معطل"], "description": "Account status" },
+        "password": { "type": "string", "maxLength": 100, "description": "Account password" },
+        "phone": { "type": "string", "maxLength": 50, "description": "Phone number" },
+        "email": { "type": "string", "maxLength": 150, "description": "Email address" },
+        "createdAt": { "type": "string", "maxLength": 50, "description": "Creation date" },
+        "lastLogin": { "type": "string", "maxLength": 50, "description": "Last login timestamp" }
+      },
+      "required": ["id", "username", "fullName", "role", "status"]
+    },
     "TestConnection": {
       "title": "TestConnection",
       "description": "Diagnostic ping document",
@@ -78,6 +96,10 @@
     "/activity_logs/{logId}": {
       "schema": "UserActivityLog",
       "description": "System audit trail records"
+    },
+    "/users/{userId}": {
+      "schema": "AppUser",
+      "description": "Application users and authentication credentials created and maintained from user management"
     },
     "/test/{testId}": {
       "schema": "TestConnection",

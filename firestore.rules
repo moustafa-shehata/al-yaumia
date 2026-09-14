@@ -59,6 +59,14 @@ service cloud.firestore {
         && (data.recordId is string || data.recordId is number);
     }
 
+    function isValidUser(data) {
+      return data.id is string && data.id.size() > 0 && data.id.size() <= 100
+        && data.username is string && data.username.size() > 0 && data.username.size() <= 100
+        && data.fullName is string && data.fullName.size() > 0 && data.fullName.size() <= 150
+        && data.role is string && (data.role == 'مدير نظام' || data.role == 'محاسب عام' || data.role == 'مدخل بيانات' || data.role == 'مراجع حسابات')
+        && data.status is string && (data.status == 'نشط' || data.status == 'معطل');
+    }
+
     // Test connection diagnostic collection
     match /test/{testId} {
       allow read: if true;
@@ -93,6 +101,17 @@ service cloud.firestore {
         && isValidActivityLog(incoming());
       allow update: if false; // Audit logs are immutable
       allow delete: if false; // Audit logs cannot be deleted
+    }
+
+    // Users and Permissions Collection
+    match /users/{userId} {
+      allow read: if true;
+      allow create: if isValidId(userId)
+        && isValidUser(incoming());
+      allow update: if isValidId(userId)
+        && isValidUser(incoming())
+        && incoming().id == existing().id;
+      allow delete: if isValidId(userId);
     }
   }
 }

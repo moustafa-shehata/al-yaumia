@@ -32,7 +32,7 @@ export type ActiveAppTab = 'daily_movement' | 'account_statement';
 
 export type UserActionType = 'دخول' | 'خروج' | 'إضافة' | 'تعديل' | 'حذف' | 'طباعة';
 
-export type ActivityWindowType = 'إضافة حركة' | 'إضافة حساب' | 'بطاقة الحساب' | 'إدارة المستخدمين';
+export type ActivityWindowType = 'إضافة حركة' | 'إضافة حساب' | 'بطاقة الحساب' | 'إدارة المستخدمين' | 'تسجيل الدخول';
 
 export interface UserActivityLog {
   id: string; // معرّف فريد
@@ -105,6 +105,7 @@ export interface AppUser {
   fullName: string;
   role: UserRole;
   status: 'نشط' | 'معطل';
+  password?: string;
   phone?: string;
   email?: string;
   createdAt: string;
