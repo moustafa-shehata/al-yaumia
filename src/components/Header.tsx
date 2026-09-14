@@ -24,9 +24,6 @@ export const Header: React.FC<HeaderProps> = () => {
               <h1 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
                 {REPORT_META.title}
               </h1>
-              <span className="hidden sm:inline-block px-2 py-0.5 text-[11px] font-semibold text-slate-500 bg-slate-100 rounded-md border border-slate-200">
-                سنة {new Date().getFullYear()}
-              </span>
             </div>
             <p className="text-xs text-slate-500 font-normal mt-0.5 hidden sm:block">
               منظومة القيود المحاسبية وتفريغ كشوف الحسابات ومطابقة الأرصدة

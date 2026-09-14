@@ -258,15 +258,9 @@ export const MonthlyCashFlowChart: React.FC<MonthlyCashFlowChartProps> = ({
             <TrendingUp className="w-5 h-5" />
           </div>
           <div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <h3 className="text-base sm:text-lg font-bold text-slate-900">
-                التحليل البياني لحركة المقبوضات والمدفوعات (Cash Flow Analytics)
-              </h3>
-              <span className="text-[11px] px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 border border-blue-200 font-semibold flex items-center gap-1">
-                <BarChart3 className="w-3 h-3 text-blue-600" />
-                مخطط Recharts تفاعلي
-              </span>
-            </div>
+            <h3 className="text-base sm:text-lg font-bold text-slate-900">
+              التحليل البياني لحركة المقبوضات والمدفوعات (Cash Flow Analytics)
+            </h3>
             <p className="text-xs text-slate-500 mt-0.5">
               مقارنة مؤشرات السيولة الواردة والمنصرفة والأرصدة الشهرية لدعم اتخاذ القرار المحاسبي
             </p>
@@ -753,20 +747,6 @@ export const MonthlyCashFlowChart: React.FC<MonthlyCashFlowChartProps> = ({
                 </AreaChart>
               )}
             </ResponsiveContainer>
-          </div>
-
-          {/* Analytical Footnote */}
-          <div className="flex flex-wrap items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-100 gap-2">
-            <div className="flex items-center gap-2">
-              <span className="inline-block w-2 h-2 rounded-full bg-emerald-600"></span>
-              <span>
-                شهر سبتمبر 2026 يمثل البيانات الفعلية المسجلة في مستند اليومية (
-                <strong className="text-slate-800 font-mono-numbers">105,000 ج.م</strong>)
-              </span>
-            </div>
-            <div className="text-[11px] text-slate-400">
-              مبني عبر Recharts مع تحديث لحظي فور تعديل أو إضافة أي حركة جديدة
-            </div>
           </div>
         </div>
       )}
