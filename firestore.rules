@@ -1,0 +1,98 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Safety Net (Pillar 4: Default Deny)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper Functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Entity Validation Helpers
+    function isValidTransaction(data) {
+      return data.id is number
+        && data.date is string && data.date.size() == 10 && data.date.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+        && data.receipt is number && data.receipt >= 0
+        && data.payment is number && data.payment >= 0
+        && data.description is string && data.description.size() <= 500
+        && data.movementBalance is number
+        && data.type is string && (data.type == 'قبض' || data.type == 'دفع')
+        && data.accountName is string && data.accountName.size() > 0 && data.accountName.size() <= 150
+        && data.mainAccount is string && data.mainAccount.size() > 0 && data.mainAccount.size() <= 150
+        && data.closingAccount is string && data.closingAccount.size() > 0 && data.closingAccount.size() <= 150;
+    }
+
+    function isValidAccount(data) {
+      return data.id is string && data.id.size() > 0 && data.id.size() <= 100
+        && data.name is string && data.name.size() > 0 && data.name.size() <= 150
+        && data.type is string && data.type.size() > 0 && data.type.size() <= 50
+        && data.mainAccount is string && data.mainAccount.size() > 0 && data.mainAccount.size() <= 150
+        && data.closingAccount is string && data.closingAccount.size() > 0 && data.closingAccount.size() <= 150
+        && data.openingBalance is number;
+    }
+
+    function isValidActivityLog(data) {
+      return data.id is string && data.id.size() > 0 && data.id.size() <= 100
+        && data.sequence is number && data.sequence >= 0
+        && data.date is string && data.date.size() <= 20
+        && data.time is string && data.time.size() <= 20
+        && data.username is string && data.username.size() > 0 && data.username.size() <= 100
+        && data.action is string && data.action.size() > 0 && data.action.size() <= 50
+        && data.window is string && data.window.size() > 0 && data.window.size() <= 100
+        && (data.recordId is string || data.recordId is number);
+    }
+
+    // Test connection diagnostic collection
+    match /test/{testId} {
+      allow read: if true;
+    }
+
+    // Transactions Journal Collection
+    match /transactions/{transactionId} {
+      allow read: if true;
+      allow create: if isValidId(transactionId) 
+        && isValidTransaction(incoming());
+      allow update: if isValidId(transactionId) 
+        && isValidTransaction(incoming())
+        && incoming().id == existing().id;
+      allow delete: if isValidId(transactionId);
+    }
+
+    // Chart of Accounts Collection
+    match /accounts/{accountId} {
+      allow read: if true;
+      allow create: if isValidId(accountId) 
+        && isValidAccount(incoming());
+      allow update: if isValidId(accountId) 
+        && isValidAccount(incoming())
+        && incoming().id == existing().id;
+      allow delete: if isValidId(accountId);
+    }
+
+    // User Activity Audit Log Collection
+    match /activity_logs/{logId} {
+      allow read: if true;
+      allow create: if isValidId(logId) 
+        && isValidActivityLog(incoming());
+      allow update: if false; // Audit logs are immutable
+      allow delete: if false; // Audit logs cannot be deleted
+    }
+  }
+}

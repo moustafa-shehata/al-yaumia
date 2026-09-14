@@ -1,0 +1,87 @@
+{
+  "entities": {
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Accounting journal movement record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "number", "description": "Serial sequence number" },
+        "date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$", "description": "Date formatted YYYY-MM-DD" },
+        "receipt": { "type": "number", "description": "Debit or incoming money" },
+        "payment": { "type": "number", "description": "Credit or outgoing money" },
+        "description": { "type": "string", "maxLength": 500, "description": "Transaction description" },
+        "movementBalance": { "type": "number", "description": "Calculated running balance" },
+        "type": { "type": "string", "enum": ["قبض", "دفع"], "description": "Transaction movement type" },
+        "accountName": { "type": "string", "maxLength": 150, "description": "Target account name" },
+        "mainAccount": { "type": "string", "maxLength": 150, "description": "Parent ledger account" },
+        "closingAccount": { "type": "string", "maxLength": 150, "description": "Financial closing category" },
+        "createdBy": { "type": "string", "maxLength": 100, "description": "Author username" },
+        "lastModified": { "type": "string", "maxLength": 100, "description": "Last updated date/time" }
+      },
+      "required": ["id", "date", "receipt", "payment", "description", "movementBalance", "type", "accountName", "mainAccount", "closingAccount"]
+    },
+    "Account": {
+      "title": "Account",
+      "description": "Financial chart of accounts card",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 100, "description": "Unique account ID" },
+        "code": { "type": "string", "maxLength": 50, "description": "Chart of accounts numeric code" },
+        "name": { "type": "string", "maxLength": 150, "description": "Account title" },
+        "type": { "type": "string", "maxLength": 50, "description": "Account classification type" },
+        "category": { "type": "string", "maxLength": 50, "description": "Financial statement category" },
+        "mainAccount": { "type": "string", "maxLength": 150, "description": "Parent category account" },
+        "closingAccount": { "type": "string", "maxLength": 150, "description": "Final closing balance destination" },
+        "openingBalance": { "type": "number", "description": "Opening balance" },
+        "phone": { "type": "string", "maxLength": 30, "description": "Contact telephone" },
+        "notes": { "type": "string", "maxLength": 500, "description": "Internal notes" },
+        "createdAt": { "type": "string", "maxLength": 50, "description": "Creation timestamp" }
+      },
+      "required": ["id", "name", "type", "mainAccount", "closingAccount", "openingBalance"]
+    },
+    "UserActivityLog": {
+      "title": "UserActivityLog",
+      "description": "User system audit trail log entry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 100, "description": "Unique log record ID" },
+        "sequence": { "type": "number", "description": "Log sequence counter" },
+        "date": { "type": "string", "maxLength": 20, "description": "Activity date" },
+        "time": { "type": "string", "maxLength": 20, "description": "Activity time" },
+        "username": { "type": "string", "maxLength": 100, "description": "User who performed action" },
+        "action": { "type": "string", "maxLength": 50, "description": "Action performed" },
+        "window": { "type": "string", "maxLength": 100, "description": "System window or modal" },
+        "recordId": { "type": "string", "maxLength": 100, "description": "Affected target record ID" },
+        "beforeValue": { "type": "string", "maxLength": 1000, "description": "Value before operation" },
+        "afterValue": { "type": "string", "maxLength": 1000, "description": "Value after operation" }
+      },
+      "required": ["id", "sequence", "date", "time", "username", "action", "window", "recordId"]
+    },
+    "TestConnection": {
+      "title": "TestConnection",
+      "description": "Diagnostic ping document",
+      "type": "object",
+      "properties": {
+        "status": { "type": "string", "description": "Status text" }
+      }
+    }
+  },
+  "firestore": {
+    "/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "Accounting movements and journal entries"
+    },
+    "/accounts/{accountId}": {
+      "schema": "Account",
+      "description": "Chart of accounts definitions and balances"
+    },
+    "/activity_logs/{logId}": {
+      "schema": "UserActivityLog",
+      "description": "System audit trail records"
+    },
+    "/test/{testId}": {
+      "schema": "TestConnection",
+      "description": "Diagnostic collection for verifying Firestore connectivity"
+    }
+  }
+}
