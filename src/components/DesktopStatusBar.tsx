@@ -48,25 +48,25 @@ export const DesktopStatusBar: React.FC<DesktopStatusBarProps> = ({
   return (
     <footer
       id="desktop-status-bar"
-      className="h-7 bg-slate-100 border-t border-slate-300 text-slate-700 text-[11px] px-3 select-none flex items-center justify-between gap-4 overflow-hidden whitespace-nowrap shrink-0 no-print"
+      className="h-7 bg-[#e6eef6] border-t border-[#bcd2e8] text-[#1e3a5f] text-[11px] px-3 select-none flex items-center justify-between gap-4 overflow-hidden whitespace-nowrap shrink-0 no-print"
       dir="rtl"
     >
       {/* Right side: System Status & Database */}
       <div className="flex items-center gap-3 shrink-0">
         {/* Ready Badge */}
-        <div className="flex items-center gap-1.5 px-2 py-0.5 bg-white rounded border border-slate-200 shadow-2xs">
+        <div className="flex items-center gap-1.5 px-2 py-0.5 bg-white rounded border border-[#bcd2e8] shadow-2xs">
           <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block shadow-2xs" />
-          <span className="font-bold text-slate-800 text-[10px]">جاهز</span>
+          <span className="font-bold text-[#0f2d52] text-[10px]">جاهز</span>
         </div>
 
         {/* Database connection */}
-        <div className="flex items-center gap-1 text-slate-600">
-          <Database className="w-3.5 h-3.5 text-blue-600" />
-          <span>قاعدة البيانات: <strong className="text-slate-800">متصلة ومطابقة 100%</strong></span>
+        <div className="flex items-center gap-1 text-[#55789e]">
+          <Database className="w-3.5 h-3.5 text-[#0078d4]" />
+          <span>قاعدة البيانات: <strong className="text-[#0f2d52]">متصلة ومطابقة 100%</strong></span>
         </div>
 
         {/* Firebase Cloud status */}
-        <div className="flex items-center gap-1 text-slate-600">
+        <div className="flex items-center gap-1 text-[#55789e]">
           {isFirestoreConnected ? (
             <>
               <CloudCheck className="w-3.5 h-3.5 text-emerald-600" />
@@ -80,39 +80,39 @@ export const DesktopStatusBar: React.FC<DesktopStatusBarProps> = ({
           )}
         </div>
 
-        <span className="h-3 w-px bg-slate-300" />
+        <span className="h-3 w-px bg-[#bcd2e8]" />
 
         {/* Transactions & Accounts Count */}
-        <div className="flex items-center gap-2 text-slate-600 font-mono-numbers">
-          <span>القيود: <strong className="text-slate-800 font-bold">{formatNumber(transactionsCount)}</strong></span>
+        <div className="flex items-center gap-2 text-[#55789e] font-mono-numbers">
+          <span>القيود: <strong className="text-[#0f2d52] font-bold">{formatNumber(transactionsCount)}</strong></span>
           <span>•</span>
-          <span>الحسابات: <strong className="text-slate-800 font-bold">{formatNumber(accountsCount)}</strong></span>
+          <span>الحسابات: <strong className="text-[#0f2d52] font-bold">{formatNumber(accountsCount)}</strong></span>
         </div>
       </div>
 
       {/* Left side: User & Clock */}
-      <div className="flex items-center gap-3 shrink-0 mr-auto text-slate-600">
+      <div className="flex items-center gap-3 shrink-0 mr-auto text-[#55789e]">
         {/* Current User */}
         {currentUser && (
           <button
             type="button"
             onClick={onOpenUserManagement}
-            className="flex items-center gap-1 text-slate-700 hover:text-blue-700 transition-colors cursor-pointer"
+            className="flex items-center gap-1 text-[#1e3a5f] hover:text-[#0078d4] transition-colors cursor-pointer"
             title="المستخدم الحالي للنظام - انقر لإدارة الصلاحيات"
           >
-            <UserCheck className="w-3.5 h-3.5 text-purple-600" />
+            <UserCheck className="w-3.5 h-3.5 text-[#0078d4]" />
             <span>
-              المستخدم: <strong className="text-slate-900">{currentUser.fullName}</strong>{' '}
-              <span className="text-blue-700 font-semibold">({currentUser.role})</span>
+              المستخدم: <strong className="text-[#0f2d52]">{currentUser.fullName}</strong>{' '}
+              <span className="text-[#0078d4] font-semibold">({currentUser.role})</span>
             </span>
           </button>
         )}
 
-        <span className="h-3 w-px bg-slate-300" />
+        <span className="h-3 w-px bg-[#bcd2e8]" />
 
         {/* Current System Time */}
-        <div className="flex items-center gap-1 font-mono-numbers text-slate-500">
-          <Clock className="w-3 h-3 text-slate-400" />
+        <div className="flex items-center gap-1 font-mono-numbers text-[#55789e]">
+          <Clock className="w-3 h-3 text-[#8aaecb]" />
           <span>{currentTime || '12:00:00'}</span>
         </div>
       </div>

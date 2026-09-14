@@ -361,32 +361,32 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-slate-900/60 backdrop-blur-xs no-print">
       <div
-        className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[94vh] flex flex-col border border-slate-200 overflow-hidden"
+        className="bg-white rounded-xl shadow-2xl w-full max-w-3xl max-h-[94vh] flex flex-col border border-[#bcd2e8] overflow-hidden"
         role="dialog"
         aria-modal="true"
       >
         {/* ========================================================
             1. SHIRIT ALAWY THABET (شريط علوي ثابت: جديد, حفظ, حذف, إغلاق)
            ======================================================== */}
-        <div className="px-4 py-3 sm:px-6 sm:py-3.5 bg-slate-900 border-b border-slate-800 text-white flex flex-wrap items-center justify-between gap-3 shrink-0">
+        <div className="px-4 py-3 sm:px-6 sm:py-3.5 bg-gradient-to-r from-[#003e73] via-[#005a9e] to-[#0078d4] border-b border-[#004e8c] text-white flex flex-wrap items-center justify-between gap-3 shrink-0 shadow-xs">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-600/30 text-blue-400 rounded-xl border border-blue-500/30">
+            <div className="p-2 bg-white/15 text-white rounded-xl border border-white/20">
               <Building2 className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="text-base sm:text-lg font-bold text-white">بطاقة الحساب المالي</h3>
                 {isNewMode ? (
-                  <span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 rounded text-xs font-bold">
+                  <span className="px-2 py-0.5 bg-emerald-500/30 text-emerald-100 border border-emerald-400/40 rounded text-xs font-bold">
                     حساب جديد
                   </span>
                 ) : (
-                  <span className="px-2 py-0.5 bg-blue-500/20 text-blue-300 border border-blue-500/40 rounded text-xs font-mono font-bold">
+                  <span className="px-2 py-0.5 bg-white/20 text-white border border-white/30 rounded text-xs font-mono font-bold">
                     {formData.code || 'بدون كود'}
                   </span>
                 )}
               </div>
-              <p className="text-xs text-slate-300">
+              <p className="text-xs text-blue-100">
                 إدارة بيانات الحساب الرئيسي والفرعي والرموز المحاسبية
               </p>
             </div>
@@ -398,10 +398,10 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
             <button
               type="button"
               onClick={handleNew}
-              className="h-9 px-3 text-xs sm:text-sm font-bold text-slate-100 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded-xl flex items-center gap-1.5 transition-colors border border-slate-700 cursor-pointer"
+              className="h-9 px-3 text-xs sm:text-sm font-bold text-white bg-white/15 hover:bg-white/25 active:scale-95 rounded-xl flex items-center gap-1.5 transition-colors border border-white/20 cursor-pointer"
               title="تفريغ البطاقة لإنشاء حساب جديد"
             >
-              <FilePlus className="w-4 h-4 text-emerald-400" />
+              <FilePlus className="w-4 h-4 text-emerald-300" />
               <span>جديد</span>
             </button>
 
@@ -409,7 +409,7 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
             <button
               type="button"
               onClick={() => handleSave()}
-              className="h-9 px-3.5 text-xs sm:text-sm font-bold text-white bg-blue-600 hover:bg-blue-500 active:bg-blue-700 rounded-xl flex items-center gap-1.5 shadow-sm transition-colors cursor-pointer"
+              className="h-9 px-3.5 text-xs sm:text-sm font-bold text-white bg-[#0078d4] hover:bg-[#0067b8] active:scale-95 border border-white/30 rounded-xl flex items-center gap-1.5 shadow-sm transition-colors cursor-pointer"
               title="حفظ بيانات الحساب في دليل الحسابات"
             >
               <Save className="w-4 h-4 text-white" />
@@ -421,20 +421,20 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
               type="button"
               onClick={handleDelete}
               disabled={isNewMode && accounts.length === 0}
-              className="h-9 px-3 text-xs sm:text-sm font-bold text-rose-300 hover:text-white bg-rose-950/50 hover:bg-rose-700 active:bg-rose-800 rounded-xl flex items-center gap-1.5 transition-colors border border-rose-800/60 cursor-pointer disabled:opacity-40 disabled:pointer-events-none"
+              className="h-9 px-3 text-xs sm:text-sm font-bold text-rose-200 hover:text-white bg-rose-900/60 hover:bg-rose-700 active:scale-95 rounded-xl flex items-center gap-1.5 transition-colors border border-rose-500/40 cursor-pointer disabled:opacity-40 disabled:pointer-events-none"
               title="حذف الحساب الحالي من دليل الحسابات"
             >
-              <Trash2 className="w-4 h-4 text-rose-400" />
+              <Trash2 className="w-4 h-4 text-rose-300" />
               <span>حذف</span>
             </button>
 
-            <span className="w-px h-6 bg-slate-700 mx-1 hidden sm:inline-block" />
+            <span className="w-px h-6 bg-white/25 mx-1 hidden sm:inline-block" />
 
             {/* إغلاق (Close) */}
             <button
               type="button"
               onClick={onClose}
-              className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
+              className="p-2 text-blue-100 hover:text-white hover:bg-white/15 rounded-xl transition-colors cursor-pointer"
               title="إغلاق بطاقة الحساب"
               aria-label="إغلاق"
             >
@@ -446,14 +446,14 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
         {/* ========================================================
             2. SHIRIT TANAQQUL MAA AL-ASHOM (شريط تنقل مع الأسهم)
            ======================================================== */}
-        <div className="px-4 py-2.5 bg-slate-100/90 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2 shrink-0">
+        <div className="px-4 py-2.5 bg-gradient-to-r from-[#f0f6fc] via-[#f7fafe] to-[#f0f6fc] border-b border-[#bcd2e8] flex flex-wrap items-center justify-between gap-2 shrink-0">
           <div className="flex items-center gap-1">
             {/* First: الأول */}
             <button
               type="button"
               onClick={handleFirst}
               disabled={accounts.length === 0 || (!isNewMode && currentIndex === 0)}
-              className="p-1.5 rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-blue-600 disabled:opacity-40 disabled:pointer-events-none transition-colors cursor-pointer shadow-2xs"
+              className="p-1.5 rounded-lg bg-white border border-[#bcd2e8] text-[#1e3a5f] hover:bg-[#eaf2fb] hover:text-[#0078d4] disabled:opacity-40 disabled:pointer-events-none transition-colors cursor-pointer shadow-2xs"
               title="الحساب الأول"
             >
               <ChevronsRight className="w-4 h-4" />
@@ -464,19 +464,19 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
               type="button"
               onClick={handlePrevious}
               disabled={accounts.length === 0 || (!isNewMode && currentIndex === 0)}
-              className="p-1.5 rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-blue-600 disabled:opacity-40 disabled:pointer-events-none transition-colors cursor-pointer shadow-2xs"
+              className="p-1.5 rounded-lg bg-white border border-[#bcd2e8] text-[#1e3a5f] hover:bg-[#eaf2fb] hover:text-[#0078d4] disabled:opacity-40 disabled:pointer-events-none transition-colors cursor-pointer shadow-2xs"
               title="الحساب السابق"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
 
             {/* Location Counter */}
-            <div className="px-3 py-1 bg-white border border-slate-300 rounded-lg text-xs font-bold text-slate-700 flex items-center gap-1.5 shadow-2xs">
+            <div className="px-3 py-1 bg-white border border-[#bcd2e8] rounded-lg text-xs font-bold text-[#0f2d52] flex items-center gap-1.5 shadow-2xs">
               {isNewMode ? (
                 <span className="text-emerald-700 font-semibold">إدخال حساب جديد</span>
               ) : accounts.length > 0 ? (
                 <span>
-                  حساب <strong className="text-blue-700 font-mono">{currentIndex + 1}</strong> من{' '}
+                  حساب <strong className="text-[#0078d4] font-mono">{currentIndex + 1}</strong> من{' '}
                   <strong className="font-mono">{accounts.length}</strong>
                 </span>
               ) : (
@@ -489,7 +489,7 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
               type="button"
               onClick={handleNext}
               disabled={accounts.length === 0 || (!isNewMode && currentIndex === accounts.length - 1)}
-              className="p-1.5 rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-blue-600 disabled:opacity-40 disabled:pointer-events-none transition-colors cursor-pointer shadow-2xs"
+              className="p-1.5 rounded-lg bg-white border border-[#bcd2e8] text-[#1e3a5f] hover:bg-[#eaf2fb] hover:text-[#0078d4] disabled:opacity-40 disabled:pointer-events-none transition-colors cursor-pointer shadow-2xs"
               title="الحساب التالي"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -500,7 +500,7 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
               type="button"
               onClick={handleLast}
               disabled={accounts.length === 0 || (!isNewMode && currentIndex === accounts.length - 1)}
-              className="p-1.5 rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-blue-600 disabled:opacity-40 disabled:pointer-events-none transition-colors cursor-pointer shadow-2xs"
+              className="p-1.5 rounded-lg bg-white border border-[#bcd2e8] text-[#1e3a5f] hover:bg-[#eaf2fb] hover:text-[#0078d4] disabled:opacity-40 disabled:pointer-events-none transition-colors cursor-pointer shadow-2xs"
               title="الحساب الأخير"
             >
               <ChevronsLeft className="w-4 h-4" />
@@ -509,14 +509,14 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
 
           {/* Quick Jump Dropdown */}
           <div className="flex items-center gap-2">
-            <label className="text-xs font-bold text-slate-600 hidden sm:inline">انتقال سريع:</label>
+            <label className="text-xs font-bold text-[#55789e] hidden sm:inline">انتقال سريع:</label>
             <select
               value={isNewMode ? '' : accounts[currentIndex]?.id || ''}
               onChange={(e) => handleSelectSpecificAccount(e.target.value)}
-              className="h-8 px-2.5 py-1 text-xs bg-white border border-slate-300 rounded-lg text-slate-800 font-medium focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer shadow-2xs max-w-[200px] truncate"
+              className="h-8 px-2.5 py-1 text-xs bg-white border border-[#bcd2e8] rounded-lg text-[#0f2d52] font-medium focus:outline-none focus:ring-1 focus:ring-[#0078d4] cursor-pointer shadow-2xs max-w-[200px] truncate"
             >
               {isNewMode && <option value="">-- حساب جديد قيد الإدخال --</option>}
-              {accounts.map((acc, i) => (
+              {accounts.map((acc) => (
                 <option key={acc.id} value={acc.id}>
                   {acc.code ? `${acc.code} - ` : ''}
                   {acc.name}
@@ -532,7 +532,7 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
                   onOpenStatementSheet(formData.name);
                   onClose();
                 }}
-                className="h-8 px-2.5 text-xs font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg flex items-center gap-1 transition-colors cursor-pointer"
+                className="h-8 px-2.5 text-xs font-bold text-[#0078d4] bg-[#eaf2fb] hover:bg-[#dbe9f8] border border-[#bcd2e8] rounded-lg flex items-center gap-1 transition-colors cursor-pointer"
                 title="فتح كشف حساب تفصيلي لهذا الحساب"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -560,23 +560,23 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
             3. HUQOOL BITAKAT AL-HISAB (حقول بطاقة الحساب)
            ======================================================== */}
         <form onSubmit={handleSave} className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
-          <div className="bg-slate-50/80 p-4 rounded-2xl border border-slate-200 space-y-4">
+          <div className="bg-[#f7fafe] p-4 rounded-xl border border-[#bcd2e8] space-y-4">
             {/* Section 1: الحساب الرئيسي والرمز */}
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
               {/* حقل اسم الحساب الرئيسي */}
               <div className="sm:col-span-8">
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-[#1e3a5f] mb-1">
                   اسم الحساب الرئيسي <span className="text-rose-500">*</span>
                 </label>
                 <div className="relative">
-                  <Layers className="w-4 h-4 text-slate-400 absolute right-3 top-2.5 pointer-events-none" />
+                  <Layers className="w-4 h-4 text-[#55789e] absolute right-3 top-2.5 pointer-events-none" />
                   <input
                     type="text"
                     list="main-accounts-list"
                     value={formData.mainAccount}
                     onChange={(e) => handleMainAccountChange(e.target.value)}
                     placeholder="اختر أو اكتب اسم الحساب الرئيسي"
-                    className="w-full pr-9 pl-3 py-2 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                    className="w-full pr-9 pl-3 py-2 bg-white border border-[#bcd2e8] rounded-xl text-xs sm:text-sm font-medium text-[#0f2d52] focus:outline-none focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4]"
                     required
                   />
                   <datalist id="main-accounts-list">
@@ -589,18 +589,18 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
 
               {/* حقل رمز الحساب الرئيسي */}
               <div className="sm:col-span-4">
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-[#1e3a5f] mb-1">
                   رمز الحساب الرئيسي
                 </label>
                 <div className="relative">
-                  <Hash className="w-4 h-4 text-slate-400 absolute right-3 top-2.5" />
+                  <Hash className="w-4 h-4 text-[#55789e] absolute right-3 top-2.5" />
                   <input
                     type="text"
                     dir="ltr"
                     value={formData.mainAccountCode}
                     onChange={(e) => setFormData({ ...formData, mainAccountCode: e.target.value })}
                     placeholder="مثال: 12"
-                    className="w-full pr-9 pl-3 py-2 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm font-mono font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                    className="w-full pr-9 pl-3 py-2 bg-white border border-[#bcd2e8] rounded-xl text-xs sm:text-sm font-mono font-bold text-[#0f2d52] focus:outline-none focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4]"
                   />
                 </div>
               </div>
@@ -610,11 +610,11 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-start">
               {/* حقل اسم الحساب */}
               <div className="sm:col-span-7">
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-[#1e3a5f] mb-1">
                   اسم الحساب <span className="text-rose-500">*</span>
                 </label>
                 <div className="relative">
-                  <Building2 className="w-4 h-4 text-slate-400 absolute right-3 top-2.5" />
+                  <Building2 className="w-4 h-4 text-[#55789e] absolute right-3 top-2.5" />
                   <input
                     type="text"
                     required
@@ -624,7 +624,7 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
                       if (errorMessage) setErrorMessage(null);
                     }}
                     placeholder="مثال: شركة الأمل للمقاولات / الخزينة الرئيسية"
-                    className="w-full pr-9 pl-3 py-2 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                    className="w-full pr-9 pl-3 py-2 bg-white border border-[#bcd2e8] rounded-xl text-xs sm:text-sm font-bold text-[#0f2d52] focus:outline-none focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4]"
                   />
                 </div>
               </div>
@@ -632,13 +632,13 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
               {/* حقل رمز الحساب (مع خيار التسلسل التلقائي) */}
               <div className="sm:col-span-5">
                 <div className="flex items-center justify-between mb-1">
-                  <label className="text-xs font-bold text-slate-700">
-                    رمز الحساب <span className="text-blue-600 font-normal">(مسلسل)</span>
+                  <label className="text-xs font-bold text-[#1e3a5f]">
+                    رمز الحساب <span className="text-[#0078d4] font-normal">(مسلسل)</span>
                   </label>
                   <button
                     type="button"
                     onClick={handleGenerateSequentialCode}
-                    className="text-[11px] font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 cursor-pointer transition-colors"
+                    className="text-[11px] font-bold text-[#0078d4] hover:text-[#004e8c] flex items-center gap-1 cursor-pointer transition-colors"
                     title="توليد رقم مسلسل تلقائياً بناءً على الحساب الرئيسي والدليل"
                   >
                     <Sparkles className="w-3 h-3" />
@@ -646,7 +646,7 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
                   </button>
                 </div>
                 <div className="relative">
-                  <Hash className="w-4 h-4 text-slate-400 absolute right-3 top-2.5" />
+                  <Hash className="w-4 h-4 text-[#55789e] absolute right-3 top-2.5" />
                   <input
                     type="text"
                     dir="ltr"
@@ -654,7 +654,7 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
                     value={formData.code}
                     onChange={(e) => setFormData({ ...formData, code: e.target.value })}
                     placeholder="مثال: 120101"
-                    className="w-full pr-9 pl-3 py-2 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm font-mono font-bold text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                    className="w-full pr-9 pl-3 py-2 bg-white border border-[#bcd2e8] rounded-xl text-xs sm:text-sm font-mono font-bold text-[#004e8c] focus:outline-none focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4]"
                   />
                 </div>
               </div>
@@ -664,11 +664,11 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {/* نوع الحساب */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">نوع الحساب</label>
+                <label className="block text-xs font-bold text-[#1e3a5f] mb-1">نوع الحساب</label>
                 <select
                   value={formData.type}
                   onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                  className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 cursor-pointer"
+                  className="w-full px-3 py-2 bg-white border border-[#bcd2e8] rounded-xl text-xs sm:text-sm font-semibold text-[#0f2d52] focus:outline-none focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] cursor-pointer"
                 >
                   <option value="عملاء">عملاء</option>
                   <option value="موردين">موردين</option>
@@ -682,31 +682,31 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
 
               {/* رقم الهاتف */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">رقم الهاتف</label>
+                <label className="block text-xs font-bold text-[#1e3a5f] mb-1">رقم الهاتف</label>
                 <div className="relative">
-                  <Phone className="w-4 h-4 text-slate-400 absolute right-3 top-2.5" />
+                  <Phone className="w-4 h-4 text-[#55789e] absolute right-3 top-2.5" />
                   <input
                     type="tel"
                     dir="ltr"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="مثال: 01012345678"
-                    className="w-full pr-9 pl-3 py-2 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                    className="w-full pr-9 pl-3 py-2 bg-white border border-[#bcd2e8] rounded-xl text-xs sm:text-sm font-mono text-[#0f2d52] focus:outline-none focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4]"
                   />
                 </div>
               </div>
 
               {/* اسم الحساب الختامي */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-[#1e3a5f] mb-1">
                   اسم الحساب الختامي
                 </label>
                 <div className="relative">
-                  <FileSpreadsheet className="w-4 h-4 text-slate-400 absolute right-3 top-2.5 pointer-events-none" />
+                  <FileSpreadsheet className="w-4 h-4 text-[#55789e] absolute right-3 top-2.5 pointer-events-none" />
                   <select
                     value={formData.closingAccount}
                     onChange={(e) => setFormData({ ...formData, closingAccount: e.target.value })}
-                    className="w-full pr-9 pl-3 py-2 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 cursor-pointer"
+                    className="w-full pr-9 pl-3 py-2 bg-white border border-[#bcd2e8] rounded-xl text-xs sm:text-sm font-medium text-[#0f2d52] focus:outline-none focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] cursor-pointer"
                   >
                     <option value="الميزانية العمومية">الميزانية العمومية</option>
                     <option value="قائمة الدخل">قائمة الدخل</option>
@@ -721,11 +721,11 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">
               {/* الرصيد الافتتاحي */}
               <div className="sm:col-span-4">
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-[#1e3a5f] mb-1">
                   الرصيد الافتتاحي (ج.م)
                 </label>
                 <div className="relative">
-                  <Wallet className="w-4 h-4 text-slate-400 absolute right-3 top-2.5" />
+                  <Wallet className="w-4 h-4 text-[#55789e] absolute right-3 top-2.5" />
                   <input
                     type="number"
                     step="0.01"
@@ -734,20 +734,20 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
                       setFormData({ ...formData, openingBalance: parseFloat(e.target.value) || 0 })
                     }
                     placeholder="0.00"
-                    className="w-full pr-9 pl-3 py-2 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm font-mono font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                    className="w-full pr-9 pl-3 py-2 bg-white border border-[#bcd2e8] rounded-xl text-xs sm:text-sm font-mono font-bold text-[#0f2d52] focus:outline-none focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4]"
                   />
                 </div>
               </div>
 
               {/* ملاحظات */}
               <div className="sm:col-span-8">
-                <label className="block text-xs font-bold text-slate-700 mb-1">ملاحظات وبيان الحساب</label>
+                <label className="block text-xs font-bold text-[#1e3a5f] mb-1">ملاحظات وبيان الحساب</label>
                 <input
                   type="text"
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                   placeholder="ملاحظات إضافية، العنوان، شروط الدفع، إلخ..."
-                  className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                  className="w-full px-3 py-2 bg-white border border-[#bcd2e8] rounded-xl text-xs sm:text-sm font-medium text-[#0f2d52] focus:outline-none focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4]"
                 />
               </div>
             </div>
@@ -755,32 +755,32 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
 
           {/* Section 5: ملخص إحصائي سريع لحركات الحساب */}
           {!isNewMode && (
-            <div className="p-3.5 bg-blue-50/50 border border-blue-100 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div className="p-3.5 bg-gradient-to-r from-[#eaf2fb] to-[#f0f6fc] border border-[#bcd2e8] rounded-xl flex flex-wrap items-center justify-between gap-3 text-xs">
               <div className="flex items-center gap-4">
                 <div>
-                  <span className="text-slate-500 block">عدد الحركات المسجلة:</span>
-                  <strong className="text-slate-800 font-mono text-sm">{accountStats.txCount} حركة</strong>
+                  <span className="text-[#55789e] block">عدد الحركات المسجلة:</span>
+                  <strong className="text-[#0f2d52] font-mono text-sm">{accountStats.txCount} حركة</strong>
                 </div>
-                <div className="w-px h-6 bg-blue-200" />
+                <div className="w-px h-6 bg-[#bcd2e8]" />
                 <div>
-                  <span className="text-slate-500 block">إجمالي المقبوضات:</span>
+                  <span className="text-[#55789e] block">إجمالي المقبوضات:</span>
                   <strong className="text-emerald-700 font-mono text-sm">
                     {formatCurrency(accountStats.totalReceipt)}
                   </strong>
                 </div>
-                <div className="w-px h-6 bg-blue-200" />
+                <div className="w-px h-6 bg-[#bcd2e8]" />
                 <div>
-                  <span className="text-slate-500 block">إجمالي المدفوعات:</span>
+                  <span className="text-[#55789e] block">إجمالي المدفوعات:</span>
                   <strong className="text-rose-700 font-mono text-sm">
                     {formatCurrency(accountStats.totalPayment)}
                   </strong>
                 </div>
-                <div className="w-px h-6 bg-blue-200" />
+                <div className="w-px h-6 bg-[#bcd2e8]" />
                 <div>
-                  <span className="text-slate-500 block">الرصيد الفعلي الحالي:</span>
+                  <span className="text-[#55789e] block">الرصيد الفعلي الحالي:</span>
                   <strong
                     className={`font-mono text-sm ${
-                      accountStats.currentBalance >= 0 ? 'text-blue-900 font-bold' : 'text-rose-700 font-bold'
+                      accountStats.currentBalance >= 0 ? 'text-[#004e8c] font-bold' : 'text-rose-700 font-bold'
                     }`}
                   >
                     {formatCurrency(accountStats.currentBalance)}
@@ -789,16 +789,16 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="text-[11px] text-slate-400">تاريخ الإنشاء: {formData.createdAt}</span>
+                <span className="text-[11px] text-[#55789e]">تاريخ الإنشاء: {formData.createdAt}</span>
               </div>
             </div>
           )}
         </form>
 
         {/* Footer */}
-        <div className="px-4 py-3 bg-slate-100 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500 shrink-0">
+        <div className="px-4 py-3 bg-gradient-to-r from-[#f0f6fc] to-[#e8f1f9] border-t border-[#bcd2e8] flex items-center justify-between text-xs text-[#55789e] shrink-0">
           <div className="flex items-center gap-1.5">
-            <HelpCircle className="w-4 h-4 text-slate-400" />
+            <HelpCircle className="w-4 h-4 text-[#55789e]" />
             <span>تتيح لك بطاقة الحساب استعراض وحفظ وتعديل وحذف أي حساب في الدليل مع الترقيم المسلسل التلقائي.</span>
           </div>
 
@@ -806,14 +806,14 @@ export const AccountCardModal: React.FC<AccountCardModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-xs font-bold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-300 rounded-xl transition-colors cursor-pointer shadow-2xs"
+              className="px-4 py-2 text-xs font-bold text-[#1e3a5f] hover:text-[#0f2d52] bg-white hover:bg-[#eaf2fb] border border-[#bcd2e8] rounded-lg transition-colors cursor-pointer shadow-2xs"
             >
               إغلاق البطاقة
             </button>
             <button
               type="button"
               onClick={() => handleSave()}
-              className="px-5 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 rounded-xl transition-colors cursor-pointer shadow-sm flex items-center gap-1.5"
+              className="px-5 py-2 text-xs font-bold text-white bg-[#0078d4] hover:bg-[#0067b8] rounded-lg transition-colors cursor-pointer shadow-sm flex items-center gap-1.5"
             >
               <Save className="w-4 h-4" />
               <span>حفظ التعديلات</span>

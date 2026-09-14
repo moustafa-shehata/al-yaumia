@@ -249,19 +249,19 @@ export const MonthlyCashFlowChart: React.FC<MonthlyCashFlowChartProps> = ({
   return (
     <div
       id="section-cashflow-chart"
-      className="bg-white border border-slate-200 rounded-xl shadow-xs overflow-hidden no-print transition-all"
+      className="bg-white border border-[#bcd2e8] rounded-xl shadow-2xs overflow-hidden no-print transition-all"
     >
       {/* Header Bar */}
-      <div className="p-4 sm:p-5 border-b border-slate-200 bg-slate-50/70 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="p-4 sm:p-5 border-b border-[#bcd2e8] bg-[#f0f6fc] flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-start sm:items-center gap-3">
-          <div className="p-2.5 bg-blue-600 text-white rounded-xl shadow-2xs">
+          <div className="p-2.5 bg-[#0078d4] text-white rounded-xl shadow-2xs">
             <TrendingUp className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="text-base sm:text-lg font-bold text-slate-900">
+            <h3 className="text-base sm:text-lg font-bold text-[#0f2d52]">
               التحليل البياني لحركة المقبوضات والمدفوعات (Cash Flow Analytics)
             </h3>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-[#55789e] mt-0.5">
               مقارنة مؤشرات السيولة الواردة والمنصرفة والأرصدة الشهرية لدعم اتخاذ القرار المحاسبي
             </p>
           </div>
@@ -270,13 +270,13 @@ export const MonthlyCashFlowChart: React.FC<MonthlyCashFlowChartProps> = ({
         {/* View Switches & Actions */}
         <div className="flex flex-wrap items-center gap-2">
           {/* View Perspective Selector */}
-          <div className="inline-flex rounded-lg bg-slate-200/80 p-0.5 text-xs font-semibold text-slate-700">
+          <div className="inline-flex rounded-lg bg-[#e6eef6] p-0.5 text-xs font-semibold text-[#1e3a5f] border border-[#bcd2e8]">
             <button
               onClick={() => setViewMode('monthly')}
               className={`px-3 py-1.5 rounded-md transition-all cursor-pointer flex items-center gap-1.5 ${
                 viewMode === 'monthly'
-                  ? 'bg-white text-blue-700 shadow-2xs font-bold'
-                  : 'hover:text-slate-900'
+                  ? 'bg-white text-[#0078d4] shadow-2xs font-bold'
+                  : 'hover:text-[#0f2d52]'
               }`}
             >
               <Calendar className="w-3.5 h-3.5" />
@@ -287,8 +287,8 @@ export const MonthlyCashFlowChart: React.FC<MonthlyCashFlowChartProps> = ({
               onClick={() => setViewMode('accounts')}
               className={`px-3 py-1.5 rounded-md transition-all cursor-pointer flex items-center gap-1.5 ${
                 viewMode === 'accounts'
-                  ? 'bg-white text-blue-700 shadow-2xs font-bold'
-                  : 'hover:text-slate-900'
+                  ? 'bg-white text-[#0078d4] shadow-2xs font-bold'
+                  : 'hover:text-[#0f2d52]'
               }`}
             >
               <Users className="w-3.5 h-3.5" />
@@ -299,8 +299,8 @@ export const MonthlyCashFlowChart: React.FC<MonthlyCashFlowChartProps> = ({
               onClick={() => setViewMode('cumulative')}
               className={`px-3 py-1.5 rounded-md transition-all cursor-pointer flex items-center gap-1.5 ${
                 viewMode === 'cumulative'
-                  ? 'bg-white text-blue-700 shadow-2xs font-bold'
-                  : 'hover:text-slate-900'
+                  ? 'bg-white text-[#0078d4] shadow-2xs font-bold'
+                  : 'hover:text-[#0f2d52]'
               }`}
             >
               <Layers className="w-3.5 h-3.5" />
@@ -310,12 +310,12 @@ export const MonthlyCashFlowChart: React.FC<MonthlyCashFlowChartProps> = ({
 
           {/* Chart Representation Switcher */}
           {viewMode !== 'cumulative' && (
-            <div className="inline-flex rounded-lg border border-slate-200 bg-white p-0.5 text-xs">
+            <div className="inline-flex rounded-lg border border-[#bcd2e8] bg-white p-0.5 text-xs">
               <button
                 onClick={() => setChartType('bar')}
                 title="عرض كأعمدة بيانية"
                 className={`p-1.5 rounded-md transition-colors cursor-pointer ${
-                  chartType === 'bar' ? 'bg-slate-100 text-blue-700 font-bold' : 'text-slate-500 hover:text-slate-800'
+                  chartType === 'bar' ? 'bg-[#eaf2fb] text-[#0078d4] font-bold' : 'text-[#55789e] hover:text-[#0f2d52]'
                 }`}
               >
                 <BarChart3 className="w-4 h-4" />
@@ -324,7 +324,7 @@ export const MonthlyCashFlowChart: React.FC<MonthlyCashFlowChartProps> = ({
                 onClick={() => setChartType('area')}
                 title="عرض كمساحة انسيابية"
                 className={`p-1.5 rounded-md transition-colors cursor-pointer ${
-                  chartType === 'area' ? 'bg-slate-100 text-blue-700 font-bold' : 'text-slate-500 hover:text-slate-800'
+                  chartType === 'area' ? 'bg-[#eaf2fb] text-[#0078d4] font-bold' : 'text-[#55789e] hover:text-[#0f2d52]'
                 }`}
               >
                 <LineChartIcon className="w-4 h-4" />
@@ -335,7 +335,7 @@ export const MonthlyCashFlowChart: React.FC<MonthlyCashFlowChartProps> = ({
           {/* Collapse/Expand */}
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
+            className="p-1.5 text-[#55789e] hover:text-[#0f2d52] hover:bg-[#eaf2fb] rounded-lg transition-colors cursor-pointer"
             title={isExpanded ? 'طي الرسم البياني' : 'توسيع الرسم البياني'}
           >
             {isExpanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}

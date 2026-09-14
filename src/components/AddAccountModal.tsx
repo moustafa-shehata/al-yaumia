@@ -128,28 +128,28 @@ export const AddAccountModal: React.FC<AddAccountModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-xs">
       <div
-        className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[92vh] flex flex-col border border-slate-200 overflow-hidden"
+        className="bg-white rounded-xl shadow-2xl w-full max-w-lg max-h-[92vh] flex flex-col border border-[#bcd2e8] overflow-hidden"
         role="dialog"
         aria-modal="true"
       >
         {/* Modal Header */}
-        <div className="px-4 py-3 sm:px-5 sm:py-3.5 border-b border-slate-200 bg-slate-900 text-white flex items-center justify-between shrink-0">
+        <div className="px-4 py-3 sm:px-5 sm:py-3.5 border-b border-[#004e8c] bg-gradient-to-r from-[#003e73] via-[#005a9e] to-[#0078d4] text-white flex items-center justify-between shrink-0 shadow-xs">
           <div className="flex items-center gap-2.5">
-            <div className="p-1.5 bg-blue-600/30 text-blue-400 rounded-lg border border-blue-500/30">
+            <div className="p-1.5 bg-white/15 text-white rounded-lg border border-white/20">
               <UserPlus className="w-4 h-4" />
             </div>
             <div>
               <h3 className="text-sm sm:text-base font-bold text-white">
                 إضافة حساب مالي / عميل جديد
               </h3>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[11px] text-blue-100">
                 إدراج الحساب في دليل حسابات الأستاذ العام وكشف الحساب
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
+            className="p-1.5 text-blue-100 hover:text-white hover:bg-white/15 rounded-lg transition-colors cursor-pointer"
             title="إغلاق"
           >
             <X className="w-5 h-5" />
@@ -158,7 +158,7 @@ export const AddAccountModal: React.FC<AddAccountModalProps> = ({
 
         {/* Modal Form */}
         <form onSubmit={handleSubmit} className="flex flex-col flex-1 min-h-0 overflow-hidden">
-          <div className="p-4 sm:p-5 overflow-y-auto space-y-2.5 text-xs sm:text-sm flex-1">
+          <div className="p-4 sm:p-5 overflow-y-auto space-y-2.5 text-xs sm:text-sm flex-1 bg-white">
             {error && (
               <div className="p-2.5 bg-rose-50 border border-rose-200 text-rose-700 rounded-lg flex items-center gap-2 text-xs">
                 <AlertCircle className="w-4 h-4 shrink-0" />
@@ -168,11 +168,11 @@ export const AddAccountModal: React.FC<AddAccountModalProps> = ({
 
             {/* Account Name */}
             <div>
-              <label className="block font-semibold text-slate-700 text-xs mb-1">
+              <label className="block font-semibold text-[#1e3a5f] text-xs mb-1">
                 اسم الحساب / العميل <span className="text-rose-500">*</span>
               </label>
               <div className="relative">
-                <Building2 className="w-4 h-4 text-slate-400 absolute right-3 top-2" />
+                <Building2 className="w-4 h-4 text-[#55789e] absolute right-3 top-2" />
                 <input
                   type="text"
                   required
@@ -182,7 +182,7 @@ export const AddAccountModal: React.FC<AddAccountModalProps> = ({
                     setFormData({ ...formData, name: e.target.value });
                     if (error) setError(null);
                   }}
-                  className="w-full pr-9 pl-3 py-1.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none text-slate-800 font-medium text-xs sm:text-sm"
+                  className="w-full pr-9 pl-3 py-1.5 bg-white border border-[#bcd2e8] rounded-lg focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] focus:outline-none text-[#0f2d52] font-medium text-xs sm:text-sm"
                 />
               </div>
             </div>
@@ -190,8 +190,8 @@ export const AddAccountModal: React.FC<AddAccountModalProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {/* Account Code (كود الحساب المالي) */}
               <div>
-                <label className="block font-semibold text-slate-700 text-xs mb-1">
-                  كود الحساب المالي في الدليل <span className="text-blue-600 font-normal">(تلقائي)</span>
+                <label className="block font-semibold text-[#1e3a5f] text-xs mb-1">
+                  كود الحساب المالي في الدليل <span className="text-[#0078d4] font-normal">(تلقائي)</span>
                 </label>
                 <input
                   type="text"
@@ -199,19 +199,19 @@ export const AddAccountModal: React.FC<AddAccountModalProps> = ({
                   placeholder="مثال: 120105"
                   value={formData.code}
                   onChange={(e) => setFormData({ ...formData, code: e.target.value })}
-                  className="w-full px-3 py-1.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none text-slate-900 font-mono font-bold text-xs sm:text-sm text-left"
+                  className="w-full px-3 py-1.5 bg-[#f0f6fc] border border-[#bcd2e8] rounded-lg focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] focus:outline-none text-[#004e8c] font-mono font-bold text-xs sm:text-sm text-left"
                 />
               </div>
 
               {/* Account Classification */}
               <div>
-                <label className="block font-semibold text-slate-700 text-xs mb-1">
+                <label className="block font-semibold text-[#1e3a5f] text-xs mb-1">
                   تصنيف الحساب
                 </label>
                 <select
                   value={formData.type}
                   onChange={(e) => handleTypeChange(e.target.value)}
-                  className="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none text-slate-800 text-xs sm:text-sm font-semibold"
+                  className="w-full px-3 py-1.5 bg-white border border-[#bcd2e8] rounded-lg focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] focus:outline-none text-[#0f2d52] text-xs sm:text-sm font-semibold"
                 >
                   <option value="عملاء">عملاء (12)</option>
                   <option value="موردين">موردين (21)</option>
@@ -226,18 +226,18 @@ export const AddAccountModal: React.FC<AddAccountModalProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {/* Phone */}
               <div>
-                <label className="block font-semibold text-slate-700 text-xs mb-1">
+                <label className="block font-semibold text-[#1e3a5f] text-xs mb-1">
                   رقم الهاتف (اختياري)
                 </label>
                 <div className="relative">
-                  <Phone className="w-4 h-4 text-slate-400 absolute right-3 top-2" />
+                  <Phone className="w-4 h-4 text-[#55789e] absolute right-3 top-2" />
                   <input
                     type="tel"
                     dir="ltr"
                     placeholder="01xxxxxxxxx"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full pr-9 pl-3 py-1.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none text-slate-800 font-mono-numbers text-xs sm:text-sm text-right"
+                    className="w-full pr-9 pl-3 py-1.5 bg-white border border-[#bcd2e8] rounded-lg focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] focus:outline-none text-[#0f2d52] font-mono text-xs sm:text-sm text-right"
                   />
                 </div>
               </div>
@@ -246,31 +246,31 @@ export const AddAccountModal: React.FC<AddAccountModalProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {/* Main Account */}
               <div>
-                <label className="block font-semibold text-slate-700 text-xs mb-1">
+                <label className="block font-semibold text-[#1e3a5f] text-xs mb-1">
                   الحساب الرئيسي
                 </label>
                 <input
                   type="text"
                   value={formData.mainAccount}
                   onChange={(e) => setFormData({ ...formData, mainAccount: e.target.value })}
-                  className="w-full px-3 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-slate-800 text-xs sm:text-sm"
+                  className="w-full px-3 py-1.5 bg-[#f0f6fc] border border-[#bcd2e8] rounded-lg text-[#0f2d52] text-xs sm:text-sm"
                 />
               </div>
 
               {/* Opening Balance */}
               <div>
-                <label className="block font-semibold text-slate-700 text-xs mb-1">
+                <label className="block font-semibold text-[#1e3a5f] text-xs mb-1">
                   الرصيد الافتتاحي (ج.م)
                 </label>
                 <div className="relative">
-                  <Coins className="w-4 h-4 text-slate-400 absolute right-3 top-2" />
+                  <Coins className="w-4 h-4 text-[#55789e] absolute right-3 top-2" />
                   <input
                     type="number"
                     dir="ltr"
                     placeholder="0"
                     value={formData.openingBalance === 0 ? '' : formData.openingBalance}
                     onChange={(e) => setFormData({ ...formData, openingBalance: Number(e.target.value) })}
-                    className="w-full pr-9 pl-3 py-1.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none text-slate-800 font-mono-numbers text-xs sm:text-sm text-right"
+                    className="w-full pr-9 pl-3 py-1.5 bg-white border border-[#bcd2e8] rounded-lg focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] focus:outline-none text-[#0f2d52] font-mono text-xs sm:text-sm text-right"
                   />
                 </div>
               </div>
@@ -278,34 +278,34 @@ export const AddAccountModal: React.FC<AddAccountModalProps> = ({
 
             {/* Notes */}
             <div>
-              <label className="block font-semibold text-slate-700 text-xs mb-1">
+              <label className="block font-semibold text-[#1e3a5f] text-xs mb-1">
                 ملاحظات أو بيان إضافي
               </label>
               <div className="relative">
-                <FileText className="w-4 h-4 text-slate-400 absolute right-3 top-2" />
+                <FileText className="w-4 h-4 text-[#55789e] absolute right-3 top-2" />
                 <input
                   type="text"
                   placeholder="ملاحظات حول الحساب أو الشروط المالية..."
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                  className="w-full pr-9 pl-3 py-1.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none text-slate-800 text-xs sm:text-sm"
+                  className="w-full pr-9 pl-3 py-1.5 bg-white border border-[#bcd2e8] rounded-lg focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] focus:outline-none text-[#0f2d52] text-xs sm:text-sm"
                 />
               </div>
             </div>
           </div>
 
           {/* Actions Sticky Footer */}
-          <div className="p-3 sm:px-5 sm:py-3 bg-slate-50 border-t border-slate-200 flex items-center justify-end gap-2.5 shrink-0">
+          <div className="p-3 sm:px-5 sm:py-3 bg-gradient-to-r from-[#f0f6fc] to-[#e8f1f9] border-t border-[#bcd2e8] flex items-center justify-end gap-2.5 shrink-0">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-xs sm:text-sm font-semibold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg transition-colors cursor-pointer"
+              className="px-4 py-2 text-xs sm:text-sm font-semibold text-[#1e3a5f] hover:text-[#0f2d52] bg-white hover:bg-[#eaf2fb] border border-[#bcd2e8] rounded-lg transition-colors cursor-pointer"
             >
               إلغاء / إغلاق
             </button>
             <button
               type="submit"
-              className="inline-flex items-center gap-1.5 px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-xs sm:text-sm transition-colors cursor-pointer shadow-sm"
+              className="inline-flex items-center gap-1.5 px-5 py-2 bg-[#0078d4] hover:bg-[#0067b8] text-white rounded-lg font-bold text-xs sm:text-sm transition-colors cursor-pointer shadow-sm"
             >
               <Save className="w-4 h-4" />
               <span>حفظ الحساب</span>

@@ -574,14 +574,14 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
     >
       <div
         id="import-accounts-modal-container"
-        className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-200 w-full max-w-7xl max-h-[92vh] flex flex-col overflow-hidden text-slate-800"
+        className="relative bg-white rounded-xl shadow-2xl border border-[#bcd2e8] w-full max-w-7xl max-h-[92vh] flex flex-col overflow-hidden text-[#0f2d52]"
       >
         {/* ========================================================
             HEADER
            ======================================================== */}
-        <div className="px-5 py-3.5 bg-gradient-to-r from-slate-900 via-slate-800 to-blue-950 text-white flex items-center justify-between shadow-xs shrink-0">
+        <div className="px-5 py-3.5 bg-gradient-to-r from-[#003e73] via-[#005a9e] to-[#0078d4] text-white flex items-center justify-between border-b border-[#004e8c] shadow-xs shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-blue-600/30 border border-blue-400/30 flex items-center justify-center text-blue-300">
+            <div className="w-9 h-9 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center text-white">
               <FileSpreadsheet className="w-5 h-5" />
             </div>
             <div>
@@ -589,11 +589,11 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                 <h3 className="text-base sm:text-lg font-black tracking-tight text-white">
                   استيراد وتخصيص دليل الحسابات
                 </h3>
-                <span className="text-[11px] px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30 font-bold">
+                <span className="text-[11px] px-2 py-0.5 rounded-full bg-white/20 text-white border border-white/30 font-bold">
                   تحديد الأعمدة والترقيم المسلسل
                 </span>
               </div>
-              <p className="text-xs text-slate-300 mt-0.5">
+              <p className="text-xs text-blue-100 mt-0.5">
                 تحديد تخصيص كل عمود، والتوليد التلقائي لرموز الحسابات المشتقة من شجرة الحسابات الرئيسية
               </p>
             </div>
@@ -601,14 +601,14 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
 
           <div className="flex items-center gap-2">
             {/* View Switcher Tabs */}
-            <div className="flex items-center bg-slate-800/80 p-0.5 rounded-xl border border-slate-700">
+            <div className="flex items-center bg-black/20 p-0.5 rounded-xl border border-white/20">
               <button
                 type="button"
                 onClick={() => setActiveView('grid')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   activeView === 'grid'
-                    ? 'bg-blue-600 text-white shadow-xs'
-                    : 'text-slate-300 hover:text-white'
+                    ? 'bg-white/25 text-white shadow-xs'
+                    : 'text-blue-100 hover:text-white'
                 }`}
               >
                 جدول الحسابات ({gridRows.length})
@@ -618,8 +618,8 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                 onClick={() => setActiveView('mapping-wizard')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1 ${
                   activeView === 'mapping-wizard'
-                    ? 'bg-blue-600 text-white shadow-xs'
-                    : 'text-slate-300 hover:text-white'
+                    ? 'bg-white/25 text-white shadow-xs'
+                    : 'text-blue-100 hover:text-white'
                 }`}
               >
                 <SlidersHorizontal className="w-3.5 h-3.5" />
@@ -630,7 +630,7 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer border border-slate-700"
+              className="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 text-blue-100 hover:text-white flex items-center justify-center transition-colors cursor-pointer border border-white/20"
               title="إغلاق"
             >
               <X className="w-4 h-4" />
@@ -646,18 +646,18 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                 ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
                 : statusMessage.type === 'error'
                 ? 'bg-rose-50 text-rose-800 border-rose-200'
-                : 'bg-blue-50 text-blue-800 border-blue-200'
+                : 'bg-[#eaf2fb] text-[#004e8c] border-[#bcd2e8]'
             }`}
           >
             <div className="flex items-center gap-2">
               {statusMessage.type === 'success' && <CheckCircle2 className="w-4 h-4 text-emerald-600" />}
               {statusMessage.type === 'error' && <AlertTriangle className="w-4 h-4 text-rose-600" />}
-              {statusMessage.type === 'info' && <Sparkles className="w-4 h-4 text-blue-600" />}
+              {statusMessage.type === 'info' && <Sparkles className="w-4 h-4 text-[#0078d4]" />}
               <span>{statusMessage.text}</span>
             </div>
             <button
               onClick={() => setStatusMessage(null)}
-              className="text-slate-400 hover:text-slate-700 p-0.5"
+              className="text-[#55789e] hover:text-[#0f2d52] p-0.5"
             >
               <X className="w-3.5 h-3.5" />
             </button>
@@ -668,13 +668,13 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
             VIEW 1: MAPPING WIZARD (تحديد وتخصيص الأعمدة المنسوخة)
            ======================================================== */}
         {activeView === 'mapping-wizard' ? (
-          <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 bg-slate-50/70">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 bg-[#f8fbfe]">
             {/* 1. Paste & Upload Box */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-2xs space-y-3">
+            <div className="bg-white border border-[#bcd2e8] rounded-xl p-4 sm:p-5 shadow-2xs space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
-                  <Clipboard className="w-4 h-4 text-blue-600" />
-                  <h4 className="text-sm font-bold text-slate-800">
+                  <Clipboard className="w-4 h-4 text-[#0078d4]" />
+                  <h4 className="text-sm font-bold text-[#0f2d52]">
                     الخطوة 1: الصق بياناتك من الإكسيل أو ارفع ملف CSV
                   </h4>
                 </div>
@@ -690,7 +690,7 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="px-3 py-1.5 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer"
+                    className="px-3 py-1.5 text-xs font-bold text-[#1e3a5f] bg-[#eaf2fb] hover:bg-[#dbe9f8] border border-[#bcd2e8] rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer"
                   >
                     <Upload className="w-3.5 h-3.5" />
                     <span>رفع ملف CSV / TXT</span>
@@ -701,7 +701,7 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                     onClick={() => {
                       setRawText(`شركة الأمل للمقاولات\t01011223344\t25000\nمؤسسة النور للتوريدات\t01122334455\t14000\nشركة الشرق الهندسية\t01223344556\t19500`);
                     }}
-                    className="px-2.5 py-1.5 text-xs text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-semibold cursor-pointer"
+                    className="px-2.5 py-1.5 text-xs text-[#0078d4] hover:bg-[#eaf2fb] rounded-lg transition-colors font-semibold cursor-pointer"
                   >
                     تجربة لصق أسماء وهواتف فقط
                   </button>
@@ -713,7 +713,7 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                 value={rawText}
                 onChange={(e) => setRawText(e.target.value)}
                 placeholder="الصق النصوص أو خلايا الإكسيل هنا مباشرة (Ctrl + V)... مثال:&#10;شركة الأمل للمقاولات    01011223344    25000&#10;مؤسسة النور للتوريدات    01122334455    14000"
-                className="w-full p-3 text-xs font-mono bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white text-slate-800 leading-relaxed"
+                className="w-full p-3 text-xs font-mono bg-white border border-[#bcd2e8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0078d4] focus:bg-white text-[#0f2d52] leading-relaxed"
               />
 
               <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
@@ -722,15 +722,15 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                     type="checkbox"
                     checked={hasHeaderRow}
                     onChange={(e) => setHasHeaderRow(e.target.checked)}
-                    className="rounded text-blue-600 focus:ring-blue-500 w-4 h-4"
+                    className="rounded text-[#0078d4] focus:ring-[#0078d4] w-4 h-4"
                   />
-                  <span className="font-bold text-slate-700">
+                  <span className="font-bold text-[#1e3a5f]">
                     الصف الأول يحتوي على أسماء وعناوين الأعمدة (تخطي الصف الأول)
                   </span>
                 </label>
 
                 {parsedRawData.maxCols > 0 && (
-                  <span className="text-[11px] font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">
+                  <span className="text-[11px] font-bold text-[#004e8c] bg-[#eaf2fb] border border-[#bcd2e8] px-2.5 py-1 rounded-full">
                     تم اكتشاف: {parsedRawData.lines.length} صفوف × {parsedRawData.maxCols} أعمدة
                   </span>
                 )}
@@ -739,21 +739,21 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
 
             {/* 2. Interactive Column Field Assignment (تحديد ماهية كل عمود) */}
             {parsedRawData.maxCols > 0 ? (
-              <div className="bg-white border border-blue-200 rounded-2xl p-4 sm:p-5 shadow-2xs space-y-4">
+              <div className="bg-white border border-[#bcd2e8] rounded-xl p-4 sm:p-5 shadow-2xs space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <SlidersHorizontal className="w-4 h-4 text-blue-600" />
-                    <h4 className="text-sm font-bold text-slate-800">
+                    <SlidersHorizontal className="w-4 h-4 text-[#0078d4]" />
+                    <h4 className="text-sm font-bold text-[#0f2d52]">
                       الخطوة 2: حدد النصوص المدخلة تخص أي عمود
                     </h4>
                   </div>
-                  <span className="text-xs text-blue-600 font-medium">
+                  <span className="text-xs text-[#0078d4] font-medium">
                     يمكنك تعيين أي عمود ليمثل اسم الحساب أو الهاتف أو الرصيد أو تجاهله
                   </span>
                 </div>
 
                 {/* Column Dropdowns Bar */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 bg-blue-50/50 p-3 rounded-xl border border-blue-100">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 bg-[#f0f6fc] p-3 rounded-xl border border-[#bcd2e8]">
                   {Array.from({ length: parsedRawData.maxCols }).map((_, colIdx) => {
                     const currentMapping = columnMappings[colIdx] || 'ignore';
                     const sampleVal =
@@ -762,16 +762,16 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                     return (
                       <div
                         key={colIdx}
-                        className="bg-white p-3 rounded-xl border border-slate-200 shadow-2xs space-y-1.5"
+                        className="bg-white p-3 rounded-xl border border-[#bcd2e8] shadow-2xs space-y-1.5"
                       >
-                        <div className="flex items-center justify-between text-xs font-bold text-slate-700">
+                        <div className="flex items-center justify-between text-xs font-bold text-[#0f2d52]">
                           <span className="flex items-center gap-1.5">
-                            <span className="w-5 h-5 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center text-[10px]">
+                            <span className="w-5 h-5 rounded-full bg-[#eaf2fb] text-[#004e8c] border border-[#bcd2e8] flex items-center justify-center text-[10px]">
                               {colIdx + 1}
                             </span>
                             العمود رقم ({colIdx + 1})
                           </span>
-                          <span className="text-[10px] text-slate-400 truncate max-w-[100px]" title={sampleVal}>
+                          <span className="text-[10px] text-[#55789e] truncate max-w-[100px]" title={sampleVal}>
                             عينة: {sampleVal}
                           </span>
                         </div>
@@ -790,8 +790,8 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                             currentMapping === 'name'
                               ? 'border-emerald-500 bg-emerald-50/50 text-emerald-900 focus:ring-emerald-500'
                               : currentMapping === 'ignore'
-                              ? 'border-slate-300 bg-slate-50 text-slate-500 focus:ring-slate-400'
-                              : 'border-blue-300 bg-white text-blue-900 focus:ring-blue-500'
+                              ? 'border-[#bcd2e8] bg-[#f8fbfe] text-[#55789e] focus:ring-slate-400'
+                              : 'border-[#0078d4] bg-white text-[#004e8c] focus:ring-[#0078d4]'
                           }`}
                         >
                           {AVAILABLE_COLUMN_OPTIONS.map((opt) => (
@@ -806,22 +806,22 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                 </div>
 
                 {/* 3. Defaults & Automatic Sequential Code Generation Settings */}
-                <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-3">
-                  <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
-                    <FolderTree className="w-4 h-4 text-slate-600" />
+                <div className="bg-[#f0f6fc] rounded-xl p-4 border border-[#bcd2e8] space-y-3">
+                  <div className="flex items-center gap-2 text-xs font-bold text-[#0f2d52]">
+                    <FolderTree className="w-4 h-4 text-[#0078d4]" />
                     <span>الخيارات الافتراضية لشجرة الحسابات والترقيم المسلسل:</span>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                     {/* Default Main Account selector */}
                     <div>
-                      <label className="block text-[11px] font-bold text-slate-600 mb-1">
+                      <label className="block text-[11px] font-bold text-[#1e3a5f] mb-1">
                         الحساب الرئيسي الافتراضي (للحسابات التي ليس لها حساب رئيسي محدد):
                       </label>
                       <select
                         value={defaultMainAccountCode}
                         onChange={(e) => setDefaultMainAccountCode(e.target.value)}
-                        className="w-full p-2 bg-white border border-slate-300 rounded-lg font-bold text-slate-800 text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none cursor-pointer"
+                        className="w-full p-2 bg-white border border-[#bcd2e8] rounded-lg font-bold text-[#0f2d52] text-xs focus:ring-2 focus:ring-[#0078d4] focus:outline-none cursor-pointer"
                       >
                         {STANDARD_CHART_TREE.map((node) => (
                           <option key={node.code} value={node.code}>
@@ -838,13 +838,13 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                           type="checkbox"
                           checked={autoGenerateCodes}
                           onChange={(e) => setAutoGenerateCodes(e.target.checked)}
-                          className="rounded text-blue-600 focus:ring-blue-500 w-4 h-4"
+                          className="rounded text-[#0078d4] focus:ring-[#0078d4] w-4 h-4"
                         />
-                        <span className="font-bold text-blue-900 text-xs">
+                        <span className="font-bold text-[#004e8c] text-xs">
                           توليد رمز الحساب تلقائياً مسلسل مشتق من رمز الحساب الرئيسي
                         </span>
                       </label>
-                      <p className="text-[11px] text-slate-500 pr-6">
+                      <p className="text-[11px] text-[#55789e] pr-6">
                         يبدأ التوليد مثلاً من كود ({selectedDefaultMainNode.code}0101) ويكمل تلقائياً بعد أعلى كود مسجل في دليلك الحالي دون تكرار أو مساس بالمدخلات السابقة.
                       </p>
                     </div>
@@ -853,19 +853,19 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
 
                 {/* 4. Live Sample Table Preview */}
                 <div>
-                  <h5 className="text-xs font-bold text-slate-700 mb-2">
+                  <h5 className="text-xs font-bold text-[#0f2d52] mb-2">
                     معاينة حية لتوزيع البيانات (أول 3 صفوف):
                   </h5>
-                  <div className="overflow-x-auto border border-slate-200 rounded-xl bg-white shadow-2xs">
+                  <div className="overflow-x-auto border border-[#bcd2e8] rounded-xl bg-white shadow-2xs">
                     <table className="w-full text-right text-xs">
                       <thead>
-                        <tr className="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+                        <tr className="bg-gradient-to-r from-[#eaf2fb] to-[#f0f6fc] text-[#0f2d52] font-bold border-b border-[#bcd2e8]">
                           <th className="py-2 px-2.5 w-10 text-center">#</th>
                           {columnMappings.map((m, idx) => {
                             const opt = AVAILABLE_COLUMN_OPTIONS.find((o) => o.value === m);
                             return (
-                              <th key={idx} className="py-2 px-3 border-r border-slate-200">
-                                <span className={m === 'name' ? 'text-emerald-700' : m === 'ignore' ? 'text-slate-400' : 'text-blue-700'}>
+                              <th key={idx} className="py-2 px-3 border-r border-[#bcd2e8]">
+                                <span className={m === 'name' ? 'text-emerald-700' : m === 'ignore' ? 'text-[#55789e]' : 'text-[#0078d4]'}>
                                   {opt?.label.replace(/📌|🔢|🏢|🏷️|📂|📞|📊|💰|📝|🚫/g, '').trim()}
                                 </span>
                               </th>
@@ -873,26 +873,28 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                           })}
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-100">
+                      <tbody className="divide-y divide-[#bcd2e8]/70">
                         {parsedRawData.lines.slice(hasHeaderRow ? 1 : 0, (hasHeaderRow ? 1 : 0) + 3).map((row, rIdx) => (
-                          <tr key={rIdx} className="hover:bg-slate-50">
-                            <td className="py-2 px-2.5 text-center text-slate-400 font-mono text-[11px]">
+                          <tr key={rIdx} className="hover:bg-[#f0f6fc]">
+                            <td className="py-2 px-2.5 text-center text-[#55789e] font-mono text-[11px]">
                               {rIdx + 1}
                             </td>
                             {columnMappings.map((m, cIdx) => (
                               <td
                                 key={cIdx}
-                                className={`py-2 px-3 border-r border-slate-100 truncate max-w-[180px] ${
-                                  m === 'ignore' ? 'text-slate-300 line-through' : 'text-slate-800'
+                                className={`py-2 px-3 border-r border-[#bcd2e8]/70 truncate max-w-[180px] ${
+                                  m === 'ignore' ? 'text-[#a3bfdb] line-through' : 'text-[#0f2d52]'
                                 }`}
                               >
-                                {row[cIdx] || (m === 'code' && autoGenerateCodes ? (
-                                  <span className="text-[10px] text-emerald-600 font-mono font-bold bg-emerald-50 px-1 py-0.5 rounded">
+                                {row[cIdx] ? (
+                                  row[cIdx]
+                                ) : m === 'code' && autoGenerateCodes ? (
+                                  <span className="text-[10px] text-emerald-700 font-mono font-bold bg-emerald-50 border border-emerald-200 px-1 py-0.5 rounded">
                                     [يولد تلقائياً]
                                   </span>
                                 ) : (
                                   '-'
-                                ))}
+                                )}
                               </td>
                             ))}
                           </tr>
@@ -907,14 +909,14 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                   <button
                     type="button"
                     onClick={() => setActiveView('grid')}
-                    className="px-4 py-2 text-xs font-bold text-slate-600 hover:text-slate-800 bg-white border border-slate-300 rounded-xl"
+                    className="px-4 py-2 text-xs font-bold text-[#1e3a5f] hover:text-[#0f2d52] bg-white border border-[#bcd2e8] rounded-xl hover:bg-[#eaf2fb] cursor-pointer"
                   >
                     إلغاء والعودة للجدول
                   </button>
                   <button
                     type="button"
                     onClick={handleApplyColumnMapping}
-                    className="px-5 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-xs flex items-center gap-1.5 cursor-pointer"
+                    className="px-5 py-2 text-xs font-bold text-white bg-[#0078d4] hover:bg-[#0067b8] rounded-xl shadow-xs flex items-center gap-1.5 cursor-pointer"
                   >
                     <Check className="w-4 h-4" />
                     <span>تطبيق وتعبئة جدول الحسابات المالي</span>
@@ -922,12 +924,12 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                 </div>
               </div>
             ) : (
-              <div className="p-8 text-center bg-white border border-dashed border-slate-300 rounded-2xl">
-                <Building2 className="w-8 h-8 text-slate-400 mx-auto mb-2" />
-                <h4 className="text-sm font-bold text-slate-700 mb-1">
+              <div className="p-8 text-center bg-white border border-dashed border-[#bcd2e8] rounded-xl">
+                <Building2 className="w-8 h-8 text-[#55789e] mx-auto mb-2" />
+                <h4 className="text-sm font-bold text-[#0f2d52] mb-1">
                   في انتظار لصق أو إدخال البيانات أعلاه
                 </h4>
-                <p className="text-xs text-slate-500 max-w-md mx-auto">
+                <p className="text-xs text-[#55789e] max-w-md mx-auto">
                   بمجرد لصق النصوص من الإكسيل، سيظهر لك شريط التحكم لتحديد أي عمود هو اسم الحساب، رقم الهاتف، الرصيد، إلخ.
                 </p>
               </div>
@@ -941,12 +943,12 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
              ======================================================== */
           <div className="flex-1 flex flex-col min-h-0">
             {/* Action Bar Above Table */}
-            <div className="px-4 sm:px-6 py-2.5 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2 shrink-0">
+            <div className="px-4 sm:px-6 py-2.5 bg-gradient-to-r from-[#f0f6fc] via-[#f7fafe] to-[#f0f6fc] border-b border-[#bcd2e8] flex flex-wrap items-center justify-between gap-2 shrink-0">
               <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={handleAddRow}
-                  className="h-8 px-3 text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-lg flex items-center gap-1 transition-colors cursor-pointer"
+                  className="h-8 px-3 text-xs font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 rounded-lg flex items-center gap-1 transition-colors cursor-pointer"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>إضافة سطر حساب</span>
@@ -955,7 +957,7 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                 <button
                   type="button"
                   onClick={handleAutoSequenceAll}
-                  className="h-8 px-3 text-xs font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg flex items-center gap-1 transition-colors cursor-pointer"
+                  className="h-8 px-3 text-xs font-bold text-[#0078d4] bg-[#eaf2fb] hover:bg-[#dbe9f8] border border-[#bcd2e8] rounded-lg flex items-center gap-1 transition-colors cursor-pointer"
                   title="توليد الأكواد المسلسلة تلقائياً لجميع الحسابات من شجرة الحسابات الرئيسية"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
@@ -965,7 +967,7 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setActiveView('mapping-wizard')}
-                  className="h-8 px-3 text-xs font-bold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 rounded-lg flex items-center gap-1 transition-colors cursor-pointer"
+                  className="h-8 px-3 text-xs font-bold text-[#004e8c] bg-[#e6eef6] hover:bg-[#d5e4f3] border border-[#bcd2e8] rounded-lg flex items-center gap-1 transition-colors cursor-pointer"
                   title="فتح نافذة اللصق وتحديد ماهية الأعمدة"
                 >
                   <SlidersHorizontal className="w-3.5 h-3.5" />
@@ -977,20 +979,20 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                 <button
                   type="button"
                   onClick={handleDownloadTemplate}
-                  className="h-8 px-2.5 text-xs font-semibold text-slate-700 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg flex items-center gap-1 transition-colors cursor-pointer"
+                  className="h-8 px-2.5 text-xs font-semibold text-[#1e3a5f] bg-white hover:bg-[#eaf2fb] border border-[#bcd2e8] rounded-lg flex items-center gap-1 transition-colors cursor-pointer"
                   title="تحميل ملف إكسيل نموذجي بالأعمدة الثمانية"
                 >
-                  <Download className="w-3.5 h-3.5 text-slate-500" />
+                  <Download className="w-3.5 h-3.5 text-[#55789e]" />
                   <span className="hidden sm:inline">تحميل نموذج CSV</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={handleLoadDemo}
-                  className="h-8 px-2.5 text-xs font-semibold text-slate-700 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg flex items-center gap-1 transition-colors cursor-pointer"
+                  className="h-8 px-2.5 text-xs font-semibold text-[#1e3a5f] bg-white hover:bg-[#eaf2fb] border border-[#bcd2e8] rounded-lg flex items-center gap-1 transition-colors cursor-pointer"
                   title="تحميل دليل استرشادي جاهز"
                 >
-                  <RefreshCw className="w-3.5 h-3.5 text-slate-500" />
+                  <RefreshCw className="w-3.5 h-3.5 text-[#55789e]" />
                   <span>دليل تجريبي</span>
                 </button>
 
@@ -1006,78 +1008,78 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
             </div>
 
             {/* Table Area */}
-            <div className="flex-1 overflow-x-auto overflow-y-auto p-4 sm:p-6 min-h-[260px]">
+            <div className="flex-1 overflow-x-auto overflow-y-auto p-4 sm:p-6 min-h-[260px] bg-[#f8fbfe]">
               {gridRows.length === 0 ? (
-                <div className="h-48 flex flex-col items-center justify-center text-center p-6 bg-slate-50 rounded-2xl border border-dashed border-slate-300">
-                  <Building2 className="w-8 h-8 text-slate-400 mb-1.5" />
-                  <h4 className="font-bold text-slate-800 text-sm mb-1">جدول الحسابات فارغ حالياً</h4>
-                  <p className="text-xs text-slate-500 max-w-sm mb-3">
+                <div className="h-48 flex flex-col items-center justify-center text-center p-6 bg-white rounded-xl border border-dashed border-[#bcd2e8]">
+                  <Building2 className="w-8 h-8 text-[#55789e] mb-1.5" />
+                  <h4 className="font-bold text-[#0f2d52] text-sm mb-1">جدول الحسابات فارغ حالياً</h4>
+                  <p className="text-xs text-[#55789e] max-w-sm mb-3">
                     يمكنك لصق بياناتك من الإكسيل وتحديد أعمدتها، أو الضغط على "إضافة سطر حساب" لإدخال الحسابات يدوياً.
                   </p>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setActiveView('mapping-wizard')}
-                      className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition-colors cursor-pointer flex items-center gap-1.5"
+                      className="px-3.5 py-1.5 bg-[#0078d4] hover:bg-[#0067b8] text-white text-xs font-bold rounded-lg transition-colors cursor-pointer flex items-center gap-1.5 shadow-2xs"
                     >
                       <SlidersHorizontal className="w-3.5 h-3.5" />
                       <span>لصق وتعيين الأعمدة</span>
                     </button>
                     <button
                       onClick={handleLoadDemo}
-                      className="px-3 py-1.5 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-bold rounded-lg transition-colors cursor-pointer"
+                      className="px-3 py-1.5 bg-white border border-[#bcd2e8] hover:bg-[#eaf2fb] text-[#1e3a5f] text-xs font-bold rounded-lg transition-colors cursor-pointer"
                     >
                       تحميل دليل تجريبي
                     </button>
                   </div>
                 </div>
               ) : (
-                <div className="border border-slate-300 rounded-2xl overflow-hidden shadow-2xs bg-white">
+                <div className="border border-[#bcd2e8] rounded-xl overflow-hidden shadow-2xs bg-white">
                   <table className="w-full text-right text-xs border-collapse min-w-[950px]">
                     <thead>
-                      <tr className="bg-slate-100 text-slate-700 border-b border-slate-300 font-bold">
-                        <th className="py-2.5 px-2 text-center w-10 border-l border-slate-200">#</th>
+                      <tr className="bg-gradient-to-r from-[#eaf2fb] to-[#f0f6fc] text-[#0f2d52] border-b border-[#bcd2e8] font-bold">
+                        <th className="py-2.5 px-2 text-center w-10 border-l border-[#bcd2e8]">#</th>
 
                         {/* 1. عمود رمز الحساب */}
-                        <th className="py-2.5 px-3 border-l border-slate-200 w-36">
+                        <th className="py-2.5 px-3 border-l border-[#bcd2e8] w-36">
                           <div className="flex items-center justify-between">
                             <span>رمز الحساب</span>
-                            <span className="text-[10px] text-blue-600 font-normal">مسلسل</span>
+                            <span className="text-[10px] text-[#0078d4] font-normal">مسلسل</span>
                           </div>
                         </th>
 
                         {/* 2. عمود اسم الحساب */}
-                        <th className="py-2.5 px-3 border-l border-slate-200 min-w-[180px]">
+                        <th className="py-2.5 px-3 border-l border-[#bcd2e8] min-w-[180px]">
                           <span>اسم الحساب المالي</span>
                           <span className="text-rose-500 mr-1">*</span>
                         </th>
 
                         {/* 3. عمود اسم الحساب الرئيسي */}
-                        <th className="py-2.5 px-3 border-l border-slate-200 w-44">
+                        <th className="py-2.5 px-3 border-l border-[#bcd2e8] w-44">
                           <span>اسم الحساب الرئيسي</span>
                         </th>
 
                         {/* 4. عمود رمز الحساب الرئيسي */}
-                        <th className="py-2.5 px-2.5 border-l border-slate-200 w-24 text-center">
+                        <th className="py-2.5 px-2.5 border-l border-[#bcd2e8] w-24 text-center">
                           <span>رمز الرئيسي</span>
                         </th>
 
                         {/* 5. عمود نوع الحساب */}
-                        <th className="py-2.5 px-3 border-l border-slate-200 w-28">
+                        <th className="py-2.5 px-3 border-l border-[#bcd2e8] w-28">
                           <span>نوع الحساب</span>
                         </th>
 
                         {/* 6. عمود رقم الهاتف */}
-                        <th className="py-2.5 px-3 border-l border-slate-200 w-32">
+                        <th className="py-2.5 px-3 border-l border-[#bcd2e8] w-32">
                           <span>رقم الهاتف</span>
                         </th>
 
                         {/* 7. عمود اسم الحساب الختامي */}
-                        <th className="py-2.5 px-3 border-l border-slate-200 w-36">
+                        <th className="py-2.5 px-3 border-l border-[#bcd2e8] w-36">
                           <span>اسم الحساب الختامي</span>
                         </th>
 
                         {/* 8. الرصيد الافتتاحي */}
-                        <th className="py-2.5 px-3 border-l border-slate-200 w-28 text-left">
+                        <th className="py-2.5 px-3 border-l border-[#bcd2e8] w-28 text-left">
                           <span>الرصيد الافتتاحي</span>
                         </th>
 
@@ -1085,22 +1087,22 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                         <th className="py-2.5 px-2 text-center w-20">إجراءات</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-200">
+                    <tbody className="divide-y divide-[#bcd2e8]/70">
                       {gridRows.map((row, idx) => {
                         const isNameEmpty = !row.name.trim();
                         return (
                           <tr
                             key={row.id}
-                            className={`hover:bg-blue-50/30 transition-colors ${
-                              isNameEmpty ? 'bg-rose-50/30' : ''
+                            className={`hover:bg-[#f0f6fc] transition-colors ${
+                              isNameEmpty ? 'bg-rose-50/40' : ''
                             }`}
                           >
-                            <td className="py-1.5 px-2 text-center text-slate-400 font-mono text-[11px] border-l border-slate-200">
+                            <td className="py-1.5 px-2 text-center text-[#55789e] font-mono text-[11px] border-l border-[#bcd2e8]/70">
                               {idx + 1}
                             </td>
 
                             {/* 1. رمز الحساب */}
-                            <td className="py-1.5 px-2 border-l border-slate-200">
+                            <td className="py-1.5 px-2 border-l border-[#bcd2e8]/70">
                               <div className="relative flex items-center">
                                 <input
                                   type="text"
@@ -1108,7 +1110,7 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                                   value={row.code}
                                   onChange={(e) => handleUpdateRow(row.id, 'code', e.target.value)}
                                   placeholder="120101"
-                                  className="w-full pr-2 pl-6 py-1 bg-white border border-slate-300 rounded-lg text-xs font-mono font-bold text-blue-900 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                  className="w-full pr-2 pl-6 py-1 bg-white border border-[#bcd2e8] rounded-lg text-xs font-mono font-bold text-[#004e8c] focus:outline-none focus:ring-1 focus:ring-[#0078d4]"
                                 />
                                 <button
                                   type="button"
@@ -1119,7 +1121,7 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                                     );
                                     handleUpdateRow(row.id, 'code', nextCode);
                                   }}
-                                  className="absolute left-1.5 text-slate-400 hover:text-blue-600 p-0.5 cursor-pointer"
+                                  className="absolute left-1.5 text-[#55789e] hover:text-[#0078d4] p-0.5 cursor-pointer"
                                   title="توليد كود تلقائي مسلسل لهذا السطر"
                                 >
                                   <Sparkles className="w-3.5 h-3.5" />
@@ -1128,26 +1130,26 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                             </td>
 
                             {/* 2. اسم الحساب */}
-                            <td className="py-1.5 px-2 border-l border-slate-200">
+                            <td className="py-1.5 px-2 border-l border-[#bcd2e8]/70">
                               <input
                                 type="text"
                                 value={row.name}
                                 onChange={(e) => handleUpdateRow(row.id, 'name', e.target.value)}
                                 placeholder="اسم الحساب المالي..."
-                                className={`w-full px-2.5 py-1 bg-white border rounded-lg text-xs font-bold text-slate-900 focus:outline-none focus:ring-1 ${
+                                className={`w-full px-2.5 py-1 bg-white border rounded-lg text-xs font-bold text-[#0f2d52] focus:outline-none focus:ring-1 ${
                                   isNameEmpty
                                     ? 'border-rose-400 focus:ring-rose-500'
-                                    : 'border-slate-300 focus:ring-blue-500'
+                                    : 'border-[#bcd2e8] focus:ring-[#0078d4]'
                                 }`}
                               />
                             </td>
 
                             {/* 3. اسم الحساب الرئيسي */}
-                            <td className="py-1.5 px-2 border-l border-slate-200">
+                            <td className="py-1.5 px-2 border-l border-[#bcd2e8]/70">
                               <select
                                 value={row.mainAccount}
                                 onChange={(e) => handleUpdateRow(row.id, 'mainAccount', e.target.value)}
-                                className="w-full px-2 py-1 bg-white border border-slate-300 rounded-lg text-xs text-slate-800 font-medium focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer"
+                                className="w-full px-2 py-1 bg-white border border-[#bcd2e8] rounded-lg text-xs text-[#0f2d52] font-medium focus:outline-none focus:ring-1 focus:ring-[#0078d4] cursor-pointer"
                               >
                                 {STANDARD_CHART_TREE.map((m) => (
                                   <option key={m.code} value={m.name}>
@@ -1158,23 +1160,23 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                             </td>
 
                             {/* 4. رمز الحساب الرئيسي */}
-                            <td className="py-1.5 px-2 border-l border-slate-200">
+                            <td className="py-1.5 px-2 border-l border-[#bcd2e8]/70">
                               <input
                                 type="text"
                                 dir="ltr"
                                 value={row.mainAccountCode}
                                 onChange={(e) => handleUpdateRow(row.id, 'mainAccountCode', e.target.value)}
                                 placeholder="12"
-                                className="w-full px-1.5 py-1 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono font-bold text-slate-700 text-center focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                className="w-full px-1.5 py-1 bg-[#f0f6fc] border border-[#bcd2e8] rounded-lg text-xs font-mono font-bold text-[#1e3a5f] text-center focus:outline-none focus:ring-1 focus:ring-[#0078d4]"
                               />
                             </td>
 
                             {/* 5. نوع الحساب */}
-                            <td className="py-1.5 px-2 border-l border-slate-200">
+                            <td className="py-1.5 px-2 border-l border-[#bcd2e8]/70">
                               <select
                                 value={row.type}
                                 onChange={(e) => handleUpdateRow(row.id, 'type', e.target.value)}
-                                className="w-full px-1.5 py-1 bg-white border border-slate-300 rounded-lg text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer"
+                                className="w-full px-1.5 py-1 bg-white border border-[#bcd2e8] rounded-lg text-xs text-[#0f2d52] focus:outline-none focus:ring-1 focus:ring-[#0078d4] cursor-pointer"
                               >
                                 <option value="عملاء">عملاء</option>
                                 <option value="موردين">موردين</option>
@@ -1187,23 +1189,23 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                             </td>
 
                             {/* 6. رقم الهاتف */}
-                            <td className="py-1.5 px-2 border-l border-slate-200">
+                            <td className="py-1.5 px-2 border-l border-[#bcd2e8]/70">
                               <input
                                 type="tel"
                                 dir="ltr"
                                 value={row.phone}
                                 onChange={(e) => handleUpdateRow(row.id, 'phone', e.target.value)}
                                 placeholder="01012345678"
-                                className="w-full px-2 py-1 bg-white border border-slate-300 rounded-lg text-xs font-mono text-slate-800 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                className="w-full px-2 py-1 bg-white border border-[#bcd2e8] rounded-lg text-xs font-mono text-[#0f2d52] focus:outline-none focus:ring-1 focus:ring-[#0078d4]"
                               />
                             </td>
 
                             {/* 7. اسم الحساب الختامي */}
-                            <td className="py-1.5 px-2 border-l border-slate-200">
+                            <td className="py-1.5 px-2 border-l border-[#bcd2e8]/70">
                               <select
                                 value={row.closingAccount}
                                 onChange={(e) => handleUpdateRow(row.id, 'closingAccount', e.target.value)}
-                                className="w-full px-1.5 py-1 bg-white border border-slate-300 rounded-lg text-[11px] font-medium text-slate-700 focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer"
+                                className="w-full px-1.5 py-1 bg-white border border-[#bcd2e8] rounded-lg text-[11px] font-medium text-[#1e3a5f] focus:outline-none focus:ring-1 focus:ring-[#0078d4] cursor-pointer"
                               >
                                 <option value="الميزانية العمومية">الميزانية العمومية</option>
                                 <option value="قائمة الدخل">قائمة الدخل</option>
@@ -1213,7 +1215,7 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                             </td>
 
                             {/* 8. الرصيد الافتتاحي */}
-                            <td className="py-1.5 px-2 border-l border-slate-200">
+                            <td className="py-1.5 px-2 border-l border-[#bcd2e8]/70">
                               <input
                                 type="number"
                                 step="0.01"
@@ -1222,7 +1224,7 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                                   handleUpdateRow(row.id, 'openingBalance', parseFloat(e.target.value) || 0)
                                 }
                                 placeholder="0"
-                                className="w-full px-1.5 py-1 bg-white border border-slate-300 rounded-lg text-xs font-mono font-bold text-slate-800 text-left focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                className="w-full px-1.5 py-1 bg-white border border-[#bcd2e8] rounded-lg text-xs font-mono font-bold text-[#0f2d52] text-left focus:outline-none focus:ring-1 focus:ring-[#0078d4]"
                               />
                             </td>
 
@@ -1233,7 +1235,7 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                                   <button
                                     type="button"
                                     onClick={() => handlePreviewCard(row)}
-                                    className="p-1 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded transition-colors cursor-pointer"
+                                    className="p-1 text-[#0078d4] hover:text-[#004e8c] hover:bg-[#eaf2fb] rounded transition-colors cursor-pointer"
                                     title="معاينة بطاقة هذا الحساب"
                                   >
                                     <Eye className="w-3.5 h-3.5" />
@@ -1243,7 +1245,7 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
                                 <button
                                   type="button"
                                   onClick={() => handleDeleteRow(row.id)}
-                                  className="p-1 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded transition-colors cursor-pointer"
+                                  className="p-1 text-[#55789e] hover:text-rose-600 hover:bg-rose-50 rounded transition-colors cursor-pointer"
                                   title="حذف هذا السطر"
                                 >
                                   <Trash2 className="w-3.5 h-3.5" />
@@ -1264,19 +1266,19 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
         {/* ========================================================
             MODAL FOOTER
            ======================================================== */}
-        <div className="px-4 py-3 sm:px-6 bg-slate-100 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3 shrink-0">
+        <div className="px-4 py-3 sm:px-6 bg-gradient-to-r from-[#f0f6fc] to-[#e8f1f9] border-t border-[#bcd2e8] flex flex-wrap items-center justify-between gap-3 shrink-0">
           {/* Strategy Selection */}
           <div className="flex items-center gap-4 text-xs">
-            <span className="font-bold text-slate-700">طريقة التطبيق في الدليل:</span>
+            <span className="font-bold text-[#1e3a5f]">طريقة التطبيق في الدليل:</span>
             <label className="inline-flex items-center gap-1.5 cursor-pointer">
               <input
                 type="radio"
                 name="import-strategy"
                 checked={importStrategy === 'merge'}
                 onChange={() => setImportStrategy('merge')}
-                className="text-blue-600 focus:ring-blue-500"
+                className="text-[#0078d4] focus:ring-[#0078d4]"
               />
-              <span className="text-slate-800 font-medium">
+              <span className="text-[#0f2d52] font-medium">
                 دمج وتحديث الدليل الحالي (يحافظ على مدخلاتك السابقة)
               </span>
             </label>
@@ -1297,7 +1299,7 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-xs font-bold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-300 rounded-xl transition-colors cursor-pointer shadow-2xs"
+              className="px-4 py-2 text-xs font-bold text-[#1e3a5f] hover:text-[#0f2d52] bg-white hover:bg-[#eaf2fb] border border-[#bcd2e8] rounded-lg transition-colors cursor-pointer shadow-2xs"
             >
               إلغاء
             </button>
@@ -1305,7 +1307,7 @@ export const ImportAccountsModal: React.FC<ImportAccountsModalProps> = ({
             <button
               type="button"
               onClick={handleApplyImport}
-              className="px-5 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 rounded-xl transition-colors cursor-pointer shadow-sm flex items-center gap-1.5"
+              className="px-5 py-2 text-xs font-bold text-white bg-[#0078d4] hover:bg-[#0067b8] rounded-lg transition-colors cursor-pointer shadow-sm flex items-center gap-1.5"
             >
               <CheckCircle2 className="w-4 h-4" />
               <span>

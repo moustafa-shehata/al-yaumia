@@ -100,24 +100,24 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
   return (
     <div
       dir="rtl"
-      className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-850 to-blue-950 flex items-center justify-center p-4 selection:bg-blue-500 selection:text-white"
+      className="min-h-screen bg-gradient-to-br from-[#00274d] via-[#004e8c] to-[#0078d4] flex items-center justify-center p-4 selection:bg-[#0078d4] selection:text-white"
     >
       {/* Background Subtle Ambience */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.12),transparent_50%)] pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(79,70,229,0.08),transparent_50%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.1),transparent_50%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(0,120,212,0.2),transparent_50%)] pointer-events-none" />
 
-      <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-slate-700/40 overflow-hidden my-auto">
+      <div className="relative w-full max-w-lg bg-[#f0f6fc] rounded-2xl shadow-2xl border border-[#bcd2e8] overflow-hidden my-auto">
         {/* Header Ribbon */}
-        <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white p-5 sm:p-6 border-b border-slate-700/60 flex items-center justify-between">
+        <div className="bg-gradient-to-r from-[#003e73] via-[#005a9e] to-[#0078d4] text-white p-5 sm:p-6 border-b border-[#004e8c] flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/30 shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-white/20 border border-white/25 flex items-center justify-center shadow-lg shadow-black/10 shrink-0">
               <Building2 className="w-6 h-6 text-white" />
             </div>
             <div>
               <h1 className="text-lg sm:text-xl font-extrabold text-white tracking-tight flex items-center gap-2">
                 منظومة اكيورا المالية
               </h1>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-blue-100 mt-0.5">
                 نظام القيود المحاسبية وتفريغ كشوف الحسابات ومطابقة الأرصدة
               </p>
             </div>
@@ -128,7 +128,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
         <div className="p-5 sm:p-6 space-y-4">
           {/* Quick Account Picker (Users from User Management) */}
           <div>
-            <div className="grid grid-cols-2 gap-2 max-h-36 overflow-y-auto p-1.5 bg-slate-50 rounded-xl border border-slate-200">
+            <div className="grid grid-cols-2 gap-2 max-h-36 overflow-y-auto p-1.5 bg-[#eaf2fb] rounded-xl border border-[#bcd2e8]">
               {users.map((u) => {
                 const isSelected = u.id === selectedUserId || u.username === usernameInput;
                 return (
@@ -138,23 +138,23 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                     onClick={() => handleSelectUser(u)}
                     className={`flex items-center justify-between p-2 rounded-lg border text-right transition-all cursor-pointer ${
                       isSelected
-                        ? 'bg-blue-50 border-blue-400 ring-2 ring-blue-500/20 shadow-xs'
-                        : 'bg-white border-slate-200 hover:bg-slate-100/70 hover:border-slate-300'
+                        ? 'bg-white border-[#0078d4] ring-2 ring-[#0078d4]/20 shadow-xs'
+                        : 'bg-white/80 border-[#bcd2e8] hover:bg-white hover:border-[#0078d4]/50'
                     }`}
                   >
                     <div className="flex items-center gap-2 min-w-0">
                       <div
                         className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 font-bold text-xs ${
-                          isSelected ? 'bg-blue-600 text-white' : 'bg-slate-200 text-slate-700'
+                          isSelected ? 'bg-[#0078d4] text-white' : 'bg-[#e6eef6] text-[#1e3a5f]'
                         }`}
                       >
                         {u.fullName.slice(0, 1)}
                       </div>
                       <div className="min-w-0">
-                        <div className="text-xs font-bold text-slate-800 truncate">
+                        <div className="text-xs font-bold text-[#0f2d52] truncate">
                           {u.fullName}
                         </div>
-                        <div className="text-[10px] text-slate-400 font-mono truncate">
+                        <div className="text-[10px] text-[#55789e] font-mono truncate">
                           {u.username}
                         </div>
                       </div>
@@ -178,7 +178,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
           <form onSubmit={handleSubmit} className="space-y-3.5">
             {/* Username Field */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-[#1e3a5f] mb-1">
                 اسم الدخول المعتمد (Username)
               </label>
               <div className="relative">
@@ -196,15 +196,15 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                     }
                   }}
                   placeholder="أدخل اسم الدخول المسجل"
-                  className="w-full pl-3 pr-9 py-2 text-xs rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-slate-800 bg-white"
+                  className="w-full pl-3 pr-9 py-2 text-xs rounded-lg border border-[#bcd2e8] focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] font-mono text-[#0f2d52] bg-white focus:outline-none"
                 />
-                <User className="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <User className="w-4 h-4 text-[#55789e] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
             </div>
 
             {/* Password Field */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-[#1e3a5f] mb-1">
                 كلمة المرور (Password)
               </label>
               <div className="relative">
@@ -214,13 +214,13 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                   value={passwordInput}
                   onChange={(e) => setPasswordInput(e.target.value)}
                   placeholder="أدخل كلمة المرور الخاصة بحسابك"
-                  className="w-full pl-10 pr-9 py-2 text-xs rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-slate-800 bg-white"
+                  className="w-full pl-10 pr-9 py-2 text-xs rounded-lg border border-[#bcd2e8] focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] font-mono text-[#0f2d52] bg-white focus:outline-none"
                 />
-                <KeyRound className="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <KeyRound className="w-4 h-4 text-[#55789e] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer p-1"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-[#55789e] hover:text-[#0f2d52] cursor-pointer p-1"
                   title={showPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -242,7 +242,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                 type="submit"
                 id="btn-submit-login"
                 disabled={isLoading}
-                className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 active:scale-[0.99] text-white font-extrabold text-sm shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2.5 transition-all cursor-pointer disabled:opacity-50 border border-blue-400/30"
+                className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#005a9e] to-[#0078d4] hover:from-[#004e8c] hover:to-[#0067b8] active:scale-[0.99] text-white font-extrabold text-sm shadow-md shadow-[#0078d4]/25 flex items-center justify-center gap-2.5 transition-all cursor-pointer disabled:opacity-50 border border-white/20"
               >
                 <LogIn className="w-5 h-5 text-white" />
                 <span className="tracking-wide">
@@ -253,8 +253,9 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
           </form>
 
           {/* Footer Note */}
-          <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+          <div className="pt-2 border-t border-[#bcd2e8] flex items-center justify-between text-[11px] text-[#55789e]">
             <span>إصدار: Acuora ERP v2.6.4 Pro</span>
+            <span>Acuora Soft Egypt</span>
           </div>
         </div>
       </div>

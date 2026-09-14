@@ -134,20 +134,20 @@ export const TransactionsTable: React.FC<TransactionsTableProps> = ({
   };
 
   return (
-    <div id="section-transactions-table" className="bg-white border border-slate-200 rounded-xl shadow-xs overflow-hidden">
+    <div id="section-transactions-table" className="bg-white border border-[#bcd2e8] rounded-xl shadow-xs overflow-hidden">
       {/* Table Header & Search Controls */}
-      <div className="p-4 sm:p-5 border-b border-slate-200 bg-slate-50/50">
+      <div className="p-4 sm:p-5 border-b border-[#bcd2e8] bg-gradient-to-r from-[#f0f6fc] via-[#f7fafe] to-[#f0f6fc]">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-base sm:text-lg font-bold text-slate-900">
+              <h2 className="text-base sm:text-lg font-bold text-[#0f2d52]">
                 أولاً: ملخص الحركات المالية (جدول البيانات)
               </h2>
-              <span className="px-2 py-0.5 text-xs font-semibold rounded-md bg-blue-100 text-blue-800 border border-blue-200 font-mono-numbers">
+              <span className="px-2 py-0.5 text-xs font-bold rounded-md bg-[#e1edf8] text-[#0067b8] border border-[#b8cfe8] font-mono-numbers">
                 {filteredTransactions.length} / {transactions.length}
               </span>
             </div>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-[#55789e] mt-0.5">
               عرض تفريغ قيود الحركة اليومية المسجلة وتفاصيل الحسابات وأرصدة التسوية
             </p>
           </div>
@@ -155,18 +155,18 @@ export const TransactionsTable: React.FC<TransactionsTableProps> = ({
           {/* Search & Filters */}
           <div className="flex flex-wrap items-center gap-2.5">
             <div className="relative min-w-[200px] sm:min-w-[260px]">
-              <Search className="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <Search className="w-4 h-4 text-[#6c8cae] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="بحث بالبيان، اسم الحساب، أو المسلسل..."
-                className="w-full pl-3 pr-9 py-2 text-xs sm:text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 placeholder-slate-400 text-slate-800"
+                className="w-full pl-3 pr-9 py-2 text-xs sm:text-sm bg-white border border-[#bcd2e8] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] placeholder-[#718fae] text-[#0f2d52]"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                  className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#718fae] hover:text-[#0f2d52]"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
@@ -177,7 +177,7 @@ export const TransactionsTable: React.FC<TransactionsTableProps> = ({
             <select
               value={selectedAccount}
               onChange={(e) => setSelectedAccount(e.target.value)}
-              className="text-xs sm:text-sm py-2 px-3 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-slate-700 cursor-pointer"
+              className="text-xs sm:text-sm py-2 px-3 bg-white border border-[#bcd2e8] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] text-[#1e3a5f] cursor-pointer"
             >
               <option value="ALL">جميع الحسابات</option>
               {uniqueAccounts.map((acc) => (
@@ -191,7 +191,7 @@ export const TransactionsTable: React.FC<TransactionsTableProps> = ({
             <select
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value)}
-              className="text-xs sm:text-sm py-2 px-3 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-slate-700 cursor-pointer"
+              className="text-xs sm:text-sm py-2 px-3 bg-white border border-[#bcd2e8] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] text-[#1e3a5f] cursor-pointer"
             >
               <option value="ALL">جميع أنواع الحركة</option>
               {uniqueTypes.map((t) => (
@@ -202,12 +202,12 @@ export const TransactionsTable: React.FC<TransactionsTableProps> = ({
             </select>
 
             {/* Sort Order Selector */}
-            <div className="flex items-center gap-1.5 bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs text-slate-700 shadow-2xs">
-              <ArrowUpDown className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+            <div className="flex items-center gap-1.5 bg-white border border-[#bcd2e8] rounded-lg px-2.5 py-1.5 text-xs text-[#1e3a5f] shadow-2xs">
+              <ArrowUpDown className="w-3.5 h-3.5 text-[#0078d4] shrink-0" />
               <select
                 value={sortMode}
                 onChange={(e) => setSortMode(e.target.value as TransactionSortMode)}
-                className="bg-transparent font-medium focus:outline-none cursor-pointer text-xs text-slate-700"
+                className="bg-transparent font-medium focus:outline-none cursor-pointer text-xs text-[#1e3a5f]"
                 title="ترتيب قيود اليومية حسب التاريخ والمسلسل"
               >
                 <option value="date_serial_asc">التاريخ ثم المسلسل (تصاعدي 1 ← N)</option>
@@ -222,10 +222,10 @@ export const TransactionsTable: React.FC<TransactionsTableProps> = ({
               <button
                 type="button"
                 onClick={onResequenceTransactions}
-                className="text-xs py-2 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 rounded-lg font-medium flex items-center gap-1 transition-colors cursor-pointer"
+                className="text-xs py-2 px-2.5 bg-[#f0f6fc] hover:bg-[#e1edf8] text-[#1e3a5f] border border-[#bcd2e8] rounded-lg font-medium flex items-center gap-1 transition-colors cursor-pointer"
                 title="إعادة ترقيم مسلسل جميع القيود بالتتابع الزمني حسب التاريخ (1، 2، 3...)"
               >
-                <ListOrdered className="w-3.5 h-3.5 text-slate-600" />
+                <ListOrdered className="w-3.5 h-3.5 text-[#55789e]" />
                 <span className="hidden xl:inline">إعادة تسلسل القيود زمنياً</span>
               </button>
             )}
@@ -258,19 +258,19 @@ export const TransactionsTable: React.FC<TransactionsTableProps> = ({
       <div className="w-full overflow-x-auto relative">
         <table className="w-full text-right border-collapse text-xs table-auto min-w-[1050px]">
           <thead>
-            <tr className="bg-slate-100/80 border-b border-slate-200 text-slate-700 font-bold text-[11px] sm:text-xs whitespace-nowrap">
+            <tr className="bg-gradient-to-b from-[#eaf2fb] via-[#e2eef9] to-[#d6e5f5] border-b border-[#bcd2e8] text-[#1e3a5f] font-bold text-[11px] sm:text-xs whitespace-nowrap">
               {/* مسلسل */}
               <th 
                 onClick={() => setSortMode((prev) => (prev === 'serial_asc' ? 'serial_desc' : 'serial_asc'))}
-                className="py-2.5 px-1.5 text-center w-12 shrink-0 cursor-pointer hover:bg-slate-200/80 transition-colors select-none group"
+                className="py-2.5 px-1.5 text-center w-12 shrink-0 cursor-pointer hover:bg-[#cfe1f5] transition-colors select-none group"
                 title="انقر لترتيب المسلسل (تصاعدي 1..N / تنازلي N..1)"
               >
                 <div className="flex items-center justify-center gap-1">
                   <span>مسلسل</span>
-                  {sortMode === 'serial_asc' && <ArrowUp className="w-3 h-3 text-blue-600 font-bold" />}
-                  {sortMode === 'serial_desc' && <ArrowDown className="w-3 h-3 text-blue-600 font-bold" />}
+                  {sortMode === 'serial_asc' && <ArrowUp className="w-3 h-3 text-[#0078d4] font-bold" />}
+                  {sortMode === 'serial_desc' && <ArrowDown className="w-3 h-3 text-[#0078d4] font-bold" />}
                   {sortMode !== 'serial_asc' && sortMode !== 'serial_desc' && (
-                    <ArrowUpDown className="w-2.5 h-2.5 text-slate-400 group-hover:text-slate-600" />
+                    <ArrowUpDown className="w-2.5 h-2.5 text-[#718fae] group-hover:text-[#0f2d52]" />
                   )}
                 </div>
               </th>
@@ -278,15 +278,15 @@ export const TransactionsTable: React.FC<TransactionsTableProps> = ({
               {/* التاريخ */}
               <th 
                 onClick={() => setSortMode((prev) => (prev === 'date_serial_asc' ? 'date_serial_desc' : 'date_serial_asc'))}
-                className="py-2.5 px-1.5 cursor-pointer hover:bg-slate-200/80 transition-colors select-none group"
+                className="py-2.5 px-1.5 cursor-pointer hover:bg-[#cfe1f5] transition-colors select-none group"
                 title="انقر لترتيب التاريخ والمسلسل (من الأقدم للأحدث / من الأحدث للأقدم)"
               >
                 <div className="flex items-center gap-1">
                   <span>التاريخ</span>
-                  {sortMode === 'date_serial_asc' && <ArrowUp className="w-3 h-3 text-blue-600 font-bold" />}
-                  {sortMode === 'date_serial_desc' && <ArrowDown className="w-3 h-3 text-blue-600 font-bold" />}
+                  {sortMode === 'date_serial_asc' && <ArrowUp className="w-3 h-3 text-[#0078d4] font-bold" />}
+                  {sortMode === 'date_serial_desc' && <ArrowDown className="w-3 h-3 text-[#0078d4] font-bold" />}
                   {sortMode !== 'date_serial_asc' && sortMode !== 'date_serial_desc' && (
-                    <ArrowUpDown className="w-2.5 h-2.5 text-slate-400 group-hover:text-slate-600" />
+                    <ArrowUpDown className="w-2.5 h-2.5 text-[#718fae] group-hover:text-[#0f2d52]" />
                   )}
                 </div>
               </th>
@@ -299,15 +299,15 @@ export const TransactionsTable: React.FC<TransactionsTableProps> = ({
               <th className="py-2.5 px-1.5">اسم الحساب</th>
               <th className="py-2.5 px-1.5">الحساب الرئيسي</th>
               <th className="py-2.5 px-1.5">الحساب الختامي</th>
-              <th className="py-2.5 px-2 text-center no-print min-w-[130px] w-32 sticky left-0 z-20 bg-slate-100 border-r border-slate-200 shadow-[-3px_0_6px_-2px_rgba(0,0,0,0.06)]">
+              <th className="py-2.5 px-2 text-center no-print min-w-[130px] w-32 sticky left-0 z-20 bg-[#dbe8f5] border-r border-[#bcd2e8] shadow-[-3px_0_6px_-2px_rgba(15,45,85,0.06)]">
                 إجراءات
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 text-slate-700">
+          <tbody className="divide-y divide-[#e4edf5] text-[#0f2d52]">
             {sortedTransactions.length === 0 ? (
               <tr>
-                <td colSpan={11} className="py-12 text-center text-slate-400">
+                <td colSpan={11} className="py-12 text-center text-[#718fae]">
                   لا توجد حركات مطابقة لمعايير البحث الحالية.
                 </td>
               </tr>
@@ -321,11 +321,11 @@ export const TransactionsTable: React.FC<TransactionsTableProps> = ({
                     className={`transition-all duration-700 ${
                       isHighlighted 
                         ? 'bg-emerald-100/70 ring-2 ring-emerald-500/80 shadow-md font-semibold' 
-                        : 'hover:bg-blue-50/40'
+                        : 'hover:bg-[#f1f6fc]'
                     }`}
                   >
                     {/* المسلسل */}
-                    <td className="py-2 px-1.5 text-center font-bold text-slate-900 font-mono-numbers bg-slate-50/40 text-[11px]">
+                    <td className="py-2 px-1.5 text-center font-bold text-[#0f2d52] font-mono-numbers bg-[#f5f9fd]/50 text-[11px]">
                       <div className="flex items-center justify-center gap-1">
                         <span>{item.id}</span>
                         {isHighlighted && (
@@ -480,9 +480,9 @@ export const TransactionsTable: React.FC<TransactionsTableProps> = ({
 
           {/* Totals Footer Row */}
           <tfoot>
-            <tr className="bg-slate-100 border-t-2 border-slate-300 font-bold text-slate-900 text-xs">
+            <tr className="bg-gradient-to-b from-[#eaf2fb] via-[#e2eef9] to-[#d8e7f6] border-t-2 border-[#a9c7e4] font-bold text-[#0f2d52] text-xs">
               <td className="py-2.5 px-1.5 text-center">الإجمالي</td>
-              <td className="py-2.5 px-1.5 text-slate-500 text-xs font-mono-numbers">
+              <td className="py-2.5 px-1.5 text-[#55789e] text-xs font-mono-numbers">
                 {filteredTransactions.length} سجل
               </td>
               <td className="py-2.5 px-1.5 text-emerald-700 font-mono-numbers whitespace-nowrap">
@@ -491,16 +491,16 @@ export const TransactionsTable: React.FC<TransactionsTableProps> = ({
               <td className="py-2.5 px-1.5 text-amber-700 font-mono-numbers whitespace-nowrap">
                 {filteredTotals.payments > 0 ? `${filteredTotals.payments.toLocaleString('en-US')} ج.م` : '-'}
               </td>
-              <td className="py-2.5 px-1.5 text-slate-500 text-xs">
+              <td className="py-2.5 px-1.5 text-[#55789e] text-xs">
                 إجمالي حركة اليوم
               </td>
               <td className="py-2.5 px-1.5 text-rose-700 font-mono-numbers whitespace-nowrap">
                 {filteredTotals.balance.toLocaleString('en-US')} ج.م
               </td>
-              <td colSpan={4} className="py-2.5 px-1.5 text-slate-500 text-xs text-left pl-4">
+              <td colSpan={4} className="py-2.5 px-1.5 text-[#55789e] text-xs text-left pl-4">
                 مطابق لقيود اليومية
               </td>
-              <td className="py-2.5 px-2 text-center sticky left-0 bg-slate-100 border-r border-slate-300 z-10"></td>
+              <td className="py-2.5 px-2 text-center sticky left-0 bg-[#d8e7f6] border-r border-[#bcd2e8] z-10"></td>
             </tr>
           </tfoot>
         </table>

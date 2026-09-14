@@ -509,29 +509,29 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-slate-950/70 backdrop-blur-xs"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/60 backdrop-blur-xs"
       dir="rtl"
     >
       <div
-        className="bg-white rounded-xl shadow-2xl w-full max-w-xl flex flex-col border border-slate-300 overflow-hidden"
+        className="bg-[#f0f6fc] rounded-xl shadow-2xl w-full max-w-xl flex flex-col border border-[#bcd2e8] overflow-hidden"
         role="dialog"
         aria-modal="true"
       >
         {/* ========================================================================= */}
         {/* شريط الأدوات المدمج (TOOLBAR) - صفين متتاليين تماماً بدون فراغات         */}
         {/* ========================================================================= */}
-        <div id="modal-integrated-toolbar" className="flex flex-col border-b border-slate-300 shrink-0">
+        <div id="modal-integrated-toolbar" className="flex flex-col border-b border-[#bcd2e8] shrink-0">
           {/* 1. الصف العلوي (شريط الأوامر الثابت): [جديد] [حفظ] [طباعة] [حذف] [إغلاق] */}
           <div
             id="toolbar-commands-row"
-            className="bg-slate-800 px-3 py-2 flex items-center justify-start gap-1.5 text-white select-none"
+            className="bg-gradient-to-r from-[#003e73] via-[#005a9e] to-[#0078d4] px-3 py-2 flex items-center justify-start gap-1.5 text-white select-none"
           >
             {/* [جديد] */}
             <button
               type="button"
               id="toolbar-btn-new"
               onClick={handleGoNew}
-              className="px-3.5 py-1 text-xs sm:text-sm font-bold rounded bg-slate-700 hover:bg-slate-600 active:bg-slate-800 text-white transition-colors cursor-pointer shadow-2xs"
+              className="px-3.5 py-1 text-xs sm:text-sm font-bold rounded bg-white/10 hover:bg-white/20 active:bg-white/30 text-white transition-colors cursor-pointer border border-white/20 shadow-2xs"
             >
               جديد
             </button>
@@ -541,7 +541,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
               type="button"
               id="toolbar-btn-save"
               onClick={handleSave}
-              className="px-3.5 py-1 text-xs sm:text-sm font-bold rounded bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white transition-colors cursor-pointer shadow-2xs"
+              className="px-3.5 py-1 text-xs sm:text-sm font-bold rounded bg-white text-[#004e8c] hover:bg-blue-50 active:bg-blue-100 transition-colors cursor-pointer shadow-xs"
             >
               حفظ
             </button>
@@ -551,7 +551,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
               type="button"
               id="toolbar-btn-print"
               onClick={handlePrint}
-              className="px-3.5 py-1 text-xs sm:text-sm font-bold rounded bg-slate-700 hover:bg-slate-600 active:bg-slate-800 text-white transition-colors cursor-pointer shadow-2xs"
+              className="px-3.5 py-1 text-xs sm:text-sm font-bold rounded bg-white/10 hover:bg-white/20 active:bg-white/30 text-white transition-colors cursor-pointer border border-white/20 shadow-2xs"
             >
               طباعة
             </button>
@@ -562,7 +562,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
               id="toolbar-btn-delete"
               onClick={handleDeleteCurrent}
               disabled={isNewMode || !onDelete}
-              className="px-3.5 py-1 text-xs sm:text-sm font-bold rounded bg-rose-700 hover:bg-rose-600 active:bg-rose-800 disabled:opacity-35 disabled:pointer-events-none text-white transition-colors cursor-pointer shadow-2xs"
+              className="px-3.5 py-1 text-xs sm:text-sm font-bold rounded bg-rose-600/80 hover:bg-rose-600 active:bg-rose-700 disabled:opacity-35 disabled:pointer-events-none text-white transition-colors cursor-pointer border border-rose-400/30 shadow-2xs"
             >
               حذف
             </button>
@@ -572,7 +572,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
               type="button"
               id="toolbar-btn-close"
               onClick={onClose}
-              className="px-3.5 py-1 text-xs sm:text-sm font-bold rounded bg-slate-900 hover:bg-slate-700 active:bg-black text-slate-200 hover:text-white transition-colors cursor-pointer shadow-2xs"
+              className="px-3.5 py-1 text-xs sm:text-sm font-bold rounded bg-black/25 hover:bg-black/40 active:bg-black/60 text-white transition-colors cursor-pointer border border-white/10 shadow-2xs"
             >
               إغلاق
             </button>
@@ -581,7 +581,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
           {/* 2. الصف السفلي (شريط التنقل بين الحركات): ملتصق تماماً بالصف العلوي */}
           <div
             id="toolbar-navigation-row"
-            className="bg-slate-100 px-3 py-1.5 flex items-center justify-start gap-1 border-t border-slate-700/40 select-none"
+            className="bg-[#eaf2fb] px-3 py-1.5 flex items-center justify-start gap-1 border-t border-[#bcd2e8] select-none"
           >
             {/* سهم (الحركة الأولى) */}
             <button
@@ -589,7 +589,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
               id="nav-btn-first"
               onClick={handleGoFirst}
               disabled={sortedTransactions.length === 0 || (!isNewMode && currentIndex === 0)}
-              className="p-1 text-slate-700 hover:text-black hover:bg-white active:bg-slate-200 disabled:opacity-25 disabled:hover:bg-transparent rounded border border-transparent hover:border-slate-300 transition-colors cursor-pointer"
+              className="p-1 text-[#0f2d52] hover:text-[#0078d4] hover:bg-white active:bg-[#dce9f6] disabled:opacity-25 disabled:hover:bg-transparent rounded border border-transparent hover:border-[#bcd2e8] transition-colors cursor-pointer"
               title="الحركة الأولى"
             >
               <ChevronsRight className="w-4 h-4" />
@@ -601,7 +601,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
               id="nav-btn-prev"
               onClick={handleGoPrev}
               disabled={sortedTransactions.length === 0 || (!isNewMode && currentIndex === 0)}
-              className="p-1 text-slate-700 hover:text-black hover:bg-white active:bg-slate-200 disabled:opacity-25 disabled:hover:bg-transparent rounded border border-transparent hover:border-slate-300 transition-colors cursor-pointer"
+              className="p-1 text-[#0f2d52] hover:text-[#0078d4] hover:bg-white active:bg-[#dce9f6] disabled:opacity-25 disabled:hover:bg-transparent rounded border border-transparent hover:border-[#bcd2e8] transition-colors cursor-pointer"
               title="السابق"
             >
               <ChevronRight className="w-4 h-4" />
@@ -611,7 +611,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
             <div
               id="current-transaction-display"
               dir="ltr"
-              className="h-7 min-w-[54px] px-2.5 flex items-center justify-center font-mono font-bold text-xs sm:text-sm bg-white border border-slate-300 rounded text-slate-900 shadow-2xs select-none font-mono-numbers"
+              className="h-7 min-w-[54px] px-2.5 flex items-center justify-center font-mono font-bold text-xs sm:text-sm bg-white border border-[#bcd2e8] rounded text-[#0078d4] shadow-2xs select-none font-mono-numbers"
               title="رقم الحركة الحالية"
             >
               {currentDisplayedNumber}
@@ -623,7 +623,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
               id="nav-btn-next"
               onClick={handleGoNext}
               disabled={isNewMode}
-              className="p-1 text-slate-700 hover:text-black hover:bg-white active:bg-slate-200 disabled:opacity-25 disabled:hover:bg-transparent rounded border border-transparent hover:border-slate-300 transition-colors cursor-pointer"
+              className="p-1 text-[#0f2d52] hover:text-[#0078d4] hover:bg-white active:bg-[#dce9f6] disabled:opacity-25 disabled:hover:bg-transparent rounded border border-transparent hover:border-[#bcd2e8] transition-colors cursor-pointer"
               title="التالي"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -635,7 +635,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
               id="nav-btn-last"
               onClick={handleGoLast}
               disabled={sortedTransactions.length === 0 || (!isNewMode && currentIndex === sortedTransactions.length - 1)}
-              className="p-1 text-slate-700 hover:text-black hover:bg-white active:bg-slate-200 disabled:opacity-25 disabled:hover:bg-transparent rounded border border-transparent hover:border-slate-300 transition-colors cursor-pointer"
+              className="p-1 text-[#0f2d52] hover:text-[#0078d4] hover:bg-white active:bg-[#dce9f6] disabled:opacity-25 disabled:hover:bg-transparent rounded border border-transparent hover:border-[#bcd2e8] transition-colors cursor-pointer"
               title="الحركة الأخيرة"
             >
               <ChevronsLeft className="w-4 h-4" />
@@ -646,7 +646,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
         {/* ========================================================================= */}
         {/* استمارة البيانات المدمجة - بدون شريط تمرير عمودي (No Vertical Scrollbar) */}
         {/* ========================================================================= */}
-        <div className="p-3.5 sm:p-4 space-y-2.5 text-xs sm:text-sm overflow-hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        <div className="p-3.5 sm:p-4 space-y-2.5 text-xs sm:text-sm overflow-hidden bg-white [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {/* إشعارات الحفظ أو الأخطاء السريعة */}
           {feedbackMsg && (
             <div
@@ -671,8 +671,8 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
           {/* صف 1: التاريخ ونوع الحركة (بدون تكرار رقم المسلسل لوجوده في شريط التنقل) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             <div>
-              <label className="block font-semibold text-slate-700 text-xs mb-1">
-                التاريخ <span className="text-slate-400 font-normal">(اليوم / الشهر / السنة)</span>
+              <label className="block font-semibold text-[#1e3a5f] text-xs mb-1">
+                التاريخ <span className="text-[#55789e] font-normal">(اليوم / الشهر / السنة)</span>
               </label>
               <DateDMYInput
                 value={formData.date || defaultDate}
@@ -681,11 +681,11 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
             </div>
 
             <div>
-              <label className="block font-semibold text-slate-700 text-xs mb-1">نوع الحركة المالية</label>
+              <label className="block font-semibold text-[#1e3a5f] text-xs mb-1">نوع الحركة المالية</label>
               <select
                 value={formData.type === 'صرف' ? 'دفع' : formData.type}
                 onChange={(e) => handleTypeChange(e.target.value)}
-                className="w-full h-8 px-2.5 bg-white border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none text-slate-800 text-xs sm:text-sm font-bold cursor-pointer"
+                className="w-full h-8 px-2.5 bg-white border border-[#bcd2e8] rounded-md focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] focus:outline-none text-[#0f2d52] text-xs sm:text-sm font-bold cursor-pointer"
               >
                 <option value="قبض">قبض (سند قبض)</option>
                 <option value="دفع">دفع (سند دفع)</option>
@@ -697,17 +697,17 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             <div>
               <div className="flex items-center justify-between mb-1">
-                <label className="block font-semibold text-slate-700 text-xs">
+                <label className="block font-semibold text-[#1e3a5f] text-xs">
                   اسم الحساب <span className="text-rose-500">*</span>
                 </label>
                 <div className="flex items-center gap-1.5">
                   <button
                     type="button"
                     onClick={() => setIsChartOfAccountsOpen(true)}
-                    className="text-[11px] text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded font-bold flex items-center gap-1 cursor-pointer transition-colors shadow-2xs"
+                    className="text-[11px] text-[#0078d4] bg-[#eaf2fb] hover:bg-[#dce9f6] border border-[#bcd2e8] px-2 py-0.5 rounded font-bold flex items-center gap-1 cursor-pointer transition-colors shadow-2xs"
                     title="استعراض واختيار الحساب من دليل الحسابات المالي"
                   >
-                    <BookOpen className="w-3 h-3 text-blue-600" />
+                    <BookOpen className="w-3 h-3 text-[#0078d4]" />
                     <span>دليل الحسابات</span>
                   </button>
                   {onAddNewAccount && (
@@ -748,7 +748,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
                       : prev.description,
                   }));
                 }}
-                className="w-full h-8 px-2.5 bg-white border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none text-slate-900 font-medium text-xs sm:text-sm"
+                className="w-full h-8 px-2.5 bg-white border border-[#bcd2e8] rounded-md focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] focus:outline-none text-[#0f2d52] font-medium text-xs sm:text-sm"
               />
               <datalist id="modal-accounts-list">
                 {accounts.map((acc) => (
@@ -797,7 +797,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
 
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <label className="block font-semibold text-slate-700 text-xs mb-1">
+                <label className="block font-semibold text-[#1e3a5f] text-xs mb-1">
                   المقبوضات (ج.م)
                 </label>
                 <input
@@ -808,12 +808,12 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
                   value={formData.receipt === 0 ? '' : formData.receipt}
                   onChange={(e) => handleReceiptChange(Number(e.target.value))}
                   placeholder="0"
-                  className="w-full h-8 px-2.5 bg-white border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none font-mono-numbers text-slate-800 text-xs sm:text-sm text-right"
+                  className="w-full h-8 px-2.5 bg-white border border-[#bcd2e8] rounded-md focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] focus:outline-none font-mono-numbers text-[#0f2d52] text-xs sm:text-sm text-right"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 text-xs mb-1">
+                <label className="block font-semibold text-[#1e3a5f] text-xs mb-1">
                   المدفوعات (ج.م)
                 </label>
                 <input
@@ -824,7 +824,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
                   value={formData.payment === 0 ? '' : formData.payment}
                   onChange={(e) => handlePaymentChange(Number(e.target.value))}
                   placeholder="0"
-                  className="w-full h-8 px-2.5 bg-white border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none font-mono-numbers text-slate-800 text-xs sm:text-sm text-right"
+                  className="w-full h-8 px-2.5 bg-white border border-[#bcd2e8] rounded-md focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] focus:outline-none font-mono-numbers text-[#0f2d52] text-xs sm:text-sm text-right"
                 />
               </div>
             </div>
@@ -833,20 +833,20 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
           {/* تفقيط المبلغ بالحروف (Tafqeet) */}
           <div
             id="amount-tafqeet-bar"
-            className="px-3 py-1.5 bg-amber-50/85 border border-amber-200/90 rounded-md flex items-center justify-between gap-2 text-xs transition-colors shadow-2xs"
+            className="px-3 py-1.5 bg-[#eaf2fb] border border-[#bcd2e8] rounded-md flex items-center justify-between gap-2 text-xs transition-colors shadow-2xs"
           >
             <div className="flex items-center gap-1.5 overflow-hidden">
-              <FileText className="w-3.5 h-3.5 text-amber-700 shrink-0" />
-              <span className="font-bold text-amber-950 shrink-0">تفقيط المبلغ:</span>
+              <FileText className="w-3.5 h-3.5 text-[#0078d4] shrink-0" />
+              <span className="font-bold text-[#0f2d52] shrink-0">تفقيط المبلغ:</span>
               <span
-                className="font-bold text-blue-950 truncate select-all"
+                className="font-bold text-[#004e8c] truncate select-all"
                 title={activeTafqeet}
               >
                 {activeTafqeet}
               </span>
             </div>
             {activeAmount > 0 && (
-              <span className="text-[11px] font-bold font-mono-numbers text-amber-950 bg-amber-100/90 px-2 py-0.5 rounded border border-amber-300/80 shrink-0">
+              <span className="text-[11px] font-bold font-mono-numbers text-[#004e8c] bg-white px-2 py-0.5 rounded border border-[#bcd2e8] shrink-0">
                 {activeAmount.toLocaleString('en-US')} ج.م
               </span>
             )}
@@ -855,10 +855,10 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
           {/* صف 3: البيان وتفاصيل القيد */}
           <div>
             <div className="flex items-center justify-between mb-1">
-              <label className="flex items-center gap-1 font-semibold text-slate-700 text-xs">
+              <label className="flex items-center gap-1 font-semibold text-[#1e3a5f] text-xs">
                 <span>البيان وتفاصيل القيد</span>
-                <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200">
-                  <Sparkles className="w-2.5 h-2.5 text-blue-600" />
+                <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#eaf2fb] text-[#0078d4] border border-[#bcd2e8]">
+                  <Sparkles className="w-2.5 h-2.5 text-[#0078d4]" />
                   <span>توليد تلقائي</span>
                 </span>
               </label>
@@ -874,7 +874,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
                     }));
                   }
                 }}
-                className="text-[11px] text-slate-500 hover:text-blue-700 font-medium transition-colors cursor-pointer"
+                className="text-[11px] text-[#55789e] hover:text-[#0078d4] font-medium transition-colors cursor-pointer"
               >
                 {isAutoDescription ? 'تعديل يدوي؟' : 'استعادة التلقائي ↺'}
               </button>
@@ -892,13 +892,13 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
                 placeholder="البيان التوضيحي للحركة..."
                 className={`w-full h-8 px-2.5 border rounded-md focus:outline-none text-xs sm:text-sm font-medium transition-colors ${
                   isAutoDescription
-                    ? 'bg-slate-100 text-slate-800 border-slate-300 cursor-default select-all'
-                    : 'bg-white text-slate-900 border-blue-400 focus:ring-2 focus:ring-blue-500/20'
+                    ? 'bg-[#f0f6fc] text-[#1e3a5f] border-[#bcd2e8] cursor-default select-all'
+                    : 'bg-white text-[#0f2d52] border-[#0078d4] focus:ring-2 focus:ring-[#0078d4]/20'
                 }`}
               />
               {isAutoDescription && (
-                <div className="absolute left-2.5 top-2 text-[10px] text-slate-400 flex items-center gap-1 pointer-events-none select-none">
-                  <Lock className="w-3 h-3 text-slate-400" />
+                <div className="absolute left-2.5 top-2 text-[10px] text-[#55789e] flex items-center gap-1 pointer-events-none select-none">
+                  <Lock className="w-3 h-3 text-[#55789e]" />
                   <span>تلقائي</span>
                 </div>
               )}
@@ -908,24 +908,24 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
           {/* صف 4: رصيد الحركة والحسابات (الرئيسي والختامي) */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 items-end">
             <div>
-              <label className="block font-semibold text-slate-700 text-xs mb-1">
+              <label className="block font-semibold text-[#1e3a5f] text-xs mb-1">
                 رصيد الحركة
               </label>
               <div 
-                className="h-8 px-2.5 bg-slate-50 border border-slate-200 rounded-md flex items-center justify-between text-xs font-bold font-mono-numbers text-rose-600"
+                className="h-8 px-2.5 bg-[#f0f6fc] border border-[#bcd2e8] rounded-md flex items-center justify-between text-xs font-bold font-mono-numbers text-rose-600"
                 dir="ltr"
               >
                 <span>{formData.movementBalance !== undefined ? formData.movementBalance.toLocaleString('en-US') : '0'}</span>
-                <span className="text-[10px] text-slate-400 font-normal">ج.م</span>
+                <span className="text-[10px] text-[#55789e] font-normal">ج.م</span>
               </div>
             </div>
 
             <div>
-              <label className="block font-semibold text-slate-700 text-xs mb-1">الحساب الرئيسي</label>
+              <label className="block font-semibold text-[#1e3a5f] text-xs mb-1">الحساب الرئيسي</label>
               <select
                 value={formData.mainAccount}
                 onChange={(e) => setFormData({ ...formData, mainAccount: e.target.value })}
-                className="w-full h-8 px-2 bg-white border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none text-slate-800 text-xs sm:text-sm cursor-pointer"
+                className="w-full h-8 px-2 bg-white border border-[#bcd2e8] rounded-md focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] focus:outline-none text-[#0f2d52] text-xs sm:text-sm cursor-pointer"
               >
                 <option value="العملاء">العملاء</option>
                 <option value="الموردين">الموردين</option>
@@ -936,11 +936,11 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
             </div>
 
             <div>
-              <label className="block font-semibold text-slate-700 text-xs mb-1">الحساب الختامي</label>
+              <label className="block font-semibold text-[#1e3a5f] text-xs mb-1">الحساب الختامي</label>
               <select
                 value={formData.closingAccount}
                 onChange={(e) => setFormData({ ...formData, closingAccount: e.target.value })}
-                className="w-full h-8 px-2 bg-white border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none text-slate-800 text-xs sm:text-sm cursor-pointer"
+                className="w-full h-8 px-2 bg-white border border-[#bcd2e8] rounded-md focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] focus:outline-none text-[#0f2d52] text-xs sm:text-sm cursor-pointer"
               >
                 <option value="ميزانية">ميزانية</option>
                 <option value="أرباح وخسائر">أرباح وخسائر</option>

@@ -272,7 +272,7 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
       >
         <div
           id="statement-sheet-modal"
-          className="bg-white rounded-2xl shadow-2xl w-full max-w-6xl h-[94vh] max-h-[880px] flex flex-col border border-slate-200 overflow-hidden"
+          className="bg-white rounded-xl shadow-2xl w-full max-w-6xl h-[94vh] max-h-[880px] flex flex-col border border-[#bcd2e8] overflow-hidden"
           role="dialog"
           aria-modal="true"
         >
@@ -282,11 +282,11 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
              ========================================= */}
           <div
             id="statement-top-command-bar"
-            className="px-3.5 py-2.5 sm:px-5 sm:py-3 border-b border-slate-200 bg-slate-900 text-white flex items-center justify-between shrink-0"
+            className="px-3.5 py-2.5 sm:px-5 sm:py-3 border-b border-[#004e8c] bg-gradient-to-r from-[#003e73] via-[#005a9e] to-[#0078d4] text-white flex items-center justify-between shrink-0 shadow-xs"
           >
             {/* عنوان النافذة + شارة الحساب المحدد */}
             <div className="flex items-center gap-2.5 overflow-hidden">
-              <div className="p-2 bg-blue-600/30 text-blue-400 rounded-lg border border-blue-500/30 shrink-0">
+              <div className="p-2 bg-white/15 text-white rounded-lg border border-white/20 shrink-0">
                 <FileText className="w-5 h-5" />
               </div>
               <div className="truncate">
@@ -295,15 +295,15 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                     كشف الحساب
                   </h3>
                   {currentAccountMeta?.code && (
-                    <span className="px-2 py-0.5 rounded bg-blue-900/60 text-blue-200 border border-blue-700/50 font-mono text-xs font-bold shrink-0">
+                    <span className="px-2 py-0.5 rounded bg-white/20 text-white border border-white/30 font-mono text-xs font-bold shrink-0">
                       كود: {currentAccountMeta.code}
                     </span>
                   )}
-                  <span className="hidden sm:inline-block px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-xs font-medium shrink-0">
-                    {selectedAccount}
+                  <span className="hidden sm:inline-block px-2 py-0.5 rounded bg-white/15 text-blue-100 text-xs font-semibold shrink-0">
+                    {selectedAccount || 'لم يتم تحديد حساب'}
                   </span>
                 </div>
-                <p className="text-[11px] text-slate-300 truncate">
+                <p className="text-[11px] text-blue-100 truncate">
                   مطابقة حركات الحساب المالي من واقع دليل الحسابات وقيود اليومية
                 </p>
               </div>
@@ -316,7 +316,7 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                 type="button"
                 id="btn-statement-view-report"
                 onClick={handleRefreshReport}
-                className="h-8 sm:h-8.5 px-3 sm:px-3.5 text-xs sm:text-sm font-bold bg-blue-600 hover:bg-blue-500 active:scale-95 text-white rounded-lg flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
+                className="h-8 sm:h-8.5 px-3 sm:px-3.5 text-xs sm:text-sm font-bold bg-[#0078d4] hover:bg-[#0067b8] border border-white/30 active:scale-95 text-white rounded-lg flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
                 title="تحديث وإعادة عرض التقرير"
               >
                 <RotateCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin' : ''}`} />
@@ -328,7 +328,7 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                 type="button"
                 id="btn-statement-print-report"
                 onClick={handlePrintReport}
-                className="h-8 sm:h-8.5 px-3 sm:px-3.5 text-xs sm:text-sm font-bold bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white rounded-lg flex items-center gap-1.5 transition-all cursor-pointer shadow-xs border border-emerald-500/50"
+                className="h-8 sm:h-8.5 px-3 sm:px-3.5 text-xs sm:text-sm font-bold bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white rounded-lg flex items-center gap-1.5 transition-all cursor-pointer shadow-xs border border-emerald-400/40"
                 title="طباعة كشف الحساب الحالي"
               >
                 <Printer className="w-3.5 h-3.5" />
@@ -343,7 +343,7 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                 type="button"
                 id="btn-statement-standalone-window"
                 onClick={handleOpenStandalone}
-                className="h-8 sm:h-8.5 px-2.5 sm:px-3 text-xs sm:text-sm font-semibold bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 hover:text-white rounded-lg flex items-center gap-1.5 transition-all cursor-pointer border border-slate-700"
+                className="h-8 sm:h-8.5 px-2.5 sm:px-3 text-xs sm:text-sm font-semibold bg-white/15 hover:bg-white/25 active:scale-95 text-white rounded-lg flex items-center gap-1.5 transition-all cursor-pointer border border-white/20"
                 title="فتح في نافذة مستقلة للطباعة المباشرة أو الحفظ كـ PDF"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -355,7 +355,7 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                 type="button"
                 id="btn-statement-close"
                 onClick={onClose}
-                className="h-8 sm:h-8.5 px-2.5 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer flex items-center gap-1 border border-slate-700/60"
+                className="h-8 sm:h-8.5 px-2.5 text-xs sm:text-sm font-semibold text-blue-100 hover:text-white hover:bg-white/15 rounded-lg transition-colors cursor-pointer flex items-center gap-1 border border-white/20"
                 title="إغلاق النافذة"
               >
                 <X className="w-4 h-4" />
@@ -371,7 +371,7 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
              ========================================= */}
           <div
             id="statement-criteria-area"
-            className="px-3.5 py-2.5 sm:px-5 sm:py-2.5 bg-slate-50 border-b border-slate-200 space-y-2 shrink-0"
+            className="px-3.5 py-2.5 sm:px-5 sm:py-2.5 bg-gradient-to-r from-[#f0f6fc] via-[#f7fafe] to-[#f0f6fc] border-b border-[#bcd2e8] space-y-2 shrink-0"
           >
             {/* السطر الأول: حقل الحساب القابل للكتابة + من تاريخ + إلى تاريخ */}
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-2.5 items-center">
@@ -380,14 +380,14 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                 <div className="flex items-center justify-between mb-1">
                   <label
                     htmlFor="statement-account-search-input"
-                    className="text-xs font-bold text-slate-800 flex items-center gap-1"
+                    className="text-xs font-bold text-[#0f2d52] flex items-center gap-1"
                   >
-                    <User className="w-3.5 h-3.5 text-blue-600" />
+                    <User className="w-3.5 h-3.5 text-[#0078d4]" />
                     <span>حساب الأستاذ (من دليل الحسابات):</span>
                   </label>
                   {currentAccountMeta && (
-                    <span className="text-[11px] text-slate-500 font-medium">
-                      تصنيف: <strong className="text-slate-700">{currentAccountMeta.type}</strong>
+                    <span className="text-[11px] text-[#55789e] font-medium">
+                      تصنيف: <strong className="text-[#1e3a5f]">{currentAccountMeta.type}</strong>
                       {currentAccountMeta.code && ` [${currentAccountMeta.code}]`}
                     </span>
                   )}
@@ -422,7 +422,7 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                     className={`h-9 px-2.5 sm:px-3 text-xs font-bold rounded-lg border flex items-center gap-1.5 transition-all shrink-0 shadow-2xs ${
                       selectedAccount
                         ? 'bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-200 cursor-pointer active:scale-95'
-                        : 'bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed opacity-60'
+                        : 'bg-[#f0f6fc] text-[#8fa8c4] border-[#bcd2e8] cursor-not-allowed opacity-60'
                     }`}
                     title="تفريغ محتوى حقل الحساب لتسهيل كتابة حساب مختلف"
                   >
@@ -437,9 +437,9 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
               <div className="sm:col-span-3">
                 <label
                   htmlFor="statement-from-date"
-                  className="block text-xs font-bold text-slate-700 mb-1 flex items-center gap-1"
+                  className="block text-xs font-bold text-[#1e3a5f] mb-1 flex items-center gap-1"
                 >
-                  <Calendar className="w-3.5 h-3.5 text-slate-500" />
+                  <Calendar className="w-3.5 h-3.5 text-[#55789e]" />
                   <span>من تاريخ:</span>
                 </label>
                 <input
@@ -447,7 +447,7 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                   id="statement-from-date"
                   value={fromDate}
                   onChange={(e) => setFromDate(e.target.value)}
-                  className="w-full h-9 px-2.5 bg-white border border-slate-300 rounded-lg text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-mono-numbers"
+                  className="w-full h-9 px-2.5 bg-white border border-[#bcd2e8] rounded-lg text-xs sm:text-sm text-[#0f2d52] focus:outline-none focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] font-mono-numbers"
                 />
               </div>
 
@@ -455,9 +455,9 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
               <div className="sm:col-span-3">
                 <label
                   htmlFor="statement-to-date"
-                  className="block text-xs font-bold text-slate-700 mb-1 flex items-center gap-1"
+                  className="block text-xs font-bold text-[#1e3a5f] mb-1 flex items-center gap-1"
                 >
-                  <Calendar className="w-3.5 h-3.5 text-slate-500" />
+                  <Calendar className="w-3.5 h-3.5 text-[#55789e]" />
                   <span>إلى تاريخ:</span>
                 </label>
                 <input
@@ -465,24 +465,24 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                   id="statement-to-date"
                   value={toDate}
                   onChange={(e) => setToDate(e.target.value)}
-                  className="w-full h-9 px-2.5 bg-white border border-slate-300 rounded-lg text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-mono-numbers"
+                  className="w-full h-9 px-2.5 bg-white border border-[#bcd2e8] rounded-lg text-xs sm:text-sm text-[#0f2d52] focus:outline-none focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] font-mono-numbers"
                 />
               </div>
             </div>
 
             {/* السطر الثاني: شيك بوكس الرصيد الافتتاحي + Radio Buttons نوع الحركات */}
-            <div className="pt-1.5 border-t border-slate-200/60 flex flex-wrap items-center justify-between gap-2">
+            <div className="pt-1.5 border-t border-[#bcd2e8]/60 flex flex-wrap items-center justify-between gap-2">
               {/* خيار شيك بوكس: إظهار الرصيد الافتتاحي */}
               <label
                 htmlFor="statement-show-opening-balance"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 cursor-pointer select-none bg-white px-2.5 py-1 rounded-md border border-slate-200 hover:bg-slate-100 transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1e3a5f] cursor-pointer select-none bg-white px-2.5 py-1 rounded-md border border-[#bcd2e8] hover:bg-[#f0f6fc] transition-colors"
               >
                 <input
                   type="checkbox"
                   id="statement-show-opening-balance"
                   checked={showOpeningBalance}
                   onChange={(e) => setShowOpeningBalance(e.target.checked)}
-                  className="w-3.5 h-3.5 rounded text-blue-600 focus:ring-blue-500 border-slate-300 cursor-pointer accent-blue-600"
+                  className="w-3.5 h-3.5 rounded text-[#0078d4] focus:ring-[#0078d4] border-[#bcd2e8] cursor-pointer accent-[#0078d4]"
                 />
                 <span>إظهار الرصيد الافتتاحي</span>
               </label>
@@ -491,8 +491,8 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                   🔘 إظهار جميع الحركات
                   🔘 إظهار الحركات المدينة فقط
                   🔘 إظهار الحركات الدائنة فقط */}
-              <div className="flex flex-wrap items-center gap-2 sm:gap-3 bg-white px-2.5 py-1 rounded-md border border-slate-200 text-xs font-semibold text-slate-700">
-                <span className="text-slate-400 font-bold text-[11px]">نوع الحركة:</span>
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 bg-white px-2.5 py-1 rounded-md border border-[#bcd2e8] text-xs font-semibold text-[#1e3a5f]">
+                <span className="text-[#55789e] font-bold text-[11px]">نوع الحركة:</span>
 
                 {/* 🔘 إظهار جميع الحركات */}
                 <label
@@ -506,9 +506,9 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                     value="all"
                     checked={movementFilter === 'all'}
                     onChange={() => setMovementFilter('all')}
-                    className="w-3.5 h-3.5 text-blue-600 focus:ring-blue-500 border-slate-300 cursor-pointer accent-blue-600"
+                    className="w-3.5 h-3.5 text-[#0078d4] focus:ring-[#0078d4] border-[#bcd2e8] cursor-pointer accent-[#0078d4]"
                   />
-                  <span className={movementFilter === 'all' ? 'text-blue-700 font-bold' : 'text-slate-700'}>
+                  <span className={movementFilter === 'all' ? 'text-[#0078d4] font-bold' : 'text-[#1e3a5f]'}>
                     إظهار جميع الحركات
                   </span>
                 </label>
@@ -525,9 +525,9 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                     value="debit"
                     checked={movementFilter === 'debit'}
                     onChange={() => setMovementFilter('debit')}
-                    className="w-3.5 h-3.5 text-blue-600 focus:ring-blue-500 border-slate-300 cursor-pointer accent-blue-600"
+                    className="w-3.5 h-3.5 text-[#0078d4] focus:ring-[#0078d4] border-[#bcd2e8] cursor-pointer accent-[#0078d4]"
                   />
-                  <span className={movementFilter === 'debit' ? 'text-blue-700 font-bold' : 'text-slate-700'}>
+                  <span className={movementFilter === 'debit' ? 'text-[#0078d4] font-bold' : 'text-[#1e3a5f]'}>
                     إظهار الحركات المدينة فقط
                   </span>
                 </label>
@@ -544,9 +544,9 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                     value="credit"
                     checked={movementFilter === 'credit'}
                     onChange={() => setMovementFilter('credit')}
-                    className="w-3.5 h-3.5 text-blue-600 focus:ring-blue-500 border-slate-300 cursor-pointer accent-blue-600"
+                    className="w-3.5 h-3.5 text-[#0078d4] focus:ring-[#0078d4] border-[#bcd2e8] cursor-pointer accent-[#0078d4]"
                   />
-                  <span className={movementFilter === 'credit' ? 'text-blue-700 font-bold' : 'text-slate-700'}>
+                  <span className={movementFilter === 'credit' ? 'text-[#0078d4] font-bold' : 'text-[#1e3a5f]'}>
                     إظهار الحركات الدائنة فقط
                   </span>
                 </label>
@@ -558,38 +558,38 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
               3. جدول الحركات للحساب (غالب المساحة مخصصة له!)
               [مسلسل , التاريخ, مدين, دائن , البيان, رصيد الحركة, نوع الحركة]
              ========================================= */}
-          <div className="flex-1 overflow-y-auto overflow-x-auto p-2.5 sm:p-4 bg-slate-50/50">
-            <div className="border border-slate-200 rounded-xl overflow-hidden shadow-2xs bg-white h-full flex flex-col">
+          <div className="flex-1 overflow-y-auto overflow-x-auto p-2.5 sm:p-4 bg-[#f4f8fc]">
+            <div className="border border-[#bcd2e8] rounded-xl overflow-hidden shadow-2xs bg-white h-full flex flex-col">
               <div className="overflow-y-auto flex-1">
                 <table
                   id="statement-movements-table"
                   className="w-full text-right text-xs sm:text-sm border-collapse"
                 >
                   {/* شريط رأس الجدول الثابت (Sticky Header) */}
-                  <thead className="sticky top-0 z-10 bg-slate-100 shadow-2xs">
-                    <tr className="text-slate-700 border-b border-slate-300 font-bold">
+                  <thead className="sticky top-0 z-10 bg-gradient-to-b from-[#eaf2fb] to-[#d6e5f5] shadow-2xs">
+                    <tr className="text-[#0f2d52] border-b border-[#bcd2e8] font-bold">
                       {/* 1. مسلسل */}
-                      <th className="py-2.5 px-3 border-l border-slate-200 text-center w-16">
+                      <th className="py-2.5 px-3 border-l border-[#bcd2e8] text-center w-16">
                         مسلسل
                       </th>
                       {/* 2. التاريخ */}
-                      <th className="py-2.5 px-3.5 border-l border-slate-200 text-center w-28">
+                      <th className="py-2.5 px-3.5 border-l border-[#bcd2e8] text-center w-28">
                         التاريخ
                       </th>
                       {/* 3. مدين */}
-                      <th className="py-2.5 px-3 border-l border-slate-200 text-left w-28">
+                      <th className="py-2.5 px-3 border-l border-[#bcd2e8] text-left w-28">
                         مدين
                       </th>
                       {/* 4. دائن */}
-                      <th className="py-2.5 px-3 border-l border-slate-200 text-left w-28">
+                      <th className="py-2.5 px-3 border-l border-[#bcd2e8] text-left w-28">
                         دائن
                       </th>
                       {/* 5. البيان */}
-                      <th className="py-2.5 px-3.5 border-l border-slate-200">
+                      <th className="py-2.5 px-3.5 border-l border-[#bcd2e8]">
                         البيان
                       </th>
                       {/* 6. رصيد الحركة */}
-                      <th className="py-2.5 px-3 border-l border-slate-200 text-left w-32">
+                      <th className="py-2.5 px-3 border-l border-[#bcd2e8] text-left w-32">
                         رصيد الحركة
                       </th>
                       {/* 7. نوع الحركة */}
@@ -599,26 +599,26 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                     </tr>
                   </thead>
 
-                  <tbody className="divide-y divide-slate-200">
+                  <tbody className="divide-y divide-[#e2edf8]">
                     {!selectedAccount ? (
                       <tr>
                         <td
                           colSpan={7}
-                          className="py-14 text-center text-slate-500 font-medium"
+                          className="py-14 text-center text-[#55789e] font-medium"
                         >
-                          <div className="max-w-md mx-auto flex flex-col items-center justify-center p-6 bg-slate-50 border border-dashed border-slate-300 rounded-2xl">
-                            <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mb-3">
+                          <div className="max-w-md mx-auto flex flex-col items-center justify-center p-6 bg-[#f7fafe] border border-dashed border-[#bcd2e8] rounded-2xl">
+                            <div className="w-12 h-12 bg-blue-100 text-[#0078d4] rounded-full flex items-center justify-center mb-3">
                               <User className="w-6 h-6" />
                             </div>
-                            <h4 className="text-base font-bold text-slate-800 mb-1">
+                            <h4 className="text-base font-bold text-[#0f2d52] mb-1">
                               حقل الحساب فارغ ومستعد للإدخال
                             </h4>
-                            <p className="text-xs text-slate-500 text-center leading-relaxed mb-4">
+                            <p className="text-xs text-[#55789e] text-center leading-relaxed mb-4">
                               اكتب اسم الحساب أو الكود في شريط المعايير أعلاه، أو انقر لاختيار الحساب من القائمة المنسدلة لعرض كشف الحساب والحركات فورياً.
                             </p>
                             {accounts.length > 0 && (
                               <div className="w-full">
-                                <span className="text-[11px] font-bold text-slate-400 block mb-2 text-right">
+                                <span className="text-[11px] font-bold text-[#55789e] block mb-2 text-right">
                                   أو اختر مباشرة من دليل الحسابات:
                                 </span>
                                 <div className="flex flex-wrap gap-1.5 justify-center">
@@ -627,7 +627,7 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                                       key={acc.id}
                                       type="button"
                                       onClick={() => setSelectedAccount(acc.name)}
-                                      className="px-2.5 py-1 text-xs font-semibold bg-white hover:bg-blue-50 text-slate-700 hover:text-blue-700 border border-slate-200 hover:border-blue-300 rounded-lg transition-colors cursor-pointer shadow-2xs"
+                                      className="px-2.5 py-1 text-xs font-semibold bg-white hover:bg-[#eaf2fb] text-[#1e3a5f] hover:text-[#0078d4] border border-[#bcd2e8] hover:border-[#0078d4] rounded-lg transition-colors cursor-pointer shadow-2xs"
                                     >
                                       {acc.name}
                                     </button>
@@ -642,50 +642,50 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                       <tr>
                         <td
                           colSpan={7}
-                          className="py-16 text-center text-slate-400 font-medium"
+                          className="py-16 text-center text-[#8fa8c4] font-medium"
                         >
                           <p className="text-sm">لا توجد حركات مسجلة للحساب [{selectedAccount}] خلال الفترة المحددة</p>
-                          <p className="text-xs text-slate-400 mt-1">تأكد من نطاق التواريخ أو اختيار حساب آخر من دليل الحسابات</p>
+                          <p className="text-xs text-[#8fa8c4] mt-1">تأكد من نطاق التواريخ أو اختيار حساب آخر من دليل الحسابات</p>
                         </td>
                       </tr>
                     ) : (
                       statementRows.map((row) => (
                         <tr
                           key={`stmt-row-${row.serial}-${row.date}`}
-                          className={`hover:bg-blue-50/40 transition-colors ${
-                            row.isOpening ? 'bg-amber-50/50 font-semibold' : ''
+                          className={`hover:bg-[#f1f6fc] transition-colors ${
+                            row.isOpening ? 'bg-amber-50/60 font-semibold' : ''
                           }`}
                         >
                           {/* مسلسل */}
-                          <td className="py-2 px-3 border-l border-slate-200 text-center font-mono-numbers text-slate-600">
+                          <td className="py-2 px-3 border-l border-[#bcd2e8] text-center font-mono-numbers text-[#55789e]">
                             {row.serial}
                           </td>
 
                           {/* التاريخ */}
-                          <td className="py-2 px-3.5 border-l border-slate-200 text-center font-mono font-mono-numbers text-slate-700">
+                          <td className="py-2 px-3.5 border-l border-[#bcd2e8] text-center font-mono font-mono-numbers text-[#1e3a5f]">
                             {formatDateDMY(row.date)}
                           </td>
 
                           {/* مدين */}
-                          <td className="py-2 px-3 border-l border-slate-200 text-left font-mono font-mono-numbers text-slate-900 font-bold">
+                          <td className="py-2 px-3 border-l border-[#bcd2e8] text-left font-mono font-mono-numbers text-[#0f2d52] font-bold">
                             {row.debit > 0 ? (
                               <span>{row.debit.toLocaleString('en-US')}</span>
                             ) : (
-                              <span className="text-slate-300">-</span>
+                              <span className="text-[#bcd2e8]">-</span>
                             )}
                           </td>
 
                           {/* دائن */}
-                          <td className="py-2 px-3 border-l border-slate-200 text-left font-mono font-mono-numbers text-emerald-700 font-bold">
+                          <td className="py-2 px-3 border-l border-[#bcd2e8] text-left font-mono font-mono-numbers text-emerald-700 font-bold">
                             {row.credit > 0 ? (
                               <span>{row.credit.toLocaleString('en-US')}</span>
                             ) : (
-                              <span className="text-slate-300">-</span>
+                              <span className="text-[#bcd2e8]">-</span>
                             )}
                           </td>
 
                           {/* البيان */}
-                          <td className="py-2 px-3.5 border-l border-slate-200 text-slate-800">
+                          <td className="py-2 px-3.5 border-l border-[#bcd2e8] text-[#0f2d52]">
                             <div className="flex items-center gap-1.5">
                               {row.isOpening && (
                                 <span className="px-1.5 py-0.2 rounded text-[10px] bg-amber-200/80 text-amber-900 font-bold shrink-0">
@@ -697,14 +697,14 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                           </td>
 
                           {/* رصيد الحركة */}
-                          <td className="py-2 px-3 border-l border-slate-200 text-left font-mono font-bold font-mono-numbers">
+                          <td className="py-2 px-3 border-l border-[#bcd2e8] text-left font-mono font-bold font-mono-numbers">
                             <span
                               className={
                                 row.runningBalance > 0
-                                  ? 'text-slate-900'
+                                  ? 'text-[#0f2d52]'
                                   : row.runningBalance < 0
                                   ? 'text-rose-700'
-                                  : 'text-slate-600'
+                                  : 'text-[#55789e]'
                               }
                             >
                               {row.runningBalance.toLocaleString('en-US')}
@@ -716,10 +716,10 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
                             <span
                               className={`inline-block px-2 py-0.5 rounded text-[11px] font-bold ${
                                 row.type === 'قبض'
-                                  ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+                                  ? 'bg-emerald-50 text-emerald-800 border border-emerald-300'
                                   : row.type === 'دفع'
-                                  ? 'bg-blue-100 text-blue-800 border border-blue-200'
-                                  : 'bg-amber-100 text-amber-900 border border-amber-200'
+                                  ? 'bg-blue-50 text-[#004e8c] border border-blue-200'
+                                  : 'bg-amber-50 text-amber-900 border border-amber-300'
                               }`}
                             >
                               {row.type}
@@ -740,25 +740,25 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
              ========================================= */}
           <div
             id="statement-footer-totals"
-            className="px-3.5 py-2.5 sm:px-5 sm:py-2.5 bg-slate-100 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2.5 shrink-0"
+            className="px-3.5 py-2.5 sm:px-5 sm:py-2.5 bg-gradient-to-r from-[#f0f6fc] to-[#e8f1f9] border-t border-[#bcd2e8] flex flex-wrap items-center justify-between gap-2.5 shrink-0"
           >
             {/* إجمالي عدد القيود المعروضة */}
-            <div className="text-xs text-slate-500 font-mono-numbers">
-              الحركات المطابقة: <strong className="text-slate-900 font-bold">{statementRows.length}</strong> حركة
+            <div className="text-xs text-[#55789e] font-mono-numbers">
+              الحركات المطابقة: <strong className="text-[#0f2d52] font-bold">{statementRows.length}</strong> حركة
             </div>
 
             {/* بوكس الإجماليات الثلاثة: مجموع مدين | مجموع دائن | رصيد الحساب */}
             <div className="flex flex-wrap items-center gap-2 sm:gap-4">
               {/* 1. مجموع مدين */}
-              <div className="flex items-center gap-1.5 bg-white px-3 py-1 rounded-lg border border-slate-300 shadow-2xs">
-                <span className="text-xs font-bold text-slate-600">مجموع مدين:</span>
-                <strong className="text-xs sm:text-sm font-mono font-mono-numbers text-slate-900 font-bold">
+              <div className="flex items-center gap-1.5 bg-white px-3 py-1 rounded-lg border border-[#bcd2e8] shadow-2xs">
+                <span className="text-xs font-bold text-[#55789e]">مجموع مدين:</span>
+                <strong className="text-xs sm:text-sm font-mono font-mono-numbers text-[#0f2d52] font-bold">
                   {formatCurrency(totalDebit)}
                 </strong>
               </div>
 
               {/* 2. مجموع دائن */}
-              <div className="flex items-center gap-1.5 bg-white px-3 py-1 rounded-lg border border-slate-300 shadow-2xs">
+              <div className="flex items-center gap-1.5 bg-white px-3 py-1 rounded-lg border border-[#bcd2e8] shadow-2xs">
                 <span className="text-xs font-bold text-emerald-800">مجموع دائن:</span>
                 <strong className="text-xs sm:text-sm font-mono font-mono-numbers text-emerald-700 font-bold">
                   {formatCurrency(totalCredit)}
@@ -766,8 +766,8 @@ export const StatementSheetModal: React.FC<StatementSheetModalProps> = ({
               </div>
 
               {/* 3. رصيد الحساب */}
-              <div className="flex items-center gap-2 bg-slate-900 text-white px-3 py-1 rounded-lg shadow-2xs border border-slate-800">
-                <span className="text-xs font-bold text-slate-300">رصيد الحساب:</span>
+              <div className="flex items-center gap-2 bg-gradient-to-r from-[#003e73] to-[#0078d4] text-white px-3 py-1 rounded-lg shadow-2xs border border-[#004e8c]">
+                <span className="text-xs font-bold text-blue-100">رصيد الحساب:</span>
                 <strong className="text-xs sm:text-sm font-mono font-mono-numbers text-amber-300 font-bold">
                   {formatCurrency(Math.abs(accountBalance))}
                 </strong>

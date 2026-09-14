@@ -58,16 +58,16 @@ export const PrintPreviewModal: React.FC<PrintPreviewModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-slate-950/70 backdrop-blur-xs">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/60 backdrop-blur-xs">
       <div
-        className="bg-white rounded-2xl shadow-2xl w-full max-w-5xl max-h-[95vh] flex flex-col border border-slate-300 overflow-hidden"
+        className="bg-[#f0f6fc] rounded-xl shadow-2xl w-full max-w-5xl max-h-[95vh] flex flex-col border border-[#bcd2e8] overflow-hidden"
         role="dialog"
         aria-modal="true"
       >
         {/* Top Control Header */}
-        <div className="p-3.5 sm:p-4 bg-slate-900 text-white flex flex-wrap items-center justify-between gap-3 border-b border-slate-800">
+        <div className="p-3.5 sm:p-4 bg-gradient-to-r from-[#003e73] via-[#005a9e] to-[#0078d4] text-white flex flex-wrap items-center justify-between gap-3 border-b border-[#004e8c]">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 bg-blue-600 rounded-xl text-white">
+            <div className="p-2 bg-white/20 rounded-xl text-white shadow-xs">
               <Printer className="w-5 h-5" />
             </div>
             <div>
@@ -75,11 +75,11 @@ export const PrintPreviewModal: React.FC<PrintPreviewModalProps> = ({
                 <h3 className="text-sm sm:text-base font-bold text-white">
                   معاينة طباعة التقرير المالي الرسمي
                 </h3>
-                <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded font-mono-numbers font-bold">
+                <span className="text-[10px] bg-emerald-500/30 text-white border border-emerald-400/40 px-2 py-0.5 rounded font-mono-numbers font-bold">
                   A4 Landscape
                 </span>
               </div>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-blue-100 mt-0.5">
                 {REPORT_META.systemName} - مجهز للطباعة المباشرة وحفظ ملفات PDF
               </p>
             </div>
@@ -89,7 +89,7 @@ export const PrintPreviewModal: React.FC<PrintPreviewModalProps> = ({
             {/* Primary Print Button */}
             <button
               onClick={handlePrintNow}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm active:scale-98"
+              className="px-4 py-2 bg-white/20 hover:bg-white/30 text-white border border-white/30 rounded-lg text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs active:scale-98"
             >
               <Printer className="w-4 h-4" />
               <span>طباعة المستند الآن</span>
@@ -98,17 +98,17 @@ export const PrintPreviewModal: React.FC<PrintPreviewModalProps> = ({
             {/* Standalone Window Print */}
             <button
               onClick={handleOpenStandalonePrint}
-              className="hidden sm:flex px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg text-xs font-semibold items-center gap-1.5 transition-colors cursor-pointer"
+              className="hidden sm:flex px-3 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-lg text-xs font-semibold items-center gap-1.5 transition-colors cursor-pointer"
               title="فتح في نافذة مستقلة للطباعة في حال قيود التصفح"
             >
-              <ExternalLink className="w-3.5 h-3.5 text-blue-400" />
+              <ExternalLink className="w-3.5 h-3.5 text-blue-200" />
               <span>نافذة طباعة مستقلة</span>
             </button>
 
             {/* Close */}
             <button
               onClick={onClose}
-              className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
+              className="p-2 text-blue-100 hover:text-white hover:bg-white/20 rounded-lg transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -124,7 +124,7 @@ export const PrintPreviewModal: React.FC<PrintPreviewModalProps> = ({
         )}
 
         {/* Printable Document A4 Canvas Preview */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-slate-100/80 flex justify-center">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-[#edf3f8] flex justify-center">
           <div
             id="printable-official-document"
             className="w-full max-w-4xl bg-white shadow-md border border-slate-300 rounded-lg p-6 sm:p-8 text-slate-900 select-text"
@@ -279,14 +279,14 @@ export const PrintPreviewModal: React.FC<PrintPreviewModalProps> = ({
         </div>
 
         {/* Modal Bottom Bar */}
-        <div className="p-3 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs text-slate-600">
-          <div className="flex items-center gap-1.5">
-            <FileSpreadsheet className="w-4 h-4 text-slate-400" />
+        <div className="p-3 bg-[#f0f6fc] border-t border-[#bcd2e8] flex items-center justify-between text-xs text-[#1e3a5f]">
+          <div className="flex items-center gap-1.5 text-[#55789e]">
+            <FileSpreadsheet className="w-4 h-4 text-[#0078d4]" />
             <span>جاهز للإرسال للطباعة أو الحفظ كملف PDF</span>
           </div>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-lg font-semibold transition-colors cursor-pointer"
+            className="px-4 py-1.5 bg-white hover:bg-[#eaf2fb] border border-[#bcd2e8] text-[#0f2d52] font-bold rounded-lg transition-colors cursor-pointer shadow-2xs"
           >
             إغلاق المعاينة
           </button>

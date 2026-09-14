@@ -154,3 +154,19 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Windows Accent & Ice Blue Desktop Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #edf3f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #a8c7e6;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0078d4;
+}

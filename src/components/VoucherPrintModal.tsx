@@ -119,15 +119,15 @@ export const VoucherPrintModal: React.FC<VoucherPrintModalProps> = ({
   return (
     <div 
       id="voucher-modal-overlay"
-      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-slate-950/75 backdrop-blur-xs overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/60 backdrop-blur-xs overflow-y-auto"
       role="dialog"
       aria-modal="true"
     >
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl my-auto border border-slate-300 flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+      <div className="bg-[#f0f6fc] rounded-xl shadow-2xl w-full max-w-3xl my-auto border border-[#bcd2e8] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150">
         {/* Modal Top Control Header */}
-        <div className="p-3 sm:p-4 bg-slate-900 text-white flex items-center justify-between gap-3 border-b border-slate-800 no-print">
+        <div className="p-3 sm:p-4 bg-gradient-to-r from-[#003e73] via-[#005a9e] to-[#0078d4] text-white flex items-center justify-between gap-3 border-b border-[#004e8c] no-print">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 bg-blue-600 rounded-lg text-white">
+            <div className="p-2 bg-white/20 rounded-lg text-white shadow-xs">
               <Printer className="w-5 h-5" />
             </div>
             <div>
@@ -135,11 +135,11 @@ export const VoucherPrintModal: React.FC<VoucherPrintModalProps> = ({
                 <h3 className="text-sm sm:text-base font-bold text-white">
                   معاينة وطباعة السند المالي
                 </h3>
-                <span className="text-[10px] bg-blue-500/20 text-blue-300 border border-blue-500/30 px-2 py-0.5 rounded font-mono-numbers font-bold">
+                <span className="text-[10px] bg-white/20 text-white border border-white/30 px-2 py-0.5 rounded font-mono-numbers font-bold">
                   {voucherCode}
                 </span>
               </div>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-blue-100">
                 سند محاسبي معتمد بنظام {REPORT_META.systemName}
               </p>
             </div>
@@ -150,10 +150,10 @@ export const VoucherPrintModal: React.FC<VoucherPrintModalProps> = ({
             <button
               type="button"
               onClick={handleCopySummary}
-              className="p-1.5 sm:px-3 sm:py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer border border-slate-700"
+              className="p-1.5 sm:px-3 sm:py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer border border-white/20"
               title="نسخ ملخص السند"
             >
-              {copied ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+              {copied ? <CheckCircle2 className="w-4 h-4 text-emerald-300" /> : <Copy className="w-4 h-4" />}
               <span className="hidden sm:inline">{copied ? 'تم النسخ' : 'نسخ'}</span>
             </button>
 
@@ -161,10 +161,10 @@ export const VoucherPrintModal: React.FC<VoucherPrintModalProps> = ({
             <button
               type="button"
               onClick={handleOpenInNewTab}
-              className="p-1.5 sm:px-3 sm:py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer border border-slate-700"
+              className="p-1.5 sm:px-3 sm:py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer border border-white/20"
               title="فتح السند بنافذة جديدة للطباعة أو التصدير PDF"
             >
-              <ExternalLink className="w-4 h-4 text-blue-400" />
+              <ExternalLink className="w-4 h-4 text-blue-200" />
               <span className="hidden sm:inline">نافذة جديدة</span>
             </button>
 
@@ -173,7 +173,7 @@ export const VoucherPrintModal: React.FC<VoucherPrintModalProps> = ({
               type="button"
               id="btn-print-voucher-now"
               onClick={handlePrint}
-              className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white rounded-lg text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
+              className="px-3.5 py-1.5 bg-white/20 hover:bg-white/30 active:bg-white/40 text-white rounded-lg text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors cursor-pointer border border-white/30 shadow-xs"
             >
               <Printer className="w-4 h-4" />
               <span>{printed ? 'جاري الطباعة...' : 'طباعة السند الآن'}</span>
@@ -183,7 +183,7 @@ export const VoucherPrintModal: React.FC<VoucherPrintModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
+              className="p-1.5 text-blue-100 hover:text-white hover:bg-white/20 rounded-lg transition-colors cursor-pointer"
               title="إغلاق المعاينة"
             >
               <X className="w-5 h-5" />
@@ -192,7 +192,7 @@ export const VoucherPrintModal: React.FC<VoucherPrintModalProps> = ({
         </div>
 
         {/* The Printable Voucher Body */}
-        <div className="p-4 sm:p-8 bg-slate-100/70 overflow-y-auto max-h-[75vh]">
+        <div className="p-4 sm:p-8 bg-[#edf3f8] overflow-y-auto max-h-[75vh]">
           <div 
             id="printable-voucher-area"
             className="bg-white rounded-xl shadow-sm border border-slate-300 p-6 sm:p-8 max-w-2xl mx-auto text-slate-900 font-sans"
@@ -357,22 +357,22 @@ export const VoucherPrintModal: React.FC<VoucherPrintModalProps> = ({
         </div>
 
         {/* Modal Bottom Footer */}
-        <div className="p-3 bg-white border-t border-slate-200 flex items-center justify-between no-print text-xs">
-          <span className="text-slate-500">
-            يمكنك حفظ السند كملف <strong className="text-slate-700 font-semibold">PDF</strong> عبر نافذة الطباعة
+        <div className="p-3 bg-[#f0f6fc] border-t border-[#bcd2e8] flex items-center justify-between no-print text-xs">
+          <span className="text-[#55789e]">
+            يمكنك حفظ السند كملف <strong className="text-[#0f2d52] font-semibold">PDF</strong> عبر نافذة الطباعة
           </span>
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 font-semibold text-slate-700 cursor-pointer"
+              className="px-4 py-1.5 rounded-lg border border-[#bcd2e8] bg-white hover:bg-[#eaf2fb] font-bold text-[#0f2d52] cursor-pointer shadow-2xs"
             >
               إغلاق
             </button>
             <button
               type="button"
               onClick={handlePrint}
-              className="px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold flex items-center gap-1.5 cursor-pointer shadow-2xs"
+              className="px-4 py-1.5 rounded-lg bg-[#0078d4] hover:bg-[#0067b8] active:bg-[#004e8c] text-white font-bold flex items-center gap-1.5 cursor-pointer shadow-2xs"
             >
               <Printer className="w-4 h-4" />
               <span>طباعة</span>

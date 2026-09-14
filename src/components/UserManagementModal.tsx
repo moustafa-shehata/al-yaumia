@@ -426,19 +426,19 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-2 sm:p-4 overflow-y-auto no-scrollbar"
       dir="rtl"
     >
-      <div className="bg-slate-100 rounded-lg border-2 border-slate-400 shadow-2xl w-full max-w-6xl h-[92vh] max-h-[850px] flex flex-col overflow-hidden text-slate-900 select-none">
+      <div className="bg-[#f0f6fc] rounded-xl border border-[#bcd2e8] shadow-2xl w-full max-w-6xl h-[92vh] max-h-[850px] flex flex-col overflow-hidden text-[#0f2d52] select-none">
         
         {/* 1. Desktop Window Frame & Titlebar (شريط عنوان نافذة سطح المكتب) */}
-        <div className="bg-slate-900 text-slate-200 px-3 py-1.5 flex items-center justify-between border-b border-slate-800 shrink-0">
+        <div className="bg-gradient-to-r from-[#003e73] via-[#005a9e] to-[#0078d4] text-white px-3 py-1.5 flex items-center justify-between border-b border-[#004e8c] shrink-0">
           <div className="flex items-center gap-2">
-            <div className="w-5 h-5 rounded bg-blue-600 flex items-center justify-center text-white">
+            <div className="w-5 h-5 rounded bg-white/20 flex items-center justify-center text-white">
               <ShieldCheck className="w-3.5 h-3.5" />
             </div>
             <div className="flex items-baseline gap-2">
               <span className="font-bold text-xs sm:text-sm text-white">
                 إدارة المستخدمين والصلاحيات
               </span>
-              <span className="text-[11px] text-slate-400 hidden md:inline">
+              <span className="text-[11px] text-blue-100 hidden md:inline">
                 - تخصيص ملفات الصلاحيات المستقلة وقوائم المنظومة [الإصدار المكتبي]
               </span>
             </div>
@@ -447,14 +447,14 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
           <div className="flex items-center gap-1.5">
             <button
               type="button"
-              className="w-5 h-5 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
+              className="w-5 h-5 flex items-center justify-center text-blue-100 hover:text-white hover:bg-white/15 rounded transition-colors"
               title="تصغير"
             >
               <Minus className="w-3 h-3" />
             </button>
             <button
               type="button"
-              className="w-5 h-5 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
+              className="w-5 h-5 flex items-center justify-center text-blue-100 hover:text-white hover:bg-white/15 rounded transition-colors"
               title="تكبير"
             >
               <Square className="w-2.5 h-2.5" />
@@ -462,7 +462,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="w-5 h-5 flex items-center justify-center text-slate-400 hover:text-rose-400 hover:bg-rose-950/80 rounded transition-colors cursor-pointer"
+              className="w-5 h-5 flex items-center justify-center text-blue-100 hover:text-rose-200 hover:bg-rose-600 rounded transition-colors cursor-pointer"
               title="إغلاق النافذة"
             >
               <X className="w-3.5 h-3.5" />
@@ -471,17 +471,17 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
         </div>
 
         {/* 2. Classic Desktop Command Toolbar (شريط الأوامر العلوي الثابت: جديد، حفظ، حذف، إغلاق مجتمعة بجانب بعضها) */}
-        <div className="bg-gradient-to-b from-slate-100 to-slate-200 border-b border-slate-300 px-3 py-1.5 flex items-center justify-between gap-3 shrink-0">
+        <div className="bg-gradient-to-r from-[#f0f6fc] via-[#f7fafe] to-[#f0f6fc] border-b border-[#bcd2e8] px-3 py-1.5 flex items-center justify-between gap-3 shrink-0">
           {/* مجموعة أزرار الأوامر متجاورة مباشرة */}
           <div className="flex items-center gap-1.5">
             {/* Button: جديد */}
             <button
               type="button"
               onClick={handleStartCreateNew}
-              className="inline-flex items-center gap-1.5 px-3 py-1 bg-white hover:bg-slate-50 active:bg-slate-200 text-slate-800 rounded border border-slate-300 hover:border-slate-400 shadow-2xs text-xs font-bold transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1 bg-white hover:bg-[#eaf2fb] active:bg-[#dbe9f8] text-[#0f2d52] rounded border border-[#bcd2e8] hover:border-[#0078d4] shadow-2xs text-xs font-bold transition-colors cursor-pointer"
               title="إضافة مستخدم جديد للنظام"
             >
-              <UserPlus className="w-3.5 h-3.5 text-blue-600" />
+              <UserPlus className="w-3.5 h-3.5 text-[#0078d4]" />
               <span>جديد</span>
             </button>
 
@@ -489,7 +489,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
             <button
               type="button"
               onClick={handleSave}
-              className="inline-flex items-center gap-1.5 px-4 py-1 bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 text-white rounded border border-emerald-800 shadow-2xs text-xs font-bold transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-4 py-1 bg-[#0078d4] hover:bg-[#0067b8] active:bg-[#004e8c] text-white rounded border border-[#005a9e] shadow-2xs text-xs font-bold transition-colors cursor-pointer"
               title="حفظ بيانات وصلاحيات المستخدم (Ctrl+S)"
             >
               <Save className="w-3.5 h-3.5" />
@@ -501,7 +501,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
               type="button"
               onClick={() => setIsConfirmDeleteOpen(true)}
               disabled={isCreatingNew || draftUser.id === 'USR-001' || draftUser.id === currentActiveUser.id}
-              className="inline-flex items-center gap-1.5 px-3 py-1 bg-white hover:bg-rose-50 active:bg-rose-100 text-rose-700 disabled:text-slate-400 disabled:bg-slate-100 rounded border border-slate-300 hover:border-rose-300 shadow-2xs text-xs font-bold transition-colors cursor-pointer disabled:cursor-not-allowed"
+              className="inline-flex items-center gap-1.5 px-3 py-1 bg-white hover:bg-rose-50 active:bg-rose-100 text-rose-700 disabled:text-slate-400 disabled:bg-slate-100 rounded border border-[#bcd2e8] hover:border-rose-300 shadow-2xs text-xs font-bold transition-colors cursor-pointer disabled:cursor-not-allowed"
               title="حذف هذا المستخدم من النظام"
             >
               <Trash2 className="w-3.5 h-3.5" />
@@ -513,7 +513,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
               <button
                 type="button"
                 onClick={handleSwitchToCurrent}
-                className="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white rounded border border-indigo-700 shadow-2xs text-xs font-bold transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#004e8c] hover:bg-[#003e73] active:bg-[#002f56] text-white rounded border border-[#003e73] shadow-2xs text-xs font-bold transition-colors cursor-pointer"
                 title={`التبديل فوراً وتفعيل جلسة العمل بحساب "${draftUser.fullName}"`}
               >
                 <LogIn className="w-3.5 h-3.5" />
@@ -525,7 +525,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="inline-flex items-center gap-1.5 px-3 py-1 bg-white hover:bg-rose-50 active:bg-rose-100 text-rose-700 rounded border border-slate-300 hover:border-rose-300 shadow-2xs text-xs font-bold transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1 bg-white hover:bg-rose-50 active:bg-rose-100 text-rose-700 rounded border border-[#bcd2e8] hover:border-rose-300 shadow-2xs text-xs font-bold transition-colors cursor-pointer"
               title="إغلاق نافذة إدارة المستخدمين"
             >
               <X className="w-3.5 h-3.5 text-rose-600" />
@@ -556,36 +556,36 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
           {/* ======================================================== */}
           {/* المنطقة الأولى (عرض المستخدمين - Side Panel) */}
           {/* ======================================================== */}
-          <div className="w-full md:w-80 lg:w-96 bg-white border-l border-slate-300 flex flex-col shrink-0">
+          <div className="w-full md:w-80 lg:w-96 bg-white border-l border-[#bcd2e8] flex flex-col shrink-0">
             {/* Side Panel Header */}
-            <div className="p-2.5 bg-slate-100 border-b border-slate-300 flex items-center justify-between">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800">
-                <Users className="w-4 h-4 text-blue-700" />
+            <div className="p-2.5 bg-gradient-to-r from-[#eaf2fb] to-[#f0f6fc] border-b border-[#bcd2e8] flex items-center justify-between">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-[#0f2d52]">
+                <Users className="w-4 h-4 text-[#0078d4]" />
                 <span>قائمة المستخدمين في المنظومة</span>
               </div>
-              <span className="px-1.5 py-0.2 rounded bg-slate-200 text-slate-700 border border-slate-300 text-[11px] font-mono font-bold">
+              <span className="px-1.5 py-0.2 rounded bg-[#eaf2fb] text-[#004e8c] border border-[#bcd2e8] text-[11px] font-mono font-bold">
                 {users.length} مستخدمين
               </span>
             </div>
 
             {/* Quick Search in Users */}
-            <div className="p-2 border-b border-slate-200 bg-slate-50">
+            <div className="p-2 border-b border-[#bcd2e8] bg-[#f8fbfe]">
               <div className="relative">
-                <Search className="w-3.5 h-3.5 text-slate-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Search className="w-3.5 h-3.5 text-[#55789e] absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="بحث سريع عن مستخدم بالاسم أو الكود..."
-                  className="w-full pl-2 pr-8 py-1 text-xs rounded border border-slate-300 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full pl-2 pr-8 py-1 text-xs rounded border border-[#bcd2e8] bg-white text-[#0f2d52] focus:outline-none focus:ring-1 focus:ring-[#0078d4] focus:border-[#0078d4]"
                 />
               </div>
             </div>
 
             {/* Users Table / List */}
-            <div className="flex-1 overflow-y-auto no-scrollbar p-1 divide-y divide-slate-100">
+            <div className="flex-1 overflow-y-auto no-scrollbar p-1 divide-y divide-[#bcd2e8]/40">
               {filteredUsers.length === 0 ? (
-                <div className="p-6 text-center text-xs text-slate-400">
+                <div className="p-6 text-center text-xs text-[#55789e]">
                   لا يوجد مستخدم يطابق البحث
                 </div>
               ) : (
@@ -599,8 +599,8 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                       onClick={() => handleSelectUser(user)}
                       className={`p-2 rounded cursor-pointer transition-all ${
                         isSelected
-                          ? 'bg-blue-600 text-white shadow-xs'
-                          : 'hover:bg-slate-100 text-slate-800'
+                          ? 'bg-[#0078d4] text-white shadow-xs'
+                          : 'hover:bg-[#f0f6fc] text-[#0f2d52]'
                       }`}
                     >
                       <div className="flex items-center justify-between">
@@ -608,8 +608,8 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                           <span
                             className={`w-5 h-5 rounded flex items-center justify-center text-[10px] font-bold font-mono ${
                               isSelected
-                                ? 'bg-blue-800 text-white'
-                                : 'bg-slate-200 text-slate-700 border border-slate-300'
+                                ? 'bg-[#004e8c] text-white'
+                                : 'bg-[#eaf2fb] text-[#004e8c] border border-[#bcd2e8]'
                             }`}
                           >
                             {idx + 1}
@@ -633,7 +633,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                             </div>
                             <div
                               className={`text-[10px] truncate ${
-                                isSelected ? 'text-blue-100' : 'text-slate-400'
+                                isSelected ? 'text-blue-100' : 'text-[#55789e]'
                               }`}
                             >
                               @{user.username} • {user.id}
@@ -645,11 +645,11 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                           <span
                             className={`text-[10px] px-1.5 py-0.5 rounded font-medium block ${
                               isSelected
-                                ? 'bg-blue-700 text-white'
+                                ? 'bg-[#004e8c] text-white'
                                 : user.role === 'مدير نظام'
                                 ? 'bg-purple-100 text-purple-800 border border-purple-200'
                                 : user.role === 'محاسب عام'
-                                ? 'bg-blue-100 text-blue-800 border border-blue-200'
+                                ? 'bg-[#eaf2fb] text-[#004e8c] border border-[#bcd2e8]'
                                 : user.role === 'مدخل بيانات'
                                 ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
                                 : 'bg-amber-100 text-amber-800 border border-amber-200'
@@ -669,31 +669,31 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
           {/* ======================================================== */}
           {/* المنطقة الثانية (إدارة الصلاحيات وقوائم النظام - Main Panel) */}
           {/* ======================================================== */}
-          <div className="flex-1 flex flex-col bg-slate-50 overflow-hidden">
+          <div className="flex-1 flex flex-col bg-[#f8fbfe] overflow-hidden">
             
             {/* Top Info Banner: اسم المستخدم المحدد */}
-            <div className="p-2.5 bg-gradient-to-r from-amber-50 via-slate-100 to-blue-50 border-b border-slate-300 shrink-0">
+            <div className="p-2.5 bg-gradient-to-r from-[#eaf2fb] via-[#f0f6fc] to-[#eaf2fb] border-b border-[#bcd2e8] shrink-0">
               <div className="flex items-center gap-2.5">
                 {/* اسم المستخدم البارز */}
-                <div className="px-3 py-1 rounded bg-amber-100 border border-amber-300 shadow-2xs text-amber-900 flex items-center gap-2">
-                  <span className="text-[11px] font-bold text-amber-800">اسم المستخدم:</span>
-                  <strong className="text-sm font-black text-rose-700">
+                <div className="px-3 py-1 rounded bg-white border border-[#bcd2e8] shadow-2xs text-[#0f2d52] flex items-center gap-2">
+                  <span className="text-[11px] font-bold text-[#55789e]">اسم المستخدم:</span>
+                  <strong className="text-sm font-black text-[#0078d4]">
                     {draftUser.fullName || 'مستخدم جديد'}
                   </strong>
                 </div>
 
-                <span className="text-xs px-2.5 py-0.5 rounded bg-white border border-slate-300 text-slate-700 font-mono font-bold">
+                <span className="text-xs px-2.5 py-0.5 rounded bg-white border border-[#bcd2e8] text-[#1e3a5f] font-mono font-bold">
                   {draftUser.id}
                 </span>
 
-                <span className="text-xs px-2.5 py-0.5 rounded bg-blue-100 text-blue-900 border border-blue-300 font-bold">
+                <span className="text-xs px-2.5 py-0.5 rounded bg-[#0078d4]/10 text-[#004e8c] border border-[#0078d4]/30 font-bold">
                   الدور: {draftUser.role}
                 </span>
               </div>
             </div>
 
             {/* System Menus Tabs Bar (نظام التبويبات العلوية للأقسام وقوائم النظام) */}
-            <div className="bg-slate-200/90 border-b border-slate-300 px-2 pt-2 flex items-center gap-1 overflow-x-auto shrink-0 scrollbar-none">
+            <div className="bg-[#dce9f6] border-b border-[#bcd2e8] px-2 pt-2 flex items-center gap-1 overflow-x-auto shrink-0 scrollbar-none">
               
               {/* Tab: بطاقة المستخدم */}
               <button
@@ -701,11 +701,11 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                 onClick={() => setActiveTab('profile')}
                 className={`px-3 py-1.5 rounded-t text-xs font-bold flex items-center gap-1.5 transition-colors border-t border-x cursor-pointer shrink-0 ${
                   activeTab === 'profile'
-                    ? 'bg-white text-blue-900 border-slate-300 shadow-xs -mb-px pb-2'
-                    : 'bg-slate-100 hover:bg-white text-slate-700 border-slate-300/60'
+                    ? 'bg-white text-[#004e8c] border-[#bcd2e8] shadow-xs -mb-px pb-2'
+                    : 'bg-[#e6eef6] hover:bg-white text-[#1e3a5f] border-[#bcd2e8]/60'
                 }`}
               >
-                <User className="w-3.5 h-3.5 text-blue-700" />
+                <User className="w-3.5 h-3.5 text-[#0078d4]" />
                 <span>بطاقة المستخدم</span>
               </button>
 
@@ -719,11 +719,11 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                     onClick={() => setActiveTab(section.id)}
                     className={`px-3 py-1.5 rounded-t text-xs font-bold flex items-center gap-1.5 transition-colors border-t border-x cursor-pointer shrink-0 ${
                       isActive
-                        ? 'bg-white text-blue-900 border-slate-300 shadow-xs -mb-px pb-2'
-                        : 'bg-slate-100 hover:bg-white text-slate-700 border-slate-300/60'
+                        ? 'bg-white text-[#004e8c] border-[#bcd2e8] shadow-xs -mb-px pb-2'
+                        : 'bg-[#e6eef6] hover:bg-white text-[#1e3a5f] border-[#bcd2e8]/60'
                     }`}
                   >
-                    {section.id === 'menu_file' && <FileText className="w-3.5 h-3.5 text-blue-700" />}
+                    {section.id === 'menu_file' && <FileText className="w-3.5 h-3.5 text-[#0078d4]" />}
                     {section.id === 'menu_accounts' && <BookOpen className="w-3.5 h-3.5 text-emerald-700" />}
                     {section.id === 'menu_reports' && <BarChart3 className="w-3.5 h-3.5 text-purple-700" />}
                     {section.id === 'menu_system' && <Settings className="w-3.5 h-3.5 text-indigo-700" />}
@@ -740,8 +740,8 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
               {/* VIEW 1: User Profile / Card Tab */}
               {activeTab === 'profile' ? (
                 <div className="max-w-2xl mx-auto space-y-4 py-2">
-                  <div className="p-3 bg-blue-50 border border-blue-200 rounded-md flex items-start gap-2 text-xs text-blue-900">
-                    <UserCheck className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
+                  <div className="p-3 bg-[#eaf2fb] border border-[#bcd2e8] rounded-xl flex items-start gap-2 text-xs text-[#004e8c]">
+                    <UserCheck className="w-4 h-4 text-[#0078d4] shrink-0 mt-0.5" />
                     <div>
                       <strong>بيانات حساب المستخدم الأساسية:</strong> قم بتعيين اسم الدخول وكلمة المرور والدور الوظيفي. يمكنك بعد ذلك تخصيص الصلاحيات المستقلة من التبويبات المجاورة.
                     </div>
@@ -750,20 +750,20 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* User ID */}
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                      <label className="block text-xs font-bold text-[#1e3a5f] mb-1">
                         رقم / كود المستخدم
                       </label>
                       <input
                         type="text"
                         value={draftUser.id}
                         disabled
-                        className="w-full px-3 py-1.5 text-xs rounded border border-slate-300 bg-slate-100 text-slate-600 font-mono font-bold"
+                        className="w-full px-3 py-1.5 text-xs rounded-lg border border-[#bcd2e8] bg-[#f0f6fc] text-[#55789e] font-mono font-bold"
                       />
                     </div>
 
                     {/* Full Name */}
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                      <label className="block text-xs font-bold text-[#1e3a5f] mb-1">
                         الاسم الكامل للمستخدم <span className="text-rose-600">*</span>
                       </label>
                       <input
@@ -771,13 +771,13 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                         value={draftUser.fullName}
                         onChange={(e) => setDraftUser((p) => ({ ...p, fullName: e.target.value }))}
                         placeholder="مثال: مصطفى شحاتة"
-                        className="w-full px-3 py-1.5 text-xs rounded border border-slate-300 focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                        className="w-full px-3 py-1.5 text-xs rounded-lg border border-[#bcd2e8] text-[#0f2d52] focus:ring-1 focus:ring-[#0078d4] focus:border-[#0078d4]"
                       />
                     </div>
 
                     {/* Username */}
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                      <label className="block text-xs font-bold text-[#1e3a5f] mb-1">
                         اسم الدخول (Username) <span className="text-rose-600">*</span>
                       </label>
                       <input
@@ -785,13 +785,13 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                         value={draftUser.username}
                         onChange={(e) => setDraftUser((p) => ({ ...p, username: e.target.value }))}
                         placeholder="مثال: moustafa"
-                        className="w-full px-3 py-1.5 text-xs rounded border border-slate-300 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 font-mono"
+                        className="w-full px-3 py-1.5 text-xs rounded-lg border border-[#bcd2e8] text-[#0f2d52] focus:ring-1 focus:ring-[#0078d4] focus:border-[#0078d4] font-mono"
                       />
                     </div>
 
                     {/* Password */}
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                      <label className="block text-xs font-bold text-[#1e3a5f] mb-1">
                         كلمة المرور
                       </label>
                       <div className="relative">
@@ -799,12 +799,12 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                           type={showPassword ? 'text' : 'password'}
                           value={passwordInput}
                           onChange={(e) => setPasswordInput(e.target.value)}
-                          className="w-full pl-8 pr-3 py-1.5 text-xs rounded border border-slate-300 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 font-mono"
+                          className="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-[#bcd2e8] text-[#0f2d52] focus:ring-1 focus:ring-[#0078d4] focus:border-[#0078d4] font-mono"
                         />
                         <button
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
-                          className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                          className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#55789e] hover:text-[#0078d4] cursor-pointer"
                           title={showPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'}
                         >
                           {showPassword ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
@@ -814,13 +814,13 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
 
                     {/* Role */}
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                      <label className="block text-xs font-bold text-[#1e3a5f] mb-1">
                         الدور الرئيسي في النظام
                       </label>
                       <select
                         value={draftUser.role}
                         onChange={(e) => handleApplyRolePreset(e.target.value as UserRole)}
-                        className="w-full px-3 py-1.5 text-xs rounded border border-slate-300 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                        className="w-full px-3 py-1.5 text-xs rounded-lg border border-[#bcd2e8] focus:ring-1 focus:ring-[#0078d4] focus:border-[#0078d4] bg-white text-[#0f2d52]"
                       >
                         <option value="مدير نظام">مدير نظام (كامل الصلاحيات)</option>
                         <option value="محاسب عام">محاسب عام (قيود وتقارير)</option>
@@ -831,7 +831,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
 
                     {/* Status */}
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                      <label className="block text-xs font-bold text-[#1e3a5f] mb-1">
                         حالة الحساب
                       </label>
                       <select
@@ -839,7 +839,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                         onChange={(e) =>
                           setDraftUser((p) => ({ ...p, status: e.target.value as 'نشط' | 'معطل' }))
                         }
-                        className="w-full px-3 py-1.5 text-xs rounded border border-slate-300 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 bg-white font-bold"
+                        className="w-full px-3 py-1.5 text-xs rounded-lg border border-[#bcd2e8] focus:ring-1 focus:ring-[#0078d4] focus:border-[#0078d4] bg-white font-bold text-[#0f2d52]"
                       >
                         <option value="نشط">نشط (مسموح له بتسجيل الدخول)</option>
                         <option value="معطل">معطل (حظر الدخول مؤقتاً)</option>
@@ -848,7 +848,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
 
                     {/* Phone */}
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                      <label className="block text-xs font-bold text-[#1e3a5f] mb-1">
                         رقم الهاتف / الواتساب
                       </label>
                       <input
@@ -856,13 +856,13 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                         value={draftUser.phone || ''}
                         onChange={(e) => setDraftUser((p) => ({ ...p, phone: e.target.value }))}
                         placeholder="010XXXXXXXX"
-                        className="w-full px-3 py-1.5 text-xs rounded border border-slate-300 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 font-mono"
+                        className="w-full px-3 py-1.5 text-xs rounded-lg border border-[#bcd2e8] text-[#0f2d52] focus:ring-1 focus:ring-[#0078d4] focus:border-[#0078d4] font-mono"
                       />
                     </div>
 
                     {/* Email */}
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                      <label className="block text-xs font-bold text-[#1e3a5f] mb-1">
                         البريد الإلكتروني
                       </label>
                       <input
@@ -870,12 +870,12 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                         value={draftUser.email || ''}
                         onChange={(e) => setDraftUser((p) => ({ ...p, email: e.target.value }))}
                         placeholder="user@example.com"
-                        className="w-full px-3 py-1.5 text-xs rounded border border-slate-300 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 font-mono"
+                        className="w-full px-3 py-1.5 text-xs rounded-lg border border-[#bcd2e8] text-[#0f2d52] focus:ring-1 focus:ring-[#0078d4] focus:border-[#0078d4] font-mono"
                       />
                     </div>
                   </div>
 
-                  <div className="pt-3 border-t border-slate-200 text-[11px] text-slate-500">
+                  <div className="pt-3 border-t border-[#bcd2e8] text-[11px] text-[#55789e]">
                     تاريخ الإنشاء: {draftUser.createdAt} • آخر دخول: {draftUser.lastLogin || 'لم يسجل دخول بعد'}
                   </div>
                 </div>
@@ -884,17 +884,17 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                 <div className="space-y-3">
                   
                   {/* Section Top Toolbar (شريط التحكم السريع في القسم كما في الصورة الإرشادية) */}
-                  <div className="p-2.5 bg-slate-100 rounded-md border border-slate-300 flex flex-wrap items-center justify-between gap-2">
+                  <div className="p-2.5 bg-[#f0f6fc] rounded-xl border border-[#bcd2e8] flex flex-wrap items-center justify-between gap-2">
                     <div className="flex items-center gap-3">
                       {/* Checkbox: تفعيل وعرض القائمة */}
-                      <label className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 cursor-pointer">
+                      <label className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0f2d52] cursor-pointer">
                         <input
                           type="checkbox"
                           checked={currentSection.subItems.some(
                             (it) => getSubItemPermission(currentSection.id, it.id).view
                           )}
                           onChange={(e) => handleToggleAllSection(currentSection, e.target.checked)}
-                          className="w-4 h-4 rounded text-blue-600 focus:ring-0 cursor-pointer"
+                          className="w-4 h-4 rounded text-[#0078d4] focus:ring-0 cursor-pointer"
                         />
                         <span>عرض وتفعيل قائمة ({currentSection.title})</span>
                       </label>
@@ -905,7 +905,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                       <button
                         type="button"
                         onClick={() => handleToggleAllSection(currentSection, true)}
-                        className="px-2.5 py-1 bg-white hover:bg-slate-50 text-blue-800 border border-slate-300 rounded font-bold shadow-2xs cursor-pointer"
+                        className="px-2.5 py-1 bg-white hover:bg-[#eaf2fb] text-[#004e8c] border border-[#bcd2e8] rounded-lg font-bold shadow-2xs cursor-pointer"
                         title="تحديد كافة الصلاحيات في هذا التبويب"
                       >
                         تحديد الكل
@@ -913,7 +913,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                       <button
                         type="button"
                         onClick={() => handleToggleAllSection(currentSection, false)}
-                        className="px-2.5 py-1 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 rounded font-bold shadow-2xs cursor-pointer"
+                        className="px-2.5 py-1 bg-white hover:bg-[#eaf2fb] text-[#1e3a5f] border border-[#bcd2e8] rounded-lg font-bold shadow-2xs cursor-pointer"
                         title="إلغاء تحديد كافة الصلاحيات في هذا التبويب"
                       >
                         إلغاء تحديد الكل
@@ -922,17 +922,17 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                   </div>
 
                   {/* Permissions Matrix Table (جدول الصلاحيات الخمس الأساسية) */}
-                  <div className="border border-slate-300 rounded-md overflow-hidden bg-white shadow-xs">
+                  <div className="border border-[#bcd2e8] rounded-xl overflow-hidden bg-white shadow-xs">
                     <table className="w-full text-xs text-right border-collapse">
                       <thead>
-                        <tr className="bg-slate-200/90 text-slate-800 border-b border-slate-300 font-black">
+                        <tr className="bg-gradient-to-r from-[#eaf2fb] to-[#f0f6fc] text-[#0f2d52] border-b border-[#bcd2e8] font-bold">
                           <th className="p-2.5 text-right w-1/3">
                             اسم القائمة والعملية الفرعية
                           </th>
                           
                           {/* 1. الدخول */}
                           <th
-                            className="p-2 text-center w-[13%] hover:bg-slate-300/80 cursor-pointer transition-colors"
+                            className="p-2 text-center w-[13%] hover:bg-[#dce9f6] cursor-pointer transition-colors border-r border-[#bcd2e8]"
                             onClick={() => handleToggleColumnInSection(currentSection, 'view')}
                             title="انقر لتحديد / إلغاء عمود الدخول بالكامل"
                           >
@@ -943,7 +943,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
 
                           {/* 2. الإضافة */}
                           <th
-                            className="p-2 text-center w-[13%] hover:bg-slate-300/80 cursor-pointer transition-colors"
+                            className="p-2 text-center w-[13%] hover:bg-[#dce9f6] cursor-pointer transition-colors border-r border-[#bcd2e8]"
                             onClick={() => handleToggleColumnInSection(currentSection, 'add')}
                             title="انقر لتحديد / إلغاء عمود الإضافة بالكامل"
                           >
@@ -954,7 +954,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
 
                           {/* 3. التعديل */}
                           <th
-                            className="p-2 text-center w-[13%] hover:bg-slate-300/80 cursor-pointer transition-colors"
+                            className="p-2 text-center w-[13%] hover:bg-[#dce9f6] cursor-pointer transition-colors border-r border-[#bcd2e8]"
                             onClick={() => handleToggleColumnInSection(currentSection, 'edit')}
                             title="انقر لتحديد / إلغاء عمود التعديل بالكامل"
                           >
@@ -965,7 +965,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
 
                           {/* 4. الحذف */}
                           <th
-                            className="p-2 text-center w-[13%] hover:bg-slate-300/80 cursor-pointer transition-colors"
+                            className="p-2 text-center w-[13%] hover:bg-[#dce9f6] cursor-pointer transition-colors border-r border-[#bcd2e8]"
                             onClick={() => handleToggleColumnInSection(currentSection, 'delete')}
                             title="انقر لتحديد / إلغاء عمود الحذف بالكامل"
                           >
@@ -976,7 +976,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
 
                           {/* 5. الطباعة */}
                           <th
-                            className="p-2 text-center w-[13%] hover:bg-slate-300/80 cursor-pointer transition-colors"
+                            className="p-2 text-center w-[13%] hover:bg-[#dce9f6] cursor-pointer transition-colors border-r border-[#bcd2e8]"
                             onClick={() => handleToggleColumnInSection(currentSection, 'print')}
                             title="انقر لتحديد / إلغاء عمود الطباعة بالكامل"
                           >
@@ -987,7 +987,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                         </tr>
                       </thead>
 
-                      <tbody className="divide-y divide-slate-200">
+                      <tbody className="divide-y divide-[#bcd2e8]/60">
                         {currentSection.subItems.map((item) => {
                           const perms = getSubItemPermission(currentSection.id, item.id);
                           const hasAnyPermission = perms.view || perms.add || perms.edit || perms.delete || perms.print;
@@ -995,38 +995,38 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                           return (
                             <tr
                               key={item.id}
-                              className={`hover:bg-blue-50/50 transition-colors ${
-                                hasAnyPermission ? 'bg-white' : 'bg-slate-50/60 text-slate-400'
+                              className={`hover:bg-[#f0f6fc] transition-colors ${
+                                hasAnyPermission ? 'bg-white' : 'bg-[#f8fbfe] text-[#55789e]'
                               }`}
                             >
                               {/* Item Title & Description */}
                               <td className="p-2.5">
-                                <div className="font-bold text-slate-900 text-xs flex items-center justify-between gap-2">
+                                <div className="font-bold text-[#0f2d52] text-xs flex items-center justify-between gap-2">
                                   <span>{item.title}</span>
                                   {item.shortcut && (
-                                    <kbd className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 border border-slate-300 text-slate-600 shrink-0">
+                                    <kbd className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#f0f6fc] border border-[#bcd2e8] text-[#004e8c] shrink-0">
                                       {item.shortcut}
                                     </kbd>
                                   )}
                                 </div>
-                                <div className="text-[10px] text-slate-500 line-clamp-1">
+                                <div className="text-[10px] text-[#55789e] line-clamp-1">
                                   {item.description}
                                 </div>
                               </td>
 
                               {/* 1. الدخول (View) */}
-                              <td className="p-2 text-center">
+                              <td className="p-2 text-center border-r border-[#bcd2e8]/40">
                                 <input
                                   type="checkbox"
                                   checked={perms.view}
                                   onChange={() => handleToggleSubItemAction(currentSection.id, item.id, 'view')}
-                                  className="w-4 h-4 rounded text-blue-600 focus:ring-0 cursor-pointer accent-blue-600"
+                                  className="w-4 h-4 rounded text-[#0078d4] focus:ring-0 cursor-pointer accent-[#0078d4]"
                                   title={`صلاحية دخول: ${item.title}`}
                                 />
                               </td>
 
                               {/* 2. الإضافة (Add) */}
-                              <td className="p-2 text-center">
+                              <td className="p-2 text-center border-r border-[#bcd2e8]/40">
                                 <input
                                   type="checkbox"
                                   checked={perms.add}
@@ -1037,7 +1037,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                               </td>
 
                               {/* 3. التعديل (Edit) */}
-                              <td className="p-2 text-center">
+                              <td className="p-2 text-center border-r border-[#bcd2e8]/40">
                                 <input
                                   type="checkbox"
                                   checked={perms.edit}
@@ -1048,7 +1048,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                               </td>
 
                               {/* 4. الحذف (Delete) */}
-                              <td className="p-2 text-center">
+                              <td className="p-2 text-center border-r border-[#bcd2e8]/40">
                                 <input
                                   type="checkbox"
                                   checked={perms.delete}
@@ -1059,7 +1059,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                               </td>
 
                               {/* 5. الطباعة (Print) */}
-                              <td className="p-2 text-center">
+                              <td className="p-2 text-center border-r border-[#bcd2e8]/40">
                                 <input
                                   type="checkbox"
                                   checked={perms.print}
@@ -1077,9 +1077,9 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
 
                   {/* Special Permissions Box (الصلاحيات الخاصة والاستثنائية كما في الصورة الإرشادية) */}
                   {currentSection.specialFlags && currentSection.specialFlags.length > 0 && (
-                    <div className="p-3 bg-amber-50/70 border border-amber-200 rounded-md">
-                      <div className="text-xs font-bold text-amber-900 mb-2 flex items-center gap-1.5">
-                        <Shield className="w-3.5 h-3.5 text-amber-700" />
+                    <div className="p-3 bg-[#f0f6fc] border border-[#bcd2e8] rounded-xl">
+                      <div className="text-xs font-bold text-[#004e8c] mb-2 flex items-center gap-1.5">
+                        <Shield className="w-3.5 h-3.5 text-[#0078d4]" />
                         <span>صلاحيات خاصة واستثنائية لقسم ({currentSection.title}):</span>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -1092,19 +1092,19 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                           return (
                             <label
                               key={flag.id}
-                              className="flex items-start gap-2 p-1.5 rounded bg-white border border-amber-200 hover:bg-amber-100/50 cursor-pointer transition-colors"
+                              className="flex items-start gap-2 p-2 rounded-lg bg-white border border-[#bcd2e8] hover:bg-[#eaf2fb] cursor-pointer transition-colors"
                             >
                               <input
                                 type="checkbox"
                                 checked={isFlagChecked}
                                 onChange={() => handleToggleSpecialFlag(flag.id)}
-                                className="w-4 h-4 rounded text-amber-700 focus:ring-0 cursor-pointer mt-0.5 accent-amber-600"
+                                className="w-4 h-4 rounded text-[#0078d4] focus:ring-0 cursor-pointer mt-0.5 accent-[#0078d4]"
                               />
                               <div className="min-w-0">
-                                <span className="text-xs font-bold text-slate-900 block">
+                                <span className="text-xs font-bold text-[#0f2d52] block">
                                   {flag.title}
                                 </span>
-                                <span className="text-[10px] text-slate-500 block leading-tight">
+                                <span className="text-[10px] text-[#55789e] block leading-tight">
                                   {flag.description}
                                 </span>
                               </div>
@@ -1116,7 +1116,7 @@ export const UserManagementModal: React.FC<UserManagementModalProps> = ({
                   )}
 
                   {/* Note */}
-                  <div className="pt-1 text-[11px] text-slate-500 text-left">
+                  <div className="pt-1 text-[11px] text-[#55789e] text-left">
                     * التعديلات تُحفظ فقط للمستخدم المحدد عبر زر (حفظ) في شريط الأوامر العلوي
                   </div>
                 </div>

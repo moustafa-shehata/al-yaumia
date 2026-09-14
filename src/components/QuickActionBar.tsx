@@ -386,7 +386,7 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
     <div
       ref={containerRef}
       id="quick-actions-bar"
-      className="bg-gradient-to-b from-slate-100 via-slate-100 to-slate-200/90 border border-slate-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_1px_3px_rgba(0,0,0,0.06)] rounded-lg px-2.5 py-1.5 select-none no-print relative"
+      className="bg-gradient-to-b from-[#f3f7fb] via-[#e9f2fa] to-[#ddeaf6] border border-[#bcd2e8] shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_1px_3px_rgba(15,45,85,0.06)] rounded-lg px-2.5 py-1.5 select-none no-print relative"
       dir="rtl"
     >
       {/* صف أفقي واحد متناسق يجمع أزرار العمليات المصغرة + حقل البحث عن العمليات */}
@@ -400,12 +400,12 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
             id="quick-btn-add-tx"
             type="button"
             onClick={onAddTransaction}
-            className="h-7.5 inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 text-xs font-bold text-white bg-gradient-to-b from-blue-700 via-blue-800 to-blue-900 hover:from-blue-600 hover:to-blue-800 active:from-blue-950 active:to-blue-900 border border-blue-950 rounded shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_1px_2px_rgba(0,0,0,0.18)] active:shadow-inner active:translate-y-px transition-all cursor-pointer whitespace-nowrap group"
+            className="h-7.5 inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 text-xs font-bold text-white bg-gradient-to-b from-[#0078d4] via-[#0067b8] to-[#005a9e] hover:from-[#1589e6] hover:to-[#005a9e] active:from-[#004e8a] active:to-[#004e8a] border border-[#004e8a] rounded shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_1px_2px_rgba(0,0,0,0.18)] active:shadow-inner active:translate-y-px transition-all cursor-pointer whitespace-nowrap group"
             title="تسجيل حركة مالية جديدة في بيان اليومية [F2]"
           >
-            <Plus className="w-3.5 h-3.5 text-blue-200 stroke-[2.6] group-hover:scale-110 transition-transform" />
+            <Plus className="w-3.5 h-3.5 text-sky-200 stroke-[2.6] group-hover:scale-110 transition-transform" />
             <span>إضافة حركة</span>
-            <kbd className="hidden lg:inline-block px-1 py-0.2 text-[9px] font-mono font-bold bg-blue-950/70 text-blue-200 rounded border border-blue-800/80">
+            <kbd className="hidden lg:inline-block px-1 py-0.2 text-[9px] font-mono font-bold bg-[#004377] text-sky-200 rounded border border-blue-400/40">
               F2
             </kbd>
           </button>
@@ -415,29 +415,29 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
             id="quick-btn-add-account"
             type="button"
             onClick={onAddAccount}
-            className="h-7.5 inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 text-xs font-bold text-white bg-gradient-to-b from-emerald-700 via-emerald-800 to-emerald-900 hover:from-emerald-600 hover:to-emerald-800 active:from-emerald-950 active:to-emerald-900 border border-emerald-950 rounded shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_1px_2px_rgba(0,0,0,0.18)] active:shadow-inner active:translate-y-px transition-all cursor-pointer whitespace-nowrap group"
+            className="h-7.5 inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 text-xs font-bold text-white bg-gradient-to-b from-[#107c41] via-[#0e6b37] to-[#0a562c] hover:from-[#138e4a] hover:to-[#0e6b37] active:from-[#074723] active:to-[#074723] border border-[#074723] rounded shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_1px_2px_rgba(0,0,0,0.18)] active:shadow-inner active:translate-y-px transition-all cursor-pointer whitespace-nowrap group"
             title="إضافة حساب مالي أو عميل جديد إلى الدليل المحاسبي [F3]"
           >
             <UserPlus className="w-3.5 h-3.5 text-emerald-200 stroke-[2.3] group-hover:scale-110 transition-transform" />
             <span>إضافة حساب</span>
-            <kbd className="hidden lg:inline-block px-1 py-0.2 text-[9px] font-mono font-bold bg-emerald-950/70 text-emerald-200 rounded border border-emerald-800/80">
+            <kbd className="hidden lg:inline-block px-1 py-0.2 text-[9px] font-mono font-bold bg-[#074723] text-emerald-200 rounded border border-emerald-500/40">
               F3
             </kbd>
           </button>
 
-          <span className="hidden sm:inline-block h-5 w-px bg-slate-300 mx-0.5" />
+          <span className="hidden sm:inline-block h-5 w-px bg-[#bcd2e8] mx-0.5" />
 
           {/* 3. دليل الحسابات - F4 */}
           <button
             id="quick-btn-chart-of-accounts"
             type="button"
             onClick={onOpenChartOfAccounts}
-            className="h-7.5 inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 text-xs font-bold text-slate-800 bg-white hover:bg-slate-50 active:bg-slate-200 border border-slate-300 hover:border-slate-400 rounded shadow-2xs active:translate-y-px transition-all cursor-pointer whitespace-nowrap group"
+            className="h-7.5 inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 text-xs font-bold text-[#1e3a5f] bg-white hover:bg-[#edf5fd] active:bg-[#dcebf8] border border-[#c4d7eb] hover:border-[#0078d4] rounded shadow-2xs active:translate-y-px transition-all cursor-pointer whitespace-nowrap group"
             title="فتح دليل الحسابات المالي الشجري والمفصل [F4]"
           >
-            <BookOpen className="w-3.5 h-3.5 text-blue-700 stroke-[2.2] group-hover:scale-110 transition-transform" />
+            <BookOpen className="w-3.5 h-3.5 text-[#0078d4] stroke-[2.2] group-hover:scale-110 transition-transform" />
             <span>دليل الحسابات</span>
-            <kbd className="hidden xl:inline-block px-1 py-0.2 text-[9px] font-mono font-bold bg-slate-100 text-slate-600 rounded border border-slate-300">
+            <kbd className="hidden xl:inline-block px-1 py-0.2 text-[9px] font-mono font-bold bg-[#edf4fb] text-[#1e3a5f] rounded border border-[#c4d7eb]">
               F4
             </kbd>
           </button>
@@ -447,24 +447,24 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
             id="quick-btn-statement"
             type="button"
             onClick={onOpenStatementSheet}
-            className="h-7.5 inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 text-xs font-bold text-slate-800 bg-white hover:bg-slate-50 active:bg-slate-200 border border-slate-300 hover:border-slate-400 rounded shadow-2xs active:translate-y-px transition-all cursor-pointer whitespace-nowrap group"
+            className="h-7.5 inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 text-xs font-bold text-[#1e3a5f] bg-white hover:bg-[#edf5fd] active:bg-[#dcebf8] border border-[#c4d7eb] hover:border-[#0078d4] rounded shadow-2xs active:translate-y-px transition-all cursor-pointer whitespace-nowrap group"
             title="معاينة كشف الحساب ودفتر الأستاذ [F5]"
           >
             <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-700 stroke-[2.2] group-hover:scale-110 transition-transform" />
             <span>كشف الحساب</span>
-            <kbd className="hidden xl:inline-block px-1 py-0.2 text-[9px] font-mono font-bold bg-slate-100 text-slate-600 rounded border border-slate-300">
+            <kbd className="hidden xl:inline-block px-1 py-0.2 text-[9px] font-mono font-bold bg-[#edf4fb] text-[#1e3a5f] rounded border border-[#c4d7eb]">
               F5
             </kbd>
           </button>
 
-          <span className="hidden sm:inline-block h-5 w-px bg-slate-300 mx-0.5" />
+          <span className="hidden sm:inline-block h-5 w-px bg-[#bcd2e8] mx-0.5" />
 
           {/* 5. سجل النشاط - F6 */}
           <button
             id="quick-btn-user-activity-log"
             type="button"
             onClick={onOpenUserActivityLogs}
-            className="h-7.5 inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 text-xs font-bold text-slate-800 bg-white hover:bg-slate-50 active:bg-slate-200 border border-slate-300 hover:border-slate-400 rounded shadow-2xs active:translate-y-px transition-all cursor-pointer whitespace-nowrap group"
+            className="h-7.5 inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 text-xs font-bold text-[#1e3a5f] bg-white hover:bg-[#edf5fd] active:bg-[#dcebf8] border border-[#c4d7eb] hover:border-[#0078d4] rounded shadow-2xs active:translate-y-px transition-all cursor-pointer whitespace-nowrap group"
             title="سجل نشاط المستخدمين وتتبع الحركات والعمليات [F6]"
           >
             <History className="w-3.5 h-3.5 text-indigo-700 stroke-[2.2] group-hover:scale-110 transition-transform" />
@@ -474,7 +474,7 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
                 {activityCount}
               </span>
             )}
-            <kbd className="hidden xl:inline-block px-1 py-0.2 text-[9px] font-mono font-bold bg-slate-100 text-slate-600 rounded border border-slate-300">
+            <kbd className="hidden xl:inline-block px-1 py-0.2 text-[9px] font-mono font-bold bg-[#edf4fb] text-[#1e3a5f] rounded border border-[#c4d7eb]">
               F6
             </kbd>
           </button>
@@ -484,12 +484,12 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
             id="quick-btn-user-management"
             type="button"
             onClick={onOpenUserManagement}
-            className="h-7.5 inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 text-xs font-bold text-slate-800 bg-white hover:bg-slate-50 active:bg-slate-200 border border-slate-300 hover:border-slate-400 rounded shadow-2xs active:translate-y-px transition-all cursor-pointer whitespace-nowrap group"
+            className="h-7.5 inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 text-xs font-bold text-[#1e3a5f] bg-white hover:bg-[#edf5fd] active:bg-[#dcebf8] border border-[#c4d7eb] hover:border-[#0078d4] rounded shadow-2xs active:translate-y-px transition-all cursor-pointer whitespace-nowrap group"
             title="إدارة المستخدمين وصلاحيات الحسابات [F7]"
           >
             <Users className="w-3.5 h-3.5 text-purple-700 stroke-[2.2] group-hover:scale-110 transition-transform" />
             <span>إدارة المستخدمين</span>
-            <kbd className="hidden xl:inline-block px-1 py-0.2 text-[9px] font-mono font-bold bg-slate-100 text-slate-600 rounded border border-slate-300">
+            <kbd className="hidden xl:inline-block px-1 py-0.2 text-[9px] font-mono font-bold bg-[#edf4fb] text-[#1e3a5f] rounded border border-[#c4d7eb]">
               F7
             </kbd>
           </button>
@@ -498,7 +498,7 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
         {/* حقل البحث عن العمليات والأوامر داخل النظام */}
         <div className="relative min-w-[200px] sm:min-w-[270px] md:min-w-[310px] max-w-sm flex-1 shrink">
           {/* أيقونة البحث في بداية الحقل (اليمين في RTL) */}
-          <Search className="w-3.5 h-3.5 text-slate-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <Search className="w-3.5 h-3.5 text-[#6c8cae] absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           
           <input
             ref={searchInputRef}
@@ -511,7 +511,7 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
             }}
             onFocus={() => setIsDropdownOpen(true)}
             placeholder="بحث عن عملية (إضافة حركة، حساب، كشف، دليل)..."
-            className="w-full h-7.5 pr-8 pl-16 text-xs bg-white border border-slate-300 hover:border-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 rounded shadow-2xs placeholder-slate-400 text-slate-800 focus:outline-none transition-all"
+            className="w-full h-7.5 pr-8 pl-16 text-xs bg-white border border-[#bcd2e8] hover:border-[#0078d4] focus:border-[#0078d4] focus:ring-2 focus:ring-[#0078d4]/20 rounded shadow-2xs placeholder-[#718fae] text-[#0f2d52] focus:outline-none transition-all"
             title="ابحث عن أي عملية أو أمر في النظام لتنفيذه مباشرة"
             autoComplete="off"
           />
@@ -547,10 +547,10 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
           {isDropdownOpen && (
             <div
               id="quick-bar-operations-dropdown"
-              className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-300 rounded-lg shadow-xl z-50 overflow-hidden max-h-80 flex flex-col animate-in fade-in zoom-in-95 duration-100"
+              className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-[#b8cfe8] rounded-lg shadow-[0_12px_32px_-4px_rgba(15,45,85,0.25)] z-50 overflow-hidden max-h-80 flex flex-col animate-in fade-in zoom-in-95 duration-100"
             >
               {/* شريط رأس القائمة */}
-              <div className="px-3 py-1.5 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-[11px] text-slate-500 font-semibold">
+              <div className="px-3 py-1.5 bg-[#f0f6fc] border-b border-[#e2edf8] flex items-center justify-between text-[11px] text-[#4b6a8d] font-semibold">
                 <span>العمليات والأوامر المتاحة ({filteredOperations.length})</span>
                 {searchQuery && (
                   <button
@@ -564,7 +564,7 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
               </div>
 
               {/* عناصر العمليات */}
-              <div className="overflow-y-auto divide-y divide-slate-100 max-h-68">
+              <div className="overflow-y-auto divide-y divide-[#edf3fa] max-h-68">
                 {filteredOperations.length > 0 ? (
                   filteredOperations.map((op, index) => {
                     const IconComponent = op.icon;
@@ -576,8 +576,8 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
                         onMouseEnter={() => setHighlightedIndex(index)}
                         className={`px-3 py-2 flex items-center justify-between gap-2.5 cursor-pointer transition-colors ${
                           isHighlighted
-                            ? 'bg-blue-50/90 text-blue-950 border-r-3 border-blue-600'
-                            : 'hover:bg-slate-50 text-slate-800'
+                            ? 'bg-[#edf5fd] text-[#004e8c] border-r-3 border-[#0078d4]'
+                            : 'hover:bg-[#f6f9fc] text-[#0f2d52]'
                         }`}
                       >
                         <div className="flex items-center gap-2.5 min-w-0 flex-1">
@@ -589,11 +589,11 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
                           <div className="min-w-0 flex-1">
                             <div className="flex items-center gap-2">
                               <span className="text-xs font-bold truncate">{op.title}</span>
-                              <span className="text-[10px] px-1.5 py-0.2 bg-slate-100 text-slate-500 rounded border border-slate-200 shrink-0">
+                              <span className="text-[10px] px-1.5 py-0.2 bg-[#f0f5fa] text-[#4b6a8d] rounded border border-[#d8e5f2] shrink-0">
                                 {op.category}
                               </span>
                             </div>
-                            <p className="text-[11px] text-slate-500 truncate mt-0.5">
+                            <p className="text-[11px] text-[#607d9e] truncate mt-0.5">
                               {op.description}
                             </p>
                           </div>
@@ -601,27 +601,27 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
 
                         <div className="flex items-center gap-1.5 shrink-0">
                           {op.shortcut && (
-                            <kbd className="px-1.5 py-0.5 text-[10px] font-mono font-bold bg-slate-100 text-slate-700 rounded border border-slate-300 shadow-2xs">
+                            <kbd className="px-1.5 py-0.5 text-[10px] font-mono font-bold bg-[#f0f5fa] text-[#1e3a5f] rounded border border-[#c8dced] shadow-2xs">
                               {op.shortcut}
                             </kbd>
                           )}
                           {isHighlighted && (
-                            <CornerDownLeft className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                            <CornerDownLeft className="w-3.5 h-3.5 text-[#0078d4] shrink-0" />
                           )}
                         </div>
                       </div>
                     );
                   })
                 ) : (
-                  <div className="px-4 py-6 text-center text-slate-500">
-                    <p className="text-xs font-bold text-slate-700">لا توجد عملية مطابقة لـ &quot;{searchQuery}&quot;</p>
-                    <p className="text-[11px] text-slate-400 mt-1">
+                  <div className="px-4 py-6 text-center text-[#4b6a8d]">
+                    <p className="text-xs font-bold text-[#0f2d52]">لا توجد عملية مطابقة لـ &quot;{searchQuery}&quot;</p>
+                    <p className="text-[11px] text-[#718fae] mt-1">
                       جرّب البحث بكلمات مثل: إضافة، حركة، حساب، كشف، دليل، طباعة، مستخدمين
                     </p>
                     <button
                       type="button"
                       onClick={handleClearSearch}
-                      className="mt-2.5 inline-flex items-center gap-1 px-2.5 py-1 text-xs font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 rounded border border-blue-200 cursor-pointer"
+                      className="mt-2.5 inline-flex items-center gap-1 px-2.5 py-1 text-xs font-bold text-[#0067b8] bg-[#edf5fd] hover:bg-[#deecf9] rounded border border-[#b8cfe8] cursor-pointer"
                     >
                       <X className="w-3 h-3" />
                       <span>مسح وإظهار كافة العمليات</span>
@@ -631,7 +631,7 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
               </div>
 
               {/* شريط أسفل القائمة للإرشاد */}
-              <div className="px-3 py-1 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-[10px] text-slate-400">
+              <div className="px-3 py-1 bg-[#f0f6fc] border-t border-[#e2edf8] flex items-center justify-between text-[10px] text-[#718fae]">
                 <span>استخدم الأسهم للتنقل و Enter للتنفيذ</span>
                 <span>Esc للإلغاء</span>
               </div>

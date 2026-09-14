@@ -87,7 +87,7 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
   return (
     <div
       ref={menuContainerRef}
-      className="bg-slate-200 border-b border-slate-300 text-slate-800 text-xs px-2 py-0.5 select-none relative z-40 no-print"
+      className="bg-gradient-to-b from-[#eaf2fb] via-[#e1edf8] to-[#d5e4f4] border-b border-[#bcd2e8] text-[#1e3a5f] text-xs px-2 py-0.5 select-none relative z-40 no-print shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]"
       dir="rtl"
     >
       <div className="flex items-center gap-0.5 sm:gap-1">
@@ -97,25 +97,25 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
             type="button"
             onClick={() => toggleMenu('file')}
             onMouseEnter={() => handleMenuHover('file')}
-            className={`px-2 py-1 rounded text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer ${
+            className={`px-2.5 py-1 rounded text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer ${
               activeMenu === 'file'
-                ? 'bg-blue-700 text-white shadow-xs'
-                : 'text-slate-800 hover:bg-slate-300/80'
+                ? 'bg-[#0078d4] text-white shadow-xs'
+                : 'text-[#1e3a5f] hover:bg-[#cfe1f5] hover:text-[#0f2d52]'
             }`}
           >
             <span>ملف</span>
-            <span className="text-[10px] text-slate-500 font-mono underline">F</span>
+            <span className="text-[10px] text-[#55789e] font-mono underline">F</span>
           </button>
 
           {activeMenu === 'file' && (
-            <div className="absolute right-0 top-full mt-0.5 w-64 bg-white border border-slate-300 shadow-xl rounded-md py-1 z-50 text-slate-800 animate-in fade-in-50 duration-100">
+            <div className="absolute right-0 top-full mt-0.5 w-64 bg-white border border-[#b8cfe8] shadow-[0_10px_28px_-5px_rgba(15,45,85,0.22)] rounded-lg py-1 z-50 text-[#0f2d52] animate-in fade-in-50 duration-100">
               <button
                 type="button"
                 onClick={() => closeMenuAndRun(onAddTransaction)}
-                className="w-full px-3 py-1.5 text-right text-xs hover:bg-blue-50 flex items-center justify-between group cursor-pointer"
+                className="w-full px-3 py-1.5 text-right text-xs hover:bg-[#edf5fd] hover:text-[#005da6] flex items-center justify-between group cursor-pointer"
               >
                 <span className="flex items-center gap-2">
-                  <FileText className="w-3.5 h-3.5 text-blue-600" />
+                  <FileText className="w-3.5 h-3.5 text-[#0078d4]" />
                   <span>إضافة حركة جديدة</span>
                 </span>
                 <kbd className="text-[10px] text-slate-400 font-mono">F2</kbd>
@@ -124,7 +124,7 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
               <button
                 type="button"
                 onClick={() => closeMenuAndRun(onAddAccount)}
-                className="w-full px-3 py-1.5 text-right text-xs hover:bg-blue-50 flex items-center justify-between group cursor-pointer"
+                className="w-full px-3 py-1.5 text-right text-xs hover:bg-[#edf5fd] hover:text-[#005da6] flex items-center justify-between group cursor-pointer"
               >
                 <span className="flex items-center gap-2">
                   <Building2 className="w-3.5 h-3.5 text-emerald-600" />
@@ -133,12 +133,12 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
                 <kbd className="text-[10px] text-slate-400 font-mono">F3</kbd>
               </button>
 
-              <div className="my-1 border-t border-slate-200" />
+              <div className="my-1 border-t border-[#e2edf8]" />
 
               <button
                 type="button"
                 onClick={() => closeMenuAndRun(onPrint)}
-                className="w-full px-3 py-1.5 text-right text-xs hover:bg-blue-50 flex items-center justify-between group cursor-pointer"
+                className="w-full px-3 py-1.5 text-right text-xs hover:bg-[#edf5fd] hover:text-[#005da6] flex items-center justify-between group cursor-pointer"
               >
                 <span className="flex items-center gap-2">
                   <Printer className="w-3.5 h-3.5 text-slate-600" />
@@ -150,7 +150,7 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
               <button
                 type="button"
                 onClick={() => closeMenuAndRun(onExportCSV)}
-                className="w-full px-3 py-1.5 text-right text-xs hover:bg-blue-50 flex items-center justify-between group cursor-pointer"
+                className="w-full px-3 py-1.5 text-right text-xs hover:bg-[#edf5fd] hover:text-[#005da6] flex items-center justify-between group cursor-pointer"
               >
                 <span className="flex items-center gap-2">
                   <Download className="w-3.5 h-3.5 text-emerald-600" />
@@ -159,7 +159,7 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
                 <kbd className="text-[10px] text-slate-400 font-mono">Ctrl+E</kbd>
               </button>
 
-              <div className="my-1 border-t border-slate-200" />
+              <div className="my-1 border-t border-[#e2edf8]" />
 
               <button
                 type="button"
@@ -174,7 +174,7 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
 
               {onLogout && (
                 <>
-                  <div className="my-1 border-t border-slate-200" />
+                  <div className="my-1 border-t border-[#e2edf8]" />
                   <button
                     type="button"
                     onClick={() => closeMenuAndRun(onLogout)}
@@ -197,25 +197,25 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
             type="button"
             onClick={() => toggleMenu('accounts')}
             onMouseEnter={() => handleMenuHover('accounts')}
-            className={`px-2 py-1 rounded text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer ${
+            className={`px-2.5 py-1 rounded text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer ${
               activeMenu === 'accounts'
-                ? 'bg-blue-700 text-white shadow-xs'
-                : 'text-slate-800 hover:bg-slate-300/80'
+                ? 'bg-[#0078d4] text-white shadow-xs'
+                : 'text-[#1e3a5f] hover:bg-[#cfe1f5] hover:text-[#0f2d52]'
             }`}
           >
             <span>الحسابات</span>
-            <span className="text-[10px] text-slate-500 font-mono underline">A</span>
+            <span className="text-[10px] text-[#55789e] font-mono underline">A</span>
           </button>
 
           {activeMenu === 'accounts' && (
-            <div className="absolute right-0 top-full mt-0.5 w-64 bg-white border border-slate-300 shadow-xl rounded-md py-1 z-50 text-slate-800 animate-in fade-in-50 duration-100">
+            <div className="absolute right-0 top-full mt-0.5 w-64 bg-white border border-[#b8cfe8] shadow-[0_10px_28px_-5px_rgba(15,45,85,0.22)] rounded-lg py-1 z-50 text-[#0f2d52] animate-in fade-in-50 duration-100">
               <button
                 type="button"
                 onClick={() => closeMenuAndRun(onOpenChartOfAccounts)}
-                className="w-full px-3 py-1.5 text-right text-xs hover:bg-blue-50 flex items-center justify-between group cursor-pointer"
+                className="w-full px-3 py-1.5 text-right text-xs hover:bg-[#edf5fd] hover:text-[#005da6] flex items-center justify-between group cursor-pointer"
               >
                 <span className="flex items-center gap-2">
-                  <BookOpen className="w-3.5 h-3.5 text-blue-600" />
+                  <BookOpen className="w-3.5 h-3.5 text-[#0078d4]" />
                   <span>دليل الحسابات المالي الشجري</span>
                 </span>
                 <kbd className="text-[10px] text-slate-400 font-mono">F4</kbd>
@@ -224,7 +224,7 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
               <button
                 type="button"
                 onClick={() => closeMenuAndRun(onOpenAccountCard)}
-                className="w-full px-3 py-1.5 text-right text-xs hover:bg-blue-50 flex items-center justify-between group cursor-pointer"
+                className="w-full px-3 py-1.5 text-right text-xs hover:bg-[#edf5fd] hover:text-[#005da6] flex items-center justify-between group cursor-pointer"
               >
                 <span className="flex items-center gap-2">
                   <Building2 className="w-3.5 h-3.5 text-amber-600" />
@@ -235,7 +235,7 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
               <button
                 type="button"
                 onClick={() => closeMenuAndRun(onOpenImportAccounts)}
-                className="w-full px-3 py-1.5 text-right text-xs hover:bg-blue-50 flex items-center justify-between group cursor-pointer"
+                className="w-full px-3 py-1.5 text-right text-xs hover:bg-[#edf5fd] hover:text-[#005da6] flex items-center justify-between group cursor-pointer"
               >
                 <span className="flex items-center gap-2">
                   <Upload className="w-3.5 h-3.5 text-indigo-600" />
@@ -243,12 +243,12 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
                 </span>
               </button>
 
-              <div className="my-1 border-t border-slate-200" />
+              <div className="my-1 border-t border-[#e2edf8]" />
 
               <button
                 type="button"
                 onClick={() => closeMenuAndRun(onAddAccount)}
-                className="w-full px-3 py-1.5 text-right text-xs hover:bg-blue-50 flex items-center justify-between group cursor-pointer"
+                className="w-full px-3 py-1.5 text-right text-xs hover:bg-[#edf5fd] hover:text-[#005da6] flex items-center justify-between group cursor-pointer"
               >
                 <span className="flex items-center gap-2">
                   <Building2 className="w-3.5 h-3.5 text-emerald-600" />
@@ -266,22 +266,22 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
             type="button"
             onClick={() => toggleMenu('reports')}
             onMouseEnter={() => handleMenuHover('reports')}
-            className={`px-2 py-1 rounded text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer ${
+            className={`px-2.5 py-1 rounded text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer ${
               activeMenu === 'reports'
-                ? 'bg-blue-700 text-white shadow-xs'
-                : 'text-slate-800 hover:bg-slate-300/80'
+                ? 'bg-[#0078d4] text-white shadow-xs'
+                : 'text-[#1e3a5f] hover:bg-[#cfe1f5] hover:text-[#0f2d52]'
             }`}
           >
             <span>التقارير</span>
-            <span className="text-[10px] text-slate-500 font-mono underline">R</span>
+            <span className="text-[10px] text-[#55789e] font-mono underline">R</span>
           </button>
 
           {activeMenu === 'reports' && (
-            <div className="absolute right-0 top-full mt-0.5 w-60 bg-white border border-slate-300 shadow-xl rounded-md py-1 z-50 text-slate-800 animate-in fade-in-50 duration-100">
+            <div className="absolute right-0 top-full mt-0.5 w-60 bg-white border border-[#b8cfe8] shadow-[0_10px_28px_-5px_rgba(15,45,85,0.22)] rounded-lg py-1 z-50 text-[#0f2d52] animate-in fade-in-50 duration-100">
               <button
                 type="button"
                 onClick={() => closeMenuAndRun(onOpenStatementSheet)}
-                className="w-full px-3 py-1.5 text-right text-xs hover:bg-blue-50 flex items-center justify-between group cursor-pointer"
+                className="w-full px-3 py-1.5 text-right text-xs hover:bg-[#edf5fd] hover:text-[#005da6] flex items-center justify-between group cursor-pointer"
               >
                 <span className="flex items-center gap-2">
                   <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-600" />
@@ -293,7 +293,7 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
               <button
                 type="button"
                 onClick={() => closeMenuAndRun(onPrint)}
-                className="w-full px-3 py-1.5 text-right text-xs hover:bg-blue-50 flex items-center justify-between group cursor-pointer"
+                className="w-full px-3 py-1.5 text-right text-xs hover:bg-[#edf5fd] hover:text-[#005da6] flex items-center justify-between group cursor-pointer"
               >
                 <span className="flex items-center gap-2">
                   <Printer className="w-3.5 h-3.5 text-slate-600" />
@@ -304,10 +304,10 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
               <button
                 type="button"
                 onClick={() => closeMenuAndRun(onExportCSV)}
-                className="w-full px-3 py-1.5 text-right text-xs hover:bg-blue-50 flex items-center justify-between group cursor-pointer"
+                className="w-full px-3 py-1.5 text-right text-xs hover:bg-[#edf5fd] hover:text-[#005da6] flex items-center justify-between group cursor-pointer"
               >
                 <span className="flex items-center gap-2">
-                  <Download className="w-3.5 h-3.5 text-blue-600" />
+                  <Download className="w-3.5 h-3.5 text-[#0078d4]" />
                   <span>تصدير تقرير الحركة إلى Excel</span>
                 </span>
               </button>
@@ -321,22 +321,22 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
             type="button"
             onClick={() => toggleMenu('system')}
             onMouseEnter={() => handleMenuHover('system')}
-            className={`px-2 py-1 rounded text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer ${
+            className={`px-2.5 py-1 rounded text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer ${
               activeMenu === 'system'
-                ? 'bg-blue-700 text-white shadow-xs'
-                : 'text-slate-800 hover:bg-slate-300/80'
+                ? 'bg-[#0078d4] text-white shadow-xs'
+                : 'text-[#1e3a5f] hover:bg-[#cfe1f5] hover:text-[#0f2d52]'
             }`}
           >
             <span>إدارة النظام</span>
-            <span className="text-[10px] text-slate-500 font-mono underline">U</span>
+            <span className="text-[10px] text-[#55789e] font-mono underline">U</span>
           </button>
 
           {activeMenu === 'system' && (
-            <div className="absolute right-0 top-full mt-0.5 w-64 bg-white border border-slate-300 shadow-xl rounded-md py-1 z-50 text-slate-800 animate-in fade-in-50 duration-100">
+            <div className="absolute right-0 top-full mt-0.5 w-64 bg-white border border-[#b8cfe8] shadow-[0_10px_28px_-5px_rgba(15,45,85,0.22)] rounded-lg py-1 z-50 text-[#0f2d52] animate-in fade-in-50 duration-100">
               <button
                 type="button"
                 onClick={() => closeMenuAndRun(onOpenUserActivityLogs)}
-                className="w-full px-3 py-1.5 text-right text-xs hover:bg-blue-50 flex items-center justify-between group cursor-pointer"
+                className="w-full px-3 py-1.5 text-right text-xs hover:bg-[#edf5fd] hover:text-[#005da6] flex items-center justify-between group cursor-pointer"
               >
                 <span className="flex items-center gap-2">
                   <History className="w-3.5 h-3.5 text-indigo-600" />
@@ -348,7 +348,7 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
               <button
                 type="button"
                 onClick={() => closeMenuAndRun(onOpenUserManagement)}
-                className="w-full px-3 py-1.5 text-right text-xs hover:bg-blue-50 flex items-center justify-between group cursor-pointer"
+                className="w-full px-3 py-1.5 text-right text-xs hover:bg-[#edf5fd] hover:text-[#005da6] flex items-center justify-between group cursor-pointer"
               >
                 <span className="flex items-center gap-2">
                   <Users className="w-3.5 h-3.5 text-purple-600" />
@@ -358,12 +358,12 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
               </button>
 
               {currentUser && (
-                <div className="px-3 py-1.5 text-[11px] bg-slate-50 border-t border-slate-200 text-slate-600 flex items-center justify-between gap-1.5">
+                <div className="px-3 py-1.5 text-[11px] bg-[#f0f6fc] border-t border-[#e2edf8] text-[#1e3a5f] flex items-center justify-between gap-1.5">
                   <span className="flex items-center gap-1.5">
                     <UserCheck className="w-3.5 h-3.5 text-emerald-600" />
                     <span>المستخدم: <strong>{currentUser.fullName}</strong></span>
                   </span>
-                  <span className="text-[10px] px-1 py-0.2 rounded bg-blue-100 text-blue-800 font-semibold">
+                  <span className="text-[10px] px-1 py-0.2 rounded bg-[#e1edf8] text-[#0067b8] font-bold">
                     {currentUser.role}
                   </span>
                 </div>
@@ -371,7 +371,7 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
 
               {onLogout && (
                 <>
-                  <div className="my-1 border-t border-slate-200" />
+                  <div className="my-1 border-t border-[#e2edf8]" />
                   <button
                     type="button"
                     onClick={() => closeMenuAndRun(onLogout)}
@@ -394,26 +394,26 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
             type="button"
             onClick={() => toggleMenu('help')}
             onMouseEnter={() => handleMenuHover('help')}
-            className={`px-2 py-1 rounded text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer ${
+            className={`px-2.5 py-1 rounded text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer ${
               activeMenu === 'help'
-                ? 'bg-blue-700 text-white shadow-xs'
-                : 'text-slate-800 hover:bg-slate-300/80'
+                ? 'bg-[#0078d4] text-white shadow-xs'
+                : 'text-[#1e3a5f] hover:bg-[#cfe1f5] hover:text-[#0f2d52]'
             }`}
           >
             <span>مساعدة</span>
-            <span className="text-[10px] text-slate-500 font-mono underline">H</span>
+            <span className="text-[10px] text-[#55789e] font-mono underline">H</span>
           </button>
 
           {activeMenu === 'help' && (
-            <div className="absolute right-0 top-full mt-0.5 w-60 bg-white border border-slate-300 shadow-xl rounded-md py-1.5 z-50 text-slate-800 animate-in fade-in-50 duration-100">
-              <div className="px-3 py-1 text-xs font-bold text-slate-800 flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
+            <div className="absolute right-0 top-full mt-0.5 w-60 bg-white border border-[#b8cfe8] shadow-[0_10px_28px_-5px_rgba(15,45,85,0.22)] rounded-lg py-1.5 z-50 text-[#0f2d52] animate-in fade-in-50 duration-100">
+              <div className="px-3 py-1 text-xs font-bold text-[#0f2d52] flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#0078d4]" />
                 <span>نظام اليومية والأستاذ العام Desktop Pro</span>
               </div>
-              <p className="px-3 py-1 text-[11px] text-slate-500 leading-normal">
+              <p className="px-3 py-1 text-[11px] text-[#4b6a8d] leading-normal">
                 منظومة محاسبية متكاملة تدعم الشجرة المحاسبية القياسية، القيود المزدوجة، ومطابقة الأرصدة.
               </p>
-              <div className="px-3 py-1 text-[10px] font-mono text-slate-400 border-t border-slate-200 mt-1">
+              <div className="px-3 py-1 text-[10px] font-mono text-[#7b98b8] border-t border-[#e2edf8] mt-1">
                 الإصدار 2.4 Desktop Edition (2026)
               </div>
             </div>
@@ -426,12 +426,12 @@ export const DesktopMenuBar: React.FC<DesktopMenuBarProps> = ({
             <button
               type="button"
               onClick={onOpenUserManagement}
-              className="hidden sm:flex items-center gap-1.5 px-2 py-0.5 rounded bg-white/70 hover:bg-white border border-slate-300 text-slate-700 transition-colors cursor-pointer"
+              className="hidden sm:flex items-center gap-1.5 px-2 py-0.5 rounded bg-white/80 hover:bg-white border border-[#bed2e8] text-[#1e3a5f] transition-colors cursor-pointer"
               title="انقر لفتح إدارة المستخدمين والصلاحيات"
             >
               <UserCheck className="w-3 h-3 text-emerald-600" />
-              <span className="text-slate-800 font-bold">{currentUser.fullName}</span>
-              <span className="text-[10px] px-1 py-0.2 rounded bg-blue-100 text-blue-800 font-semibold">
+              <span className="text-[#0f2d52] font-bold">{currentUser.fullName}</span>
+              <span className="text-[10px] px-1 py-0.2 rounded bg-[#e1edf8] text-[#0067b8] font-bold">
                 {currentUser.role}
               </span>
             </button>

@@ -261,15 +261,15 @@ export const UserActivityLogModal: React.FC<UserActivityLogModalProps> = ({
   return (
     <div 
       id="user-activity-log-modal-overlay"
-      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-slate-950/75 backdrop-blur-xs overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/60 backdrop-blur-xs overflow-y-auto"
       role="dialog"
       aria-modal="true"
     >
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-6xl my-auto border border-slate-300 flex flex-col overflow-hidden max-h-[92vh] animate-in fade-in zoom-in-95 duration-150">
+      <div className="bg-[#f0f6fc] rounded-xl shadow-2xl w-full max-w-6xl my-auto border border-[#bcd2e8] flex flex-col overflow-hidden max-h-[92vh] animate-in fade-in zoom-in-95 duration-150">
         {/* Modal Header */}
-        <div className="p-4 sm:p-5 bg-slate-900 text-white flex items-center justify-between gap-3 border-b border-slate-800 shrink-0">
+        <div className="p-4 sm:p-5 bg-gradient-to-r from-[#003e73] via-[#005a9e] to-[#0078d4] text-white flex items-center justify-between gap-3 border-b border-[#004e8c] shrink-0">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-blue-600 rounded-xl text-white shadow-sm">
+            <div className="p-2.5 bg-white/20 rounded-xl text-white shadow-xs">
               <History className="w-6 h-6" />
             </div>
             <div>
@@ -277,11 +277,11 @@ export const UserActivityLogModal: React.FC<UserActivityLogModalProps> = ({
                 <h3 className="text-base sm:text-lg font-bold text-white">
                   سجل نشاط المستخدمين
                 </h3>
-                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 font-mono-numbers">
+                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white/20 text-white border border-white/30 font-mono-numbers">
                   {filteredLogs.length} سجل
                 </span>
               </div>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-blue-100 mt-0.5">
                 تتبع شامل لكافة العمليات اليومية: الدخول، الخروج، الإضافة، التعديل، الحذف، والطباعة مع رصد القيم قبل وبعد
               </p>
             </div>
@@ -291,17 +291,17 @@ export const UserActivityLogModal: React.FC<UserActivityLogModalProps> = ({
             <button
               type="button"
               onClick={handleExport}
-              className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-900 text-slate-200 hover:text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer border border-slate-700"
+              className="px-3 py-1.5 bg-white/10 hover:bg-white/20 active:bg-white/30 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer border border-white/20"
               title="تصدير سجل النشاط إلى إكسيل / CSV"
             >
-              <Download className="w-4 h-4 text-emerald-400" />
+              <Download className="w-4 h-4 text-emerald-300" />
               <span className="hidden sm:inline">تصدير CSV</span>
             </button>
 
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
+              className="p-1.5 text-blue-100 hover:text-white hover:bg-white/20 rounded-lg transition-colors cursor-pointer"
               title="إغلاق السجل"
             >
               <X className="w-5 h-5" />
@@ -310,22 +310,22 @@ export const UserActivityLogModal: React.FC<UserActivityLogModalProps> = ({
         </div>
 
         {/* 1. منطقة المعايير (Criteria & Filter Area) */}
-        <div className="p-3.5 sm:p-4 bg-slate-50 border-b border-slate-200 shrink-0 space-y-3">
-          <div className="flex items-center gap-1.5 text-xs font-bold text-slate-700">
-            <Filter className="w-3.5 h-3.5 text-blue-600" />
+        <div className="p-3.5 sm:p-4 bg-[#f0f6fc] border-b border-[#bcd2e8] shrink-0 space-y-3">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-[#0f2d52]">
+            <Filter className="w-3.5 h-3.5 text-[#0078d4]" />
             <span>منطقة المعايير والتصفية المتقدمة:</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 text-xs">
             {/* Filter 1: اسم المستخدم */}
             <div>
-              <label className="block text-[11px] font-bold text-slate-600 mb-1">
+              <label className="block text-[11px] font-bold text-[#1e3a5f] mb-1">
                 تصفية حسب المستخدم:
               </label>
               <select
                 value={selectedUser}
                 onChange={(e) => setSelectedUser(e.target.value)}
-                className="w-full h-9 px-2.5 bg-white border border-slate-300 rounded-lg text-xs text-slate-800 font-medium focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 cursor-pointer"
+                className="w-full h-9 px-2.5 bg-white border border-[#bcd2e8] rounded-lg text-xs text-[#0f2d52] font-bold focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] cursor-pointer"
               >
                 <option value="ALL">جميع المستخدمين ({allUsernames.length})</option>
                 {allUsernames.map((u) => {
@@ -341,13 +341,13 @@ export const UserActivityLogModal: React.FC<UserActivityLogModalProps> = ({
 
             {/* Filter 2: نوع الحركة */}
             <div>
-              <label className="block text-[11px] font-bold text-slate-600 mb-1">
+              <label className="block text-[11px] font-bold text-[#1e3a5f] mb-1">
                 تصفية حسب نوع الحركة:
               </label>
               <select
                 value={selectedAction}
                 onChange={(e) => setSelectedAction(e.target.value)}
-                className="w-full h-9 px-2.5 bg-white border border-slate-300 rounded-lg text-xs text-slate-800 font-medium focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 cursor-pointer"
+                className="w-full h-9 px-2.5 bg-white border border-[#bcd2e8] rounded-lg text-xs text-[#0f2d52] font-bold focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] cursor-pointer"
               >
                 <option value="ALL">جميع الحركات</option>
                 <option value="دخول">دخول</option>
@@ -361,13 +361,13 @@ export const UserActivityLogModal: React.FC<UserActivityLogModalProps> = ({
 
             {/* Filter 3: النافذة */}
             <div>
-              <label className="block text-[11px] font-bold text-slate-600 mb-1">
+              <label className="block text-[11px] font-bold text-[#1e3a5f] mb-1">
                 تصفية حسب النافذة:
               </label>
               <select
                 value={selectedWindow}
                 onChange={(e) => setSelectedWindow(e.target.value)}
-                className="w-full h-9 px-2.5 bg-white border border-slate-300 rounded-lg text-xs text-slate-800 font-medium focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 cursor-pointer"
+                className="w-full h-9 px-2.5 bg-white border border-[#bcd2e8] rounded-lg text-xs text-[#0f2d52] font-bold focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4] cursor-pointer"
               >
                 <option value="ALL">جميع النوافذ</option>
                 <option value="إضافة حركة">إضافة حركة</option>
@@ -379,17 +379,17 @@ export const UserActivityLogModal: React.FC<UserActivityLogModalProps> = ({
 
             {/* Filter 4: البحث السريع */}
             <div className="lg:col-span-2">
-              <label className="block text-[11px] font-bold text-slate-600 mb-1">
+              <label className="block text-[11px] font-bold text-[#1e3a5f] mb-1">
                 بحث في رقم الحركة / القيم (قبل وبعد):
               </label>
               <div className="relative">
-                <Search className="w-3.5 h-3.5 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Search className="w-3.5 h-3.5 text-[#55789e] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="ابحث برقم الحركة، الاسم، أو تفاصيل القيمة..."
-                  className="w-full h-9 pl-3 pr-8.5 bg-white border border-slate-300 rounded-lg text-xs text-slate-800 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                  className="w-full h-9 pl-3 pr-8.5 bg-white border border-[#bcd2e8] rounded-lg text-xs text-[#0f2d52] focus:ring-2 focus:ring-[#0078d4]/20 focus:border-[#0078d4]"
                 />
               </div>
             </div>
@@ -397,26 +397,26 @@ export const UserActivityLogModal: React.FC<UserActivityLogModalProps> = ({
 
           {/* Quick Active Filter Badges and Reset */}
           {(selectedUser !== 'ALL' || selectedAction !== 'ALL' || selectedWindow !== 'ALL' || searchQuery) && (
-            <div className="flex items-center justify-between pt-2 border-t border-slate-200/80 text-xs">
+            <div className="flex items-center justify-between pt-2 border-t border-[#bcd2e8] text-xs">
               <div className="flex flex-wrap items-center gap-1.5">
-                <span className="text-slate-500 text-[11px]">الفلاتر النشطة:</span>
+                <span className="text-[#55789e] text-[11px]">الفلاتر النشطة:</span>
                 {selectedUser !== 'ALL' && (
-                  <span className="px-2 py-0.5 rounded bg-blue-100 text-blue-800 text-[11px] font-semibold">
+                  <span className="px-2 py-0.5 rounded bg-[#eaf2fb] text-[#004e8c] border border-[#bcd2e8] text-[11px] font-semibold">
                     المستخدم: {selectedUser}
                   </span>
                 )}
                 {selectedAction !== 'ALL' && (
-                  <span className="px-2 py-0.5 rounded bg-amber-100 text-amber-900 text-[11px] font-semibold">
+                  <span className="px-2 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-200 text-[11px] font-semibold">
                     الحركة: {selectedAction}
                   </span>
                 )}
                 {selectedWindow !== 'ALL' && (
-                  <span className="px-2 py-0.5 rounded bg-purple-100 text-purple-900 text-[11px] font-semibold">
+                  <span className="px-2 py-0.5 rounded bg-purple-100 text-purple-900 border border-purple-200 text-[11px] font-semibold">
                     النافذة: {selectedWindow}
                   </span>
                 )}
                 {searchQuery && (
-                  <span className="px-2 py-0.5 rounded bg-slate-200 text-slate-800 text-[11px]">
+                  <span className="px-2 py-0.5 rounded bg-[#eaf2fb] text-[#004e8c] border border-[#bcd2e8] text-[11px]">
                     بحث: "{searchQuery}"
                   </span>
                 )}
@@ -425,7 +425,7 @@ export const UserActivityLogModal: React.FC<UserActivityLogModalProps> = ({
               <button
                 type="button"
                 onClick={handleResetFilters}
-                className="text-slate-500 hover:text-rose-600 flex items-center gap-1 text-[11px] font-semibold transition-colors cursor-pointer"
+                className="text-[#55789e] hover:text-rose-600 flex items-center gap-1 text-[11px] font-semibold transition-colors cursor-pointer"
               >
                 <RotateCcw className="w-3 h-3" />
                 <span>إعادة ضبط المعايير</span>
@@ -437,33 +437,33 @@ export const UserActivityLogModal: React.FC<UserActivityLogModalProps> = ({
         {/* 2. منطقة جدول السجل (Activity Log Table) */}
         <div className="overflow-x-auto flex-1 bg-white">
           <table className="w-full text-right text-xs border-collapse">
-            <thead className="bg-slate-100 text-slate-700 font-bold border-b border-slate-300 sticky top-0 z-10 select-none">
+            <thead className="bg-gradient-to-r from-[#eaf2fb] to-[#f0f6fc] text-[#0f2d52] font-bold border-b border-[#bcd2e8] sticky top-0 z-10 select-none">
               <tr>
-                <th className="py-2.5 px-3 w-16 text-center border-l border-slate-200">مسلسل</th>
-                <th className="py-2.5 px-3 w-28 border-l border-slate-200">التاريخ</th>
-                <th className="py-2.5 px-3 w-28 border-l border-slate-200 text-center">
+                <th className="py-2.5 px-3 w-16 text-center border-l border-[#bcd2e8]">مسلسل</th>
+                <th className="py-2.5 px-3 w-28 border-l border-[#bcd2e8]">التاريخ</th>
+                <th className="py-2.5 px-3 w-28 border-l border-[#bcd2e8] text-center">
                   <div className="flex items-center justify-center gap-1">
-                    <Clock className="w-3 h-3 text-slate-400" />
+                    <Clock className="w-3 h-3 text-[#55789e]" />
                     <span>الوقت (12س)</span>
                   </div>
                 </th>
-                <th className="py-2.5 px-3 w-40 border-l border-slate-200">اسم المستخدم</th>
-                <th className="py-2.5 px-3 w-24 text-center border-l border-slate-200">الحركة</th>
-                <th className="py-2.5 px-3 w-32 text-center border-l border-slate-200">النافذة</th>
-                <th className="py-2.5 px-3 w-24 text-center border-l border-slate-200">رقم الحركة</th>
-                <th className="py-2.5 px-3.5 min-w-[220px] border-l border-slate-200">قبل</th>
+                <th className="py-2.5 px-3 w-40 border-l border-[#bcd2e8]">اسم المستخدم</th>
+                <th className="py-2.5 px-3 w-24 text-center border-l border-[#bcd2e8]">الحركة</th>
+                <th className="py-2.5 px-3 w-32 text-center border-l border-[#bcd2e8]">النافذة</th>
+                <th className="py-2.5 px-3 w-24 text-center border-l border-[#bcd2e8]">رقم الحركة</th>
+                <th className="py-2.5 px-3.5 min-w-[220px] border-l border-[#bcd2e8]">قبل</th>
                 <th className="py-2.5 px-3.5 min-w-[240px]">بعد</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200">
+            <tbody className="divide-y divide-[#bcd2e8]/60">
               {filteredLogs.length === 0 ? (
                 <tr>
-                  <td colSpan={9} className="py-12 text-center text-slate-400">
-                    <History className="w-10 h-10 mx-auto mb-2 text-slate-300 stroke-1" />
-                    <p className="text-sm font-semibold text-slate-600">
+                  <td colSpan={9} className="py-12 text-center text-[#55789e]">
+                    <History className="w-10 h-10 mx-auto mb-2 text-[#bcd2e8] stroke-1" />
+                    <p className="text-sm font-semibold text-[#1e3a5f]">
                       لا توجد سجلات نشاط مطابقة لمعايير التصفية المختارة
                     </p>
-                    <p className="text-xs text-slate-400 mt-1">
+                    <p className="text-xs text-[#55789e] mt-1">
                       جرب تغيير نوع الحركة، المستخدم، أو تفريغ كلمات البحث
                     </p>
                   </td>
@@ -477,36 +477,36 @@ export const UserActivityLogModal: React.FC<UserActivityLogModalProps> = ({
                   return (
                     <tr
                       key={log.id}
-                      className="hover:bg-blue-50/40 transition-colors group text-slate-800"
+                      className="hover:bg-[#f0f6fc] transition-colors group text-[#0f2d52]"
                     >
                       {/* 1. مسلسل */}
-                      <td className="py-2.5 px-3 text-center font-mono-numbers font-bold text-slate-500 border-l border-slate-200 bg-slate-50/50">
+                      <td className="py-2.5 px-3 text-center font-mono-numbers font-bold text-[#55789e] border-l border-[#bcd2e8]/60 bg-[#f8fbfe]">
                         {log.sequence ?? '-'}
                       </td>
 
                       {/* 2. التاريخ */}
-                      <td className="py-2.5 px-3 font-mono-numbers text-slate-700 whitespace-nowrap border-l border-slate-200">
+                      <td className="py-2.5 px-3 font-mono-numbers text-[#1e3a5f] whitespace-nowrap border-l border-[#bcd2e8]/60">
                         {formatDateDMY(log.date) || log.date || '-'}
                       </td>
 
                       {/* 3. الوقت (بنظام 12 ساعة) */}
-                      <td className="py-2.5 px-3 text-center whitespace-nowrap border-l border-slate-200 font-mono-numbers font-semibold text-slate-800 bg-slate-50/30">
-                        <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
+                      <td className="py-2.5 px-3 text-center whitespace-nowrap border-l border-[#bcd2e8]/60 font-mono-numbers font-semibold text-[#0f2d52] bg-[#f8fbfe]">
+                        <span className="px-2 py-0.5 rounded bg-[#eaf2fb] text-[#004e8c] border border-[#bcd2e8]">
                           {log.time || '-'}
                         </span>
                       </td>
 
                       {/* 4. اسم المستخدم */}
-                      <td className="py-2.5 px-3 border-l border-slate-200">
+                      <td className="py-2.5 px-3 border-l border-[#bcd2e8]/60">
                         <div className="flex items-center gap-1.5">
-                          <div className="w-6 h-6 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-[10px] shrink-0 font-mono">
+                          <div className="w-6 h-6 rounded-full bg-[#eaf2fb] text-[#004e8c] border border-[#bcd2e8] flex items-center justify-center font-bold text-[10px] shrink-0 font-mono">
                             {(log.username ? log.username.slice(0, 1).toUpperCase() : 'U')}
                           </div>
                           <div className="overflow-hidden">
-                            <div className="font-bold text-slate-900 truncate" title={log.username || ''}>
+                            <div className="font-bold text-[#0f2d52] truncate" title={log.username || ''}>
                               {appUser ? appUser.fullName : (log.username || 'مستخدم')}
                             </div>
-                            <div className="text-[10px] text-slate-400 font-mono truncate" title={log.username || ''}>
+                            <div className="text-[10px] text-[#55789e] font-mono truncate" title={log.username || ''}>
                               {log.username || '-'}
                             </div>
                           </div>
@@ -514,33 +514,33 @@ export const UserActivityLogModal: React.FC<UserActivityLogModalProps> = ({
                       </td>
 
                       {/* 5. الحركة */}
-                      <td className="py-2.5 px-3 text-center border-l border-slate-200 whitespace-nowrap">
+                      <td className="py-2.5 px-3 text-center border-l border-[#bcd2e8]/60 whitespace-nowrap">
                         {getActionBadge(log.action)}
                       </td>
 
                       {/* 6. النافذة */}
-                      <td className="py-2.5 px-3 text-center border-l border-slate-200 whitespace-nowrap">
+                      <td className="py-2.5 px-3 text-center border-l border-[#bcd2e8]/60 whitespace-nowrap">
                         {getWindowBadge(log.window)}
                       </td>
 
                       {/* 7. رقم الحركة */}
-                      <td className="py-2.5 px-3 text-center font-mono-numbers font-bold text-blue-700 border-l border-slate-200 bg-blue-50/20 whitespace-nowrap">
+                      <td className="py-2.5 px-3 text-center font-mono-numbers font-bold text-[#0078d4] border-l border-[#bcd2e8]/60 bg-[#eaf2fb]/40 whitespace-nowrap">
                         #{log.recordId ?? '-'}
                       </td>
 
                       {/* 8. قبل (القيمة الحالية / السابقة) */}
-                      <td className="py-2.5 px-3.5 border-l border-slate-200 text-slate-600 bg-rose-50/20">
+                      <td className="py-2.5 px-3.5 border-l border-[#bcd2e8]/60 text-[#1e3a5f] bg-rose-50/20">
                         <div className="font-mono text-[11px] leading-relaxed break-words line-clamp-3" title={beforeText}>
                           {isNewDraft ? (
-                            <span className="text-slate-400 italic">{beforeText}</span>
+                            <span className="text-[#55789e] italic">{beforeText}</span>
                           ) : (
-                            <span className="text-rose-900">{beforeText}</span>
+                            <span className="text-rose-900 font-semibold">{beforeText}</span>
                           )}
                         </div>
                       </td>
 
                       {/* 9. بعد (القيمة الجديدة) */}
-                      <td className="py-2.5 px-3.5 text-slate-900 bg-emerald-50/20">
+                      <td className="py-2.5 px-3.5 text-[#0f2d52] bg-emerald-50/20">
                         <div className="flex items-start justify-between gap-1.5">
                           <div className="font-mono text-[11px] leading-relaxed break-words line-clamp-3 text-emerald-950 font-medium" title={log.afterValue || ''}>
                             {log.afterValue || '-'}
@@ -548,7 +548,7 @@ export const UserActivityLogModal: React.FC<UserActivityLogModalProps> = ({
                           <button
                             type="button"
                             onClick={() => handleCopyRow(log)}
-                            className="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-slate-800 hover:bg-slate-200 rounded transition-all shrink-0 cursor-pointer"
+                            className="opacity-0 group-hover:opacity-100 p-1 text-[#55789e] hover:text-[#0078d4] hover:bg-[#eaf2fb] rounded transition-all shrink-0 cursor-pointer"
                             title="نسخ تفاصيل السطر"
                           >
                             {copiedId === log.id ? (
@@ -568,13 +568,13 @@ export const UserActivityLogModal: React.FC<UserActivityLogModalProps> = ({
         </div>
 
         {/* Modal Footer */}
-        <div className="p-3.5 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3 shrink-0 text-xs">
-          <div className="flex items-center gap-3 text-slate-500">
+        <div className="p-3.5 bg-[#f0f6fc] border-t border-[#bcd2e8] flex flex-wrap items-center justify-between gap-3 shrink-0 text-xs">
+          <div className="flex items-center gap-3 text-[#55789e]">
             <span className="flex items-center gap-1">
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
               <span>نظام الرقابة والتدقيق الداخلي - توثيق آلي غير قابل للتلاعب</span>
             </span>
-            <span className="hidden sm:inline text-slate-300">•</span>
+            <span className="hidden sm:inline text-[#bcd2e8]">•</span>
             <span className="hidden sm:inline font-mono-numbers">
               الوقت المسجل بنظام 12 ساعة مع مؤشرات (ص / م)
             </span>
@@ -584,7 +584,7 @@ export const UserActivityLogModal: React.FC<UserActivityLogModalProps> = ({
             <button
               type="button"
               onClick={handleExport}
-              className="px-3.5 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 font-semibold text-slate-700 flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
+              className="px-3.5 py-1.5 rounded-lg border border-[#bcd2e8] bg-white hover:bg-[#eaf2fb] font-bold text-[#0f2d52] flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
             >
               <Download className="w-4 h-4 text-emerald-600" />
               <span>تصدير البيانات</span>
@@ -593,7 +593,7 @@ export const UserActivityLogModal: React.FC<UserActivityLogModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 active:bg-black text-white font-bold transition-colors cursor-pointer"
+              className="px-5 py-1.5 rounded-lg bg-[#0078d4] hover:bg-[#0067b8] active:bg-[#004e8c] text-white font-bold transition-colors cursor-pointer"
             >
               إغلاق
             </button>
